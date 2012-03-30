@@ -1,11 +1,9 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>lt.bumbis</groupId>
-	<artifactId>rpsim-core3</artifactId>
+	<groupId>lt.bumbis.rpsim</groupId>
+	<artifactId>rpsim-core1</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>Rule Based Process Simulator</name>
-	<description>Rule based process simulator built on DESMO-J, DROOLS and jBPM</description>
 
 	<!-- Drools and jBPM dependencies -->
 	<dependencies>
@@ -29,21 +27,13 @@
 			<artifactId>jbpm-bpmn2</artifactId>
 			<version>${jBPMVersion}</version>
 		</dependency>
-
+		
 		<!-- Simulator dependencies -->
 		<dependency>
 			<groupId>desmoj</groupId>
 			<artifactId>desmoj-core</artifactId>
 			<version>${desmojVersion}</version>
 		</dependency>
-
-		<!-- Modelio dependencies -->
-		<dependency>
-			<groupId>com.modeliosoft.modelio</groupId>
-			<artifactId>javadesigner</artifactId>
-			<version>${javadesignerVersion}</version>
-		</dependency>
-
 
 		<!-- Logging dependencies -->
 		<dependency>
@@ -79,10 +69,7 @@
 		<slf4jVersion>1.6.4</slf4jVersion>
 		<jUnitVersion>4.10</jUnitVersion>
 		<desmojVersion>2.3.3</desmojVersion>
-		<javadesignerVersion>2.0.13</javadesignerVersion>
 	</properties>
-
-
 
 
 </project>

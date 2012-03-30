@@ -1,12 +1,7 @@
 package lt.bumbis.rpsim;
 
-import java.util.concurrent.TimeUnit;
-
-import org.drools.ClockType;
 import org.drools.io.ResourceFactory;
 import org.drools.runtime.conf.ClockTypeOption;
-import org.drools.runtime.process.ProcessInstance;
-import org.drools.time.impl.PseudoClockScheduler;
 import org.jbpm.test.JbpmJUnitTestCase;
 import org.junit.Test;
 
