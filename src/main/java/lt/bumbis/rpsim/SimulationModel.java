@@ -6,6 +6,9 @@ import desmoj.core.simulator.TimeSpan;
 
 @objid ("961eae68-7a86-11e1-9a4b-028037ec0200")
 public class SimulationModel extends Model {
+    @objid ("45381754-7a96-11e1-9a4b-028037ec0200")
+    private ProcessEngine processEngine;
+
 
     @objid ("9aa664c6-7a88-11e1-9a4b-028037ec0200")
     public SimulationModel(final Model arg0, final String arg1, final boolean arg2, final boolean arg3) {
@@ -35,6 +38,18 @@ public class SimulationModel extends Model {
 
     @objid ("6ca96526-7a8d-11e1-9a4b-028037ec0200")
     public void startProcess() {
+    }
+
+    @objid ("78b6c0de-7a97-11e1-9a4b-028037ec0200")
+    public ProcessEngine getProcessEngine() {
+        // Automatically generated method. Please delete this comment before entering specific code.
+        return this.processEngine;
+    }
+
+    @objid ("78b6c0e3-7a97-11e1-9a4b-028037ec0200")
+    public void setProcessEngine(final ProcessEngine value) {
+        // Automatically generated method. Please delete this comment before entering specific code.
+        this.processEngine = value;
     }
 
 }
