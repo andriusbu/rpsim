@@ -6,6 +6,9 @@ import com.modeliosoft.modelio.javadesigner.annotations.objid;
 public interface ProcessEngine {
 
     @objid ("689474dc-7a9a-11e1-9a4b-028037ec0200")
-    void startEngine();
+    ProcessEngine startEngine();
+
+    @objid ("413de0a9-7aa4-11e1-9a4b-028037ec0200")
+    boolean isRunning();
 
 }

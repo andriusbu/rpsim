@@ -1,7 +1,10 @@
 package lt.bumbis.rpsim;
 
 import java.util.concurrent.TimeUnit;
+
+import org.drools.ClockType;
 import org.drools.io.ResourceFactory;
+import org.drools.runtime.conf.ClockTypeOption;
 import org.drools.runtime.process.ProcessInstance;
 import org.drools.time.impl.PseudoClockScheduler;
 import org.jbpm.test.JbpmJUnitTestCase;
@@ -18,12 +21,22 @@ public class ProcessEngineImplTest extends JbpmJUnitTestCase {
 		assertEquals(2, engine.getKnowledgeBase().getProcesses().size());
 	}
 	
-//	@Test
-//	public void testStartEngine() {
-//		ProcessEngineImpl engine = new ProcessEngineImpl();
-//		engine.addChangeSet(ResourceFactory.newClassPathResource("changeSet1.xml"));
-//		assertNotNull("Engine not starte - Knowledge session is Null", engine.startEngine().getKnowledgeSession());
-//	}
+	@Test
+	public void testStartEngine() {
+		ProcessEngineImpl engine = new ProcessEngineImpl();
+		engine.addChangeSet(ResourceFactory.newClassPathResource("changeSet1.xml"));
+		assertNotNull("Engine not starte - Knowledge session is Null", engine.startEngine().getKnowledgeSession());
+		assertEquals("pseudo", engine.startEngine().getKnowledgeSession().getSessionConfiguration().getOption(ClockTypeOption.class).getClockType());
+	}
+	
+	@Test
+	public void testIsRunning() {
+		ProcessEngineImpl engine = new ProcessEngineImpl();
+		engine.addChangeSet(ResourceFactory.newClassPathResource("changeSet1.xml"));
+		assertFalse(engine.isRunning());
+		engine.startEngine();
+		assertTrue(engine.isRunning());
+	}
 //	
 //	@Test
 //	public void testStartProcess() {

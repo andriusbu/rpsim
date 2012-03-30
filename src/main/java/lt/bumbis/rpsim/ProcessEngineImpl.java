@@ -2,10 +2,13 @@ package lt.bumbis.rpsim;
 
 import com.modeliosoft.modelio.javadesigner.annotations.objid;
 import org.drools.KnowledgeBase;
+import org.drools.KnowledgeBaseFactory;
 import org.drools.agent.KnowledgeAgent;
 import org.drools.agent.KnowledgeAgentFactory;
 import org.drools.io.Resource;
+import org.drools.runtime.KnowledgeSessionConfiguration;
 import org.drools.runtime.StatefulKnowledgeSession;
+import org.drools.runtime.conf.ClockTypeOption;
 
 @objid ("a281fb2e-7a95-11e1-9a4b-028037ec0200")
 public class ProcessEngineImpl implements ProcessEngine {
@@ -25,7 +28,12 @@ public class ProcessEngineImpl implements ProcessEngine {
     }
 
     @objid ("6a203b38-7a9a-11e1-9a4b-028037ec0200")
-    public void startEngine() {
+    public ProcessEngineImpl startEngine() {
+        KnowledgeBase kbase = kagent.getKnowledgeBase();
+        KnowledgeSessionConfiguration conf = KnowledgeBaseFactory.newKnowledgeSessionConfiguration();
+        conf.setOption( ClockTypeOption.get("pseudo"));
+        ksession = kbase.newStatefulKnowledgeSession(conf, null);
+        return this;
     }
 
     @objid ("fe18ac9a-7a9b-11e1-9a4b-028037ec0200")
@@ -41,6 +49,20 @@ public class ProcessEngineImpl implements ProcessEngine {
     @objid ("d194c3e1-7a9c-11e1-9a4b-028037ec0200")
     public KnowledgeBase getKnowledgeBase() {
         return kagent.getKnowledgeBase();
+    }
+
+    @objid ("0cb3303f-7aa1-11e1-9a4b-028037ec0200")
+    public StatefulKnowledgeSession getKnowledgeSession() {
+        return this.ksession;
+    }
+
+    @objid ("41404304-7aa4-11e1-9a4b-028037ec0200")
+    public boolean isRunning() {
+        if (ksession == null) {
+            return false;
+        } else {
+            return true;
+        }
     }
 
 }

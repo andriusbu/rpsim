@@ -33,7 +33,7 @@ public class SimulationModel extends Model {
     @Override
     @objid ("9aa664d6-7a88-11e1-9a4b-028037ec0200")
     public void init() {
-        // TODO Auto-generated method stub
+        processEngine.startEngine();
     }
 
     @objid ("6ca96526-7a8d-11e1-9a4b-028037ec0200")
