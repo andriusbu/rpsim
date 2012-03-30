@@ -9,6 +9,7 @@ import org.drools.io.Resource;
 import org.drools.runtime.KnowledgeSessionConfiguration;
 import org.drools.runtime.StatefulKnowledgeSession;
 import org.drools.runtime.conf.ClockTypeOption;
+import org.drools.runtime.process.ProcessInstance;
 
 @objid ("a281fb2e-7a95-11e1-9a4b-028037ec0200")
 public class ProcessEngineImpl implements ProcessEngine {
@@ -56,13 +57,12 @@ public class ProcessEngineImpl implements ProcessEngine {
         return this.ksession;
     }
 
-    @objid ("41404304-7aa4-11e1-9a4b-028037ec0200")
-    public boolean isRunning() {
-        if (ksession == null) {
-            return false;
-        } else {
-            return true;
-        }
+    @objid ("2900d70a-7aa6-11e1-9a4b-028037ec0200")
+    public long startProcess(final String processName) {
+        ProcessInstance process = ksession.startProcess(processName);
+        if (process == null)
+            return 0;
+            else return process.getId();
     }
 
 }

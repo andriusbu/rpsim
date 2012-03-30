@@ -30,31 +30,19 @@ public class ProcessEngineImplTest extends JbpmJUnitTestCase {
 	}
 	
 	@Test
-	public void testIsRunning() {
+	public void testStartProcess() {
 		ProcessEngineImpl engine = new ProcessEngineImpl();
-		engine.addChangeSet(ResourceFactory.newClassPathResource("changeSet1.xml"));
-		assertFalse(engine.isRunning());
+		engine.addChangeSet(ResourceFactory.newClassPathResource("changeSet2.xml"));
 		engine.startEngine();
-		assertTrue(engine.isRunning());
+		long processId = engine.startProcess("changeSet2_process1");
+		assertProcessInstanceActive(processId, engine.getKnowledgeSession());
+		try {
+			Thread.sleep(50);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		assertProcessInstanceActive(processId, engine.getKnowledgeSession());
 	}
-//	
-//	@Test
-//	public void testStartProcess() {
-//		ProcessEngineImpl engine = new ProcessEngineImpl();
-//		engine.addChangeSet(ResourceFactory.newClassPathResource("changeSet2.xml"));
-//		ProcessSimulationModel model = new ProcessSimulationModel(null, "Test", false, false);
-//		model.setStartProcess("changeSet2_process1");
-//		engine.startEngine();
-//		ProcessEntityImpl process = engine.startProcess(model, "Test process", false);
-//		assertNotNull("Process instance not created", process);
-//		assertProcessInstanceActive(process.getProcess().getId(), engine.getKnowledgeSession());
-//		try {
-//			Thread.sleep(50);
-//		} catch (InterruptedException e) {
-//			e.printStackTrace();
-//		}
-//		assertProcessInstanceActive(process.getProcess().getId(), engine.getKnowledgeSession());
-//	}
 	
 //	@Test
 //	public void testStep() {
