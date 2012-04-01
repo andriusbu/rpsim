@@ -24,4 +24,5 @@ public class TokenGenerator extends ExternalEvent {
         schedule(new TimeSpan(10, TimeUnit.MINUTES));
         // TODO Call Process Engine to start process instance
     }
+
 }

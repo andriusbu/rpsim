@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>lt.bumbis</groupId>
 	<artifactId>rpsim-core</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.1-SNAPSHOT</version>
 	<name>Rule Based Process Simulator</name>
 	<description>Rule based process simulator built on DESMO-J, DROOLS and jBPM</description>
 

@@ -22,7 +22,7 @@ public class TokenGeneratorTest {
 		engine = new ProcessEngineImpl();
 		engine.addChangeSet(ResourceFactory.newClassPathResource("changeSet2.xml"));
 		model.setProcessEngine(engine);
-		model.setStartProcessName("changeSet2_process1");
+		model.setStartProcessName("changeSet2_process2");
 	}
 
 	@Test
@@ -35,7 +35,7 @@ public class TokenGeneratorTest {
 		assertEquals(1, ((ProcessEngineImpl)model.getProcessEngine()).getKnowledgeSession().getProcessInstances().size());
 		exp.stop(new TimeInstant(11, TimeUnit.MINUTES));
 		exp.start();
-		assertEquals(2, ((ProcessEngineImpl)model.getProcessEngine()).getKnowledgeSession().getProcessInstances().size());
+		assertEquals(1, ((ProcessEngineImpl)model.getProcessEngine()).getKnowledgeSession().getProcessInstances().size());
 		exp.finish();
 	}
 
