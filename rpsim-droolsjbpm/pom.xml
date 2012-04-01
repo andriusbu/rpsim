@@ -1,0 +1,49 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <artifactId>rpsim-droolsjbpm</artifactId>
+  <name>RPSIM Drools&amp;jBPM module</name>
+  <parent>
+  	<groupId>lt.bumbis</groupId>
+  	<artifactId>rpsim</artifactId>
+  	<version>0.1-SNAPSHOT</version>
+  	<relativePath>..</relativePath>
+  </parent>
+  
+  <dependencies>
+  	<!-- Drools and jBPM dependencies -->
+		<dependency>
+			<groupId>org.drools</groupId>
+			<artifactId>drools-core</artifactId>
+			<version>${DroolsVersion}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.drools</groupId>
+			<artifactId>knowledge-api</artifactId>
+			<version>${DroolsVersion}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.drools</groupId>
+			<artifactId>drools-compiler</artifactId>
+			<version>${DroolsVersion}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.jbpm</groupId>
+			<artifactId>jbpm-bpmn2</artifactId>
+			<version>${jBPMVersion}</version>
+		</dependency>
+		
+				<!-- Testing dependencies -->
+		<dependency>
+			<groupId>org.jbpm</groupId>
+			<artifactId>jbpm-test</artifactId>
+			<version>${jBPMVersion}</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>lt.bumbis</groupId>
+			<artifactId>rpsim-core</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+  </dependencies>
+</project>

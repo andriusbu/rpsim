@@ -41,14 +41,6 @@
 			<version>${desmojVersion}</version>
 		</dependency>
 
-		<!-- Modelio dependencies -->
-		<dependency>
-			<groupId>com.modeliosoft.modelio</groupId>
-			<artifactId>javadesigner</artifactId>
-			<version>${javadesignerVersion}</version>
-		</dependency>
-
-
 		<!-- Logging dependencies -->
 		<dependency>
 			<groupId>org.slf4j</groupId>

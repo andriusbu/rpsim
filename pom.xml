@@ -9,7 +9,19 @@
   <modules>
   	<module>rpsim-core</module>
   	<module>rpsim-test</module>
+  	<module>rpsim-droolsjbpm</module>
   </modules>
+  
+  <dependencies>
+  		<!-- Modelio dependencies -->
+		<dependency>
+			<groupId>com.modeliosoft.modelio</groupId>
+			<artifactId>javadesigner</artifactId>
+			<version>${javadesignerVersion}</version>
+		</dependency>
+	</dependencies>
+
+  
   
   	<properties>
 		<DroolsVersion>5.3.1.Final</DroolsVersion>

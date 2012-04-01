@@ -1,4 +1,4 @@
-package lt.bumbis.rpsim.core;
+package lt.bumbis.rpsim.droolsjbpm;
 
 import java.util.concurrent.TimeUnit;
 

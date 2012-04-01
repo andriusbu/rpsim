@@ -1,6 +1,5 @@
 package lt.bumbis.rpsim.core;
 
-import lt.bumbis.rpsim.core.ProcessEngineImpl;
 import lt.bumbis.rpsim.core.SimulationModel;
 
 import org.drools.io.ResourceFactory;
