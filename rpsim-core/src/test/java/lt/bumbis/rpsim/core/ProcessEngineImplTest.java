@@ -1,6 +1,8 @@
-package lt.bumbis.rpsim;
+package lt.bumbis.rpsim.core;
 
 import java.util.concurrent.TimeUnit;
+
+import lt.bumbis.rpsim.core.ProcessEngineImpl;
 
 import org.drools.io.ResourceFactory;
 import org.drools.runtime.conf.ClockTypeOption;

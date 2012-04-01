@@ -1,4 +1,4 @@
-package lt.bumbis.rpsim;
+package lt.bumbis.rpsim.core;
 
 import java.util.concurrent.TimeUnit;
 import com.modeliosoft.modelio.javadesigner.annotations.objid;

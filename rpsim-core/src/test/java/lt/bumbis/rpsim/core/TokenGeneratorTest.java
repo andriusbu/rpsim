@@ -1,8 +1,11 @@
-package lt.bumbis.rpsim;
+package lt.bumbis.rpsim.core;
 
 import static org.junit.Assert.*;
 
 import java.util.concurrent.TimeUnit;
+
+import lt.bumbis.rpsim.core.ProcessEngineImpl;
+import lt.bumbis.rpsim.core.SimulationModel;
 
 import org.drools.io.ResourceFactory;
 import org.junit.Before;

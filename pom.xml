@@ -1,0 +1,23 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>lt.bumbis</groupId>
+  <artifactId>rpsim</artifactId>
+  <version>0.1-SNAPSHOT</version>
+  <packaging>pom</packaging>
+  <name>RPSIM Main</name>
+  <description>Rules based process simulation tool build on Drools, jBPM and DESMO-J</description>
+  <modules>
+  	<module>rpsim-core</module>
+  	<module>rpsim-test</module>
+  </modules>
+  
+  	<properties>
+		<DroolsVersion>5.3.1.Final</DroolsVersion>
+		<jBPMVersion>5.2.0.Final</jBPMVersion>
+		<slf4jVersion>1.6.4</slf4jVersion>
+		<jUnitVersion>4.10</jUnitVersion>
+		<desmojVersion>2.3.3</desmojVersion>
+		<javadesignerVersion>2.0.13</javadesignerVersion>
+	</properties>
+  
+</project>
