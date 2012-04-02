@@ -1,5 +1,6 @@
 package lt.bumbis.rpsim.droolsjbpm;
 
+import java.util.Observable;
 import java.util.concurrent.TimeUnit;
 
 import lt.bumbis.rpsim.core.ProcessEngine;
@@ -16,7 +17,7 @@ import org.drools.runtime.process.ProcessInstance;
 import org.drools.time.impl.PseudoClockScheduler;
 
 @objid ("a281fb2e-7a95-11e1-9a4b-028037ec0200")
-public class ProcessEngineImpl implements ProcessEngine {
+public class ProcessEngineImpl extends ProcessEngine {
     @objid ("07aa1ec0-7a99-11e1-9a4b-028037ec0200")
     private static String resAgentName = "ProcessEngineAgent";
 
@@ -84,5 +85,10 @@ public class ProcessEngineImpl implements ProcessEngine {
         long advanceTime = time - currentTime;
         if (advanceTime > 0) clock.advanceTime(advanceTime, TimeUnit.MILLISECONDS);
     }
+
+	public void update(Observable o, Object arg) {
+		// TODO Auto-generated method stub
+		
+	}
 
 }

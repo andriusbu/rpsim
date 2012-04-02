@@ -3,6 +3,7 @@ package lt.bumbis.rpsim.core;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+import java.util.Observable;
 import java.util.concurrent.TimeUnit;
 
 import org.junit.Before;
@@ -40,6 +41,10 @@ public class TokenGeneratorTest {
 			public void setTime(long amount) {
 				procEngineSetTimeCalled = true;
 				prcessEngineStartProcessCalledNum++;
+			}
+			public void update(Observable o, Object arg) {
+				// TODO Auto-generated method stub
+				
 			}			
 		});
 		simEngine.setModelBuilder(new ModelBuilder(simEngine) {

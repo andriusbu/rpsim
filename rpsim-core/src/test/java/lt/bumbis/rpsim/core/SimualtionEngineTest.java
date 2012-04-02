@@ -1,5 +1,6 @@
 package lt.bumbis.rpsim.core;
 
+import java.util.Observable;
 import java.util.concurrent.TimeUnit;
 
 import lt.bumbis.rpsim.core.SimulationEngine;
@@ -31,6 +32,9 @@ public class SimualtionEngineTest extends JbpmJUnitTestCase {
 			public void setAdvanceTime(long amount, TimeUnit unit) {
 			}
 			public void setTime(long amount) {
+			}
+			public void update(Observable o, Object arg) {
+				// TODO 
 			}			
 		});
 		simEngine.setModelBuilder(new ModelBuilder(simEngine) {
