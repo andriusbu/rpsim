@@ -74,11 +74,13 @@ public class ProcessEngineImpl extends ProcessEngine {
             else return process.getId();
     }
 
+    @Deprecated
     @objid ("e1607536-7bf9-11e1-8f30-028037ec0200")
     public void setAdvanceTime(final long amount, final TimeUnit unit) {
         clock.advanceTime(amount, unit);
     }
 
+    @Deprecated
     @objid ("3989c540-7c00-11e1-8f30-028037ec0200")
     public void setTime(final long time) {
         long currentTime = clock.getCurrentTime();

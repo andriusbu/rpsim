@@ -1,9 +1,10 @@
 package lt.bumbis.rpsim.test;
 
+import java.util.Observable;
 import java.util.concurrent.TimeUnit;
 import lt.bumbis.rpsim.core.ProcessEngine;
 
-public class ProcessEngineImpl implements ProcessEngine {
+public class ProcessEngineImpl extends ProcessEngine {
 
 	public ProcessEngine startEngine() {
 		// TODO Auto-generated method stub
@@ -21,6 +22,11 @@ public class ProcessEngineImpl implements ProcessEngine {
 	}
 
 	public void setTime(long amount) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void update(Observable o, Object arg) {
 		// TODO Auto-generated method stub
 		
 	}
