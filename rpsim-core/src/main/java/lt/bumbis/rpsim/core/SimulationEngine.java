@@ -28,6 +28,7 @@ public class SimulationEngine extends Model {
     @objid ("12051e4f-7ce9-11e1-a49d-028037ec0200")
     public void doInitialSchedules() {
         modelBuilder.doInitialSchedules();
+        getExperiment().getSimClock().addObserver(processEngine);
     }
 
     @Override
