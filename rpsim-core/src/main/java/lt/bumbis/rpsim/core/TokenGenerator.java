@@ -20,7 +20,7 @@ public class TokenGenerator extends ExternalEvent {
     public void eventRoutine() {
         // TODO Auto-generated method stub
         SimulationModel model = (SimulationModel)getModel();
-        model.startProcess();
+        model.startProcess("process1");
         schedule(new TimeSpan(10, TimeUnit.MINUTES));
         // TODO Call Process Engine to start process instance
     }

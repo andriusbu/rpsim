@@ -1,38 +1,43 @@
 package lt.bumbis.rpsim.core;
 
-import lt.bumbis.rpsim.core.SimulationModel;
+import java.util.concurrent.TimeUnit;
 
-import org.drools.io.ResourceFactory;
+import lt.bumbis.rpsim.core.SimulationModel;
 import org.jbpm.test.JbpmJUnitTestCase;
 import org.junit.Before;
 import org.junit.Test;
 
-import desmoj.core.simulator.Model;
-
-
 public class SimualtionModelTest extends JbpmJUnitTestCase {
 	
 	private SimulationModel model;
-	private ProcessEngineImpl engine;
+	private ProcessEngine engine;
+	private boolean engineStarted;
 	
 	@Before
 	public void before() {
 		model = new SimulationModel(null, "Test Model", true, false);
-		engine = new ProcessEngineImpl();
-		engine.addChangeSet(ResourceFactory.newClassPathResource("changeSet2.xml"));
+		engineStarted = false;
+		engine = new ProcessEngine() {
+			public ProcessEngine startEngine() {
+				engineStarted = true;
+				return null;
+			}
+			public long startProcess(String processName) {
+				return 0;
+			}
+			public void setAdvanceTime(long amount, TimeUnit unit) {
+	
+			}
+			public void setTime(long amount) {
+			
+			}			
+		};
 		model.setProcessEngine(engine);
-		model.setStartProcessName("changeSet2_process2");
 	}
 
 	@Test
 	public void testInit() {
 		model.init();
-		assertNotNull("ProcessEngine not initialized",((ProcessEngineImpl)model.getProcessEngine()).getKnowledgeSession());
+		assertTrue("ProcessEngine not started", engineStarted);
 	}
-	
-//	@Test
-//	public void testStartProcess() {
-//		model.getProcessEngine().startEngine();
-//		assertProcessInstanceActive(model.startProcess(), engine.getKnowledgeSession());
-//	}
 }

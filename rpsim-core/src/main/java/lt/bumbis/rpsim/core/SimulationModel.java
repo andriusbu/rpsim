@@ -10,10 +10,6 @@ public class SimulationModel extends Model {
     @objid ("45381754-7a96-11e1-9a4b-028037ec0200")
     private ProcessEngine processEngine;
 
-    @objid ("baa6bbc6-7aaa-11e1-9a4b-028037ec0200")
-    private String startProcessName;
-
-
     @objid ("9aa664c6-7a88-11e1-9a4b-028037ec0200")
     public SimulationModel(final Model arg0, final String arg1, final boolean arg2, final boolean arg3) {
         super(arg0, arg1, arg2, arg3);
@@ -41,7 +37,7 @@ public class SimulationModel extends Model {
     }
 
     @objid ("6ca96526-7a8d-11e1-9a4b-028037ec0200")
-    public long startProcess() {
+    public long startProcess(String startProcessName) {
     	syncTime();
         return processEngine.startProcess(startProcessName);
     }
@@ -56,18 +52,6 @@ public class SimulationModel extends Model {
     public void setProcessEngine(final ProcessEngine value) {
         // Automatically generated method. Please delete this comment before entering specific code.
         this.processEngine = value;
-    }
-
-    @objid ("baa6bbc7-7aaa-11e1-9a4b-028037ec0200")
-    public String getStartProcessName() {
-        // Automatically generated method. Please delete this comment before entering specific code.
-        return this.startProcessName;
-    }
-
-    @objid ("c8fe612e-7aaa-11e1-9a4b-028037ec0200")
-    public void setStartProcessName(final String value) {
-        // Automatically generated method. Please delete this comment before entering specific code.
-        this.startProcessName = value;
     }
 
     @objid ("1a838c72-7bff-11e1-8f30-028037ec0200")
