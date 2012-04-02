@@ -28,7 +28,6 @@ public class TokenGenerator extends ExternalEvent {
     @objid ("912678e9-7c49-11e1-8f00-028037ec0200")
     public void eventRoutine() {
         SimulationEngine simEngine = (SimulationEngine)getModel();
-        simEngine.syncTime();
         simEngine.getProcessEngine().startProcess(processName);
         schedule(new TimeSpan(dist.sample(), timeUnit));
     }

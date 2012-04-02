@@ -1,7 +1,6 @@
 package lt.bumbis.rpsim.core;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 import java.util.Observable;
 import java.util.concurrent.TimeUnit;
@@ -18,15 +17,15 @@ public class TokenGeneratorTest {
 	
 	private SimulationEngine simEngine;
 	private TokenGenerator tokenGenerator;
-	private boolean procEngineSetTimeCalled;
 	private String procEngineStartProcessCalled;
-	private long prcessEngineStartProcessCalledNum;
+	private long procEngineStartProcessCalledNum;
+	private Observable observable;
 	
 	@Before
 	public void before() {
-		procEngineSetTimeCalled = false;
 		procEngineStartProcessCalled = "";
-		prcessEngineStartProcessCalledNum = 0;
+		procEngineStartProcessCalledNum = 0;
+		observable = null;
 		simEngine = new SimulationEngine(null, "Test Model", true, false);
 		simEngine.setProcessEngine(new ProcessEngine() {
 			public ProcessEngine startEngine() {
@@ -34,16 +33,11 @@ public class TokenGeneratorTest {
 			}
 			public long startProcess(String processName) {
 				procEngineStartProcessCalled = processName;
+				procEngineStartProcessCalledNum++;
 				return 1;
 			}
-			public void setAdvanceTime(long amount, TimeUnit unit) {
-			}
-			public void setTime(long amount) {
-				procEngineSetTimeCalled = true;
-				prcessEngineStartProcessCalledNum++;
-			}
 			public void update(Observable o, Object arg) {
-				// TODO Auto-generated method stub
+				observable = o;
 				
 			}			
 		});
@@ -69,11 +63,11 @@ public class TokenGeneratorTest {
 		simEngine.connectToExperiment(exp);
 		exp.stop(new TimeInstant(1, TimeUnit.MILLISECONDS));
 		exp.start();
-		assertTrue("Token generator did not call syncTime() method", procEngineSetTimeCalled);
+		assertNotNull("Observer not attached to SimClock", observable);
 		assertEquals("Token generator did not call startProcess() method", "process1", procEngineStartProcessCalled);
 		exp.stop(new TimeInstant(10, TimeUnit.MINUTES));
 		exp.start();
-		assertEquals("Tokent generator did not scheduled it self", 4, prcessEngineStartProcessCalledNum);
+		assertEquals("Tokent generator did not scheduled it self", 4, procEngineStartProcessCalledNum);
 		exp.finish();
 	}
 	

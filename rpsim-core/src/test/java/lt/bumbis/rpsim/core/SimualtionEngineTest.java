@@ -35,10 +35,6 @@ public class SimualtionEngineTest extends JbpmJUnitTestCase {
 			public long startProcess(String processName) {
 				return 0;
 			}
-			public void setAdvanceTime(long amount, TimeUnit unit) {
-			}
-			public void setTime(long amount) {
-			}
 			public void update(Observable o, Object arg) {
 				observable = o;
 			}			

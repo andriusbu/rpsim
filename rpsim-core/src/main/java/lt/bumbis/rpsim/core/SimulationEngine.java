@@ -1,6 +1,5 @@
 package lt.bumbis.rpsim.core;
 
-import java.util.concurrent.TimeUnit;
 import com.modeliosoft.modelio.javadesigner.annotations.objid;
 import desmoj.core.simulator.Model;
 
@@ -38,12 +37,6 @@ public class SimulationEngine extends Model {
         modelBuilder.init();
     }
 
-    @objid ("12051e55-7ce9-11e1-a49d-028037ec0200")
-    public long startProcess(final String startProcessName) {
-        syncTime();
-        return processEngine.startProcess(startProcessName);
-    }
-
     @objid ("12051e5a-7ce9-11e1-a49d-028037ec0200")
     public ProcessEngine getProcessEngine() {
         // Automatically generated method. Please delete this comment before entering specific code.
@@ -65,10 +58,4 @@ public class SimulationEngine extends Model {
     public void setModelBuilder(final ModelBuilder modelBuilder) {
         this.modelBuilder = modelBuilder;
     }
-
-    @objid ("12078075-7ce9-11e1-a49d-028037ec0200")
-    protected void syncTime() {
-        processEngine.setTime((long)presentTime().getTimeAsDouble(TimeUnit.MILLISECONDS));
-    }
-
 }
