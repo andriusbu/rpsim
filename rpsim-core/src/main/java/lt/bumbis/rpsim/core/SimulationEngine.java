@@ -25,8 +25,6 @@ public class SimulationEngine extends Model {
     @Override
     @objid ("9aa664d3-7a88-11e1-9a4b-028037ec0200")
     public void doInitialSchedules() {
-//        TokenGenerator tokenGenerator = new TokenGenerator(this, "Token Generator", true);
-//        tokenGenerator.schedule(new TimeSpan(0));
     	modelBuilder.doInitialSchedules();
     }
 

@@ -1,16 +1,18 @@
 package lt.bumbis.rpsim.core;
 
 import desmoj.core.simulator.Event;
-import desmoj.core.simulator.Model;
 
 public class ServiceRequestArrivalEvent extends Event<ServiceRequest> {
+	
+	private SimulationEngine simEngine;
 
-	public ServiceRequestArrivalEvent(Model arg0, String arg1, boolean arg2) {
-		super(arg0, arg1, arg2);
+	public ServiceRequestArrivalEvent(SimulationEngine owner, String name, boolean showInTrace) {
+		super(owner, name, showInTrace);
+		simEngine = owner;
 	}
 
 	@Override
-	public void eventRoutine(ServiceRequest arg0) {
+	public void eventRoutine(ServiceRequest request) {
 		// TODO Implement
 		
 	}
