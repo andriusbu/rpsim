@@ -9,35 +9,57 @@ import org.junit.Test;
 
 public class SimualtionEngineTest extends JbpmJUnitTestCase {
 	
-	private SimulationEngine model;
-	private ProcessEngine engine;
-	private boolean engineStarted;
+	private SimulationEngine simEngine;
+	private boolean procEngineStarted;
+	private boolean modelBuilderInitCalled;
+	private boolean modelBuilderDoInitShedulesCalled;
 	
 	@Before
 	public void before() {
-		model = new SimulationEngine(null, "Test Model", true, false);
-		engineStarted = false;
-		engine = new ProcessEngine() {
+		simEngine = new SimulationEngine(null, "Test Model", true, false);
+		procEngineStarted = false;
+		modelBuilderInitCalled = false;
+		modelBuilderDoInitShedulesCalled = false;
+		simEngine.setProcessEngine(new ProcessEngine() {
 			public ProcessEngine startEngine() {
-				engineStarted = true;
+				procEngineStarted = true;
 				return null;
 			}
 			public long startProcess(String processName) {
 				return 0;
 			}
 			public void setAdvanceTime(long amount, TimeUnit unit) {
-	
 			}
 			public void setTime(long amount) {
-			
 			}			
-		};
-		model.setProcessEngine(engine);
+		});
+		simEngine.setModelBuilder(new ModelBuilder(simEngine) {
+
+			@Override
+			public void init() {
+				modelBuilderInitCalled = true;
+			}
+
+			@Override
+			public void doInitialSchedules() {
+				modelBuilderDoInitShedulesCalled = true;
+			}
+			
+		});
 	}
 
 	@Test
 	public void testInit() {
-		model.init();
-		assertTrue("ProcessEngine not started", engineStarted);
+		simEngine.init();
+		assertTrue("ProcessEngine not started", procEngineStarted);
+		assertTrue("Model builder init() method not called", modelBuilderInitCalled);
 	}
+	
+	@Test
+	public void testDoInitialSchedules() {
+		simEngine.doInitialSchedules();
+		assertTrue("Model builder doInitialSchedules() mothod not called", modelBuilderDoInitShedulesCalled);
+	}
+	
+	
 }
