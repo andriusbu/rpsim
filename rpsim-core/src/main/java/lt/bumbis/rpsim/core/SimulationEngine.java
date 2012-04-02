@@ -6,12 +6,12 @@ import desmoj.core.simulator.Model;
 import desmoj.core.simulator.TimeSpan;
 
 @objid ("961eae68-7a86-11e1-9a4b-028037ec0200")
-public class SimulationModel extends Model {
+public class SimulationEngine extends Model {
     @objid ("45381754-7a96-11e1-9a4b-028037ec0200")
     private ProcessEngine processEngine;
 
     @objid ("9aa664c6-7a88-11e1-9a4b-028037ec0200")
-    public SimulationModel(final Model arg0, final String arg1, final boolean arg2, final boolean arg3) {
+    public SimulationEngine(final Model arg0, final String arg1, final boolean arg2, final boolean arg3) {
         super(arg0, arg1, arg2, arg3);
         // TODO Auto-generated constructor stub
     }

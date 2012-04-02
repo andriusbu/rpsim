@@ -4,7 +4,7 @@ public class TokenGeneratorTest {
 	
 //	@Before
 //	public void before() {
-//		model = new SimulationModel(null, "Test Model", true, false);
+//		model = new SimulationEngine(null, "Test Model", true, false);
 //		engine = new ProcessEngineImpl();
 //		engine.addChangeSet(ResourceFactory.newClassPathResource("changeSet2.xml"));
 //		model.setProcessEngine(engine);

@@ -2,20 +2,20 @@ package lt.bumbis.rpsim.core;
 
 import java.util.concurrent.TimeUnit;
 
-import lt.bumbis.rpsim.core.SimulationModel;
+import lt.bumbis.rpsim.core.SimulationEngine;
 import org.jbpm.test.JbpmJUnitTestCase;
 import org.junit.Before;
 import org.junit.Test;
 
-public class SimualtionModelTest extends JbpmJUnitTestCase {
+public class SimualtionEngineTest extends JbpmJUnitTestCase {
 	
-	private SimulationModel model;
+	private SimulationEngine model;
 	private ProcessEngine engine;
 	private boolean engineStarted;
 	
 	@Before
 	public void before() {
-		model = new SimulationModel(null, "Test Model", true, false);
+		model = new SimulationEngine(null, "Test Model", true, false);
 		engineStarted = false;
 		engine = new ProcessEngine() {
 			public ProcessEngine startEngine() {
