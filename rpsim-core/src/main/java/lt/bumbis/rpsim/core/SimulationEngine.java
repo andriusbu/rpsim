@@ -11,8 +11,9 @@ public class SimulationEngine extends Model {
     @objid ("12051e3f-7ce9-11e1-a49d-028037ec0200")
     private ModelBuilder modelBuilder;
 
+    private ModelComponentFactory componentFactory;
 
-    @objid ("12051e40-7ce9-11e1-a49d-028037ec0200")
+	@objid ("12051e40-7ce9-11e1-a49d-028037ec0200")
     public SimulationEngine(final Model arg0, final String arg1, final boolean arg2, final boolean arg3) {
         super(arg0, arg1, arg2, arg3);
     }
@@ -33,6 +34,7 @@ public class SimulationEngine extends Model {
     @Override
     @objid ("12051e52-7ce9-11e1-a49d-028037ec0200")
     public void init() {
+    	componentFactory = new ModelComponentFactory(this);
         processEngine.startEngine();
         modelBuilder.init();
     }
@@ -58,4 +60,9 @@ public class SimulationEngine extends Model {
     public void setModelBuilder(final ModelBuilder modelBuilder) {
         this.modelBuilder = modelBuilder;
     }
+    
+    public ModelComponentFactory getComponentFactory() {
+		return componentFactory;
+	}
+
 }

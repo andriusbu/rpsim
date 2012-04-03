@@ -52,6 +52,13 @@ public class ServiceRequestTest {
 		Queue<ServiceProcessor> queue = new Queue<ServiceProcessor>(model, "Test", false, false);
 		assertEquals(serviceRequest.setProcIdleQueue(queue).getProcIdleQueue(), queue);
 	}
+	
+	@Test
+	public void testSetServiceProcessor() {
+		ServiceProcessor serviceProcessor = new ServiceProcessor(model, "Test", false);
+		assertEquals(serviceRequest.setServiceProcessor(serviceProcessor).getServiceProcessor(), serviceProcessor);
+	}
+
 
 	@Test
 	public void testSettings() {

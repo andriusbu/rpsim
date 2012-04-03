@@ -9,8 +9,9 @@ public class ServiceRequest extends Entity {
 	private Object externalRef;
 	private Queue<ServiceRequest> waitQueue;
 	private Queue<ServiceProcessor> procIdleQueue;
+	private ServiceProcessor serviceProcessor;
 
-    public ServiceRequest(Model model, String name, boolean showInTrace) {
+	public ServiceRequest(Model model, String name, boolean showInTrace) {
         super(model, name, showInTrace);
     }
     
@@ -41,6 +42,15 @@ public class ServiceRequest extends Entity {
 		return procIdleQueue;
 	}
 	
+    public ServiceProcessor getServiceProcessor() {
+		return serviceProcessor;
+	}
+
+	public ServiceRequest setServiceProcessor(ServiceProcessor serviceProcessor) {
+		this.serviceProcessor = serviceProcessor;
+		return this;
+	}
+
     public ServiceRequest settings(Queue<ServiceRequest> waitQueue, Queue<ServiceProcessor> procIdleQueue, Object externalRef) {
     	setExternalRef(externalRef);
     	setWaitQueue(waitQueue);
