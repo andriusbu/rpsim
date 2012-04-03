@@ -10,6 +10,8 @@ import desmoj.core.simulator.Event;
 public class ServiceRequestArrival extends Event<ServiceRequest> {
     @objid ("12051e29-7ce9-11e1-a49d-028037ec0200")
     private SimulationEngine simEngine;
+    
+//    private List<> resQueue;
 
 
     @objid ("12051e2a-7ce9-11e1-a49d-028037ec0200")
