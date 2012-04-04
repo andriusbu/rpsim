@@ -11,8 +11,13 @@ public class ServiceRequestCompletion extends Event<ServiceRequest> {
         super(model, name, showInTrace);
     }
 
-    public void eventRoutine(final ServiceRequest arg0) {
-        // TODO Implement eventRoutrine()
+    public void eventRoutine(final ServiceRequest request) {
+        request.getProcIdleQueue().insert(request.getServiceProcessor());
+        request.setServiceProcessor(null);
+        //TODO Implement ProcessEngin notification about completed service request
+        if (!request.getWaitQueue().isEmpty() ) {
+        	//TODO Implement ServiceRequest processing from wait queue
+        }
     }
 
 }
