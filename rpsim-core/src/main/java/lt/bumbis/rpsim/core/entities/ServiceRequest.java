@@ -1,5 +1,8 @@
 package lt.bumbis.rpsim.core.entities;
 
+import java.util.concurrent.TimeUnit;
+
+import desmoj.core.dist.ContDist;
 import desmoj.core.simulator.Entity;
 import desmoj.core.simulator.Model;
 import desmoj.core.simulator.Queue;
@@ -9,6 +12,8 @@ public class ServiceRequest extends Entity {
 	private Object externalRef;
 	private Queue<ServiceRequest> waitQueue;
 	private Queue<ServiceProcessor> procIdleQueue;
+	private TimeUnit timeUnit;
+	private ContDist dist;
 	private ServiceProcessor serviceProcessor;
 
 	public ServiceRequest(Model model, String name, boolean showInTrace) {
@@ -51,10 +56,30 @@ public class ServiceRequest extends Entity {
 		return this;
 	}
 
-    public ServiceRequest settings(Queue<ServiceRequest> waitQueue, Queue<ServiceProcessor> procIdleQueue, Object externalRef) {
+    public TimeUnit getTimeUnit() {
+		return timeUnit;
+	}
+
+	public ServiceRequest setTimeUnit(TimeUnit timeUnit) {
+		this.timeUnit = timeUnit;
+		return this;
+	}
+
+	public ContDist getDist() {
+		return dist;
+	}
+
+	public ServiceRequest setDist(ContDist dist) {
+		this.dist = dist;
+		return this;
+	}
+
+	public ServiceRequest setParameters(Queue<ServiceRequest> waitQueue, Queue<ServiceProcessor> procIdleQueue, ContDist dist, TimeUnit timeUnit, Object externalRef) {
     	setExternalRef(externalRef);
     	setWaitQueue(waitQueue);
     	setProcIdleQueue(procIdleQueue);
+    	setTimeUnit(timeUnit);
+    	setDist(dist);
     	return this;
     }
 }

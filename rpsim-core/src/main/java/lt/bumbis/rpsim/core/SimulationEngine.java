@@ -27,16 +27,18 @@ public class SimulationEngine extends Model {
     @Override
     @objid ("12051e4f-7ce9-11e1-a49d-028037ec0200")
     public void doInitialSchedules() {
-        modelBuilder.doInitialSchedules();
-        getExperiment().getSimClock().addObserver(processEngine);
+        if (modelBuilder != null) modelBuilder.doInitialSchedules();
+        if (processEngine != null) {
+        	getExperiment().getSimClock().addObserver(processEngine);
+        }
     }
 
     @Override
     @objid ("12051e52-7ce9-11e1-a49d-028037ec0200")
     public void init() {
     	componentFactory = new ModelComponentFactory(this);
-        processEngine.startEngine();
-        modelBuilder.init();
+        if (processEngine != null) processEngine.startEngine();
+        if (modelBuilder != null) modelBuilder.init();
     }
 
     @objid ("12051e5a-7ce9-11e1-a49d-028037ec0200")

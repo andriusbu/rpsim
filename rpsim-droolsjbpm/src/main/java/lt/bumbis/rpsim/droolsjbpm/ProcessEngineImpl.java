@@ -89,7 +89,7 @@ public class ProcessEngineImpl extends ProcessEngine {
     }
 
 	public void update(Observable o, Object arg) {
-		// TODO Auto-generated method stub
+		// TODO Implement time sync between SimulationEngine and ProcessEngine
 		
 	}
 
