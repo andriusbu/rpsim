@@ -14,7 +14,7 @@ public class ServiceRequestTest {
 	private class TestClass {
 	}
 	
-	private ServiceRequest serviceRequest;
+	private SvcReq serviceRequest;
 	private SimulationEngine model;
 	private Experiment exp;
 	
@@ -23,13 +23,13 @@ public class ServiceRequestTest {
 		model = new SimulationEngine(null, "Test model", false, false);
 		exp = new Experiment("Test Experiment", false);		
 		model.connectToExperiment(exp);
-		serviceRequest = new ServiceRequest(model, "Test SR", false);
+		serviceRequest = new SvcReq(model, "Test SR", false);
 	}
 
 	@Test
 	public void testSettings() {		
-		Queue<ServiceRequest> queue1 = new Queue<ServiceRequest>(model, "test", false, false);
-		Queue<ServiceProcessor> queue2 = new Queue<ServiceProcessor>(model, "Test", false, false);
+		Queue<SvcReq> queue1 = new Queue<SvcReq>(model, "test", false, false);
+		Queue<SvcReqExec> queue2 = new Queue<SvcReqExec>(model, "Test", false, false);
 		TestClass testClass = new TestClass();
 		serviceRequest.setParameters(queue1, queue2, null, null, testClass);
 		assertEquals(serviceRequest.getWaitQueue(), queue1);

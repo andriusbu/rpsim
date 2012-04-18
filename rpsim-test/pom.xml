@@ -3,7 +3,7 @@
   <parent>
     <artifactId>rpsim</artifactId>
     <groupId>lt.bumbis</groupId>
-    <version>0.1-SNAPSHOT</version>
+    <version>0.2-SNAPSHOT</version>
   </parent>
   <artifactId>rpsim-test</artifactId>
   <name>RPSIM Testing classes</name>
@@ -11,7 +11,7 @@
   	<dependency>
   		<groupId>lt.bumbis</groupId>
   		<artifactId>rpsim-core</artifactId>
-  		<version>0.1-SNAPSHOT</version>
+  		<version>0.2-SNAPSHOT</version>
   	</dependency>
   </dependencies>
 </project>

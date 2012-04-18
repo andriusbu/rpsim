@@ -2,8 +2,8 @@ package lt.bumbis.rpsim.core.events;
 
 import static org.junit.Assert.*;
 import lt.bumbis.rpsim.core.SimulationEngine;
-import lt.bumbis.rpsim.core.entities.ServiceProcessor;
-import lt.bumbis.rpsim.core.entities.ServiceRequest;
+import lt.bumbis.rpsim.core.entities.SvcReqExec;
+import lt.bumbis.rpsim.core.entities.SvcReq;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -15,8 +15,8 @@ public class ServiceRequestCompletionTest {
 	
 	private SimulationEngine model;
 	private Experiment exp;
-	private ServiceRequest serviceRequest;
-	private ServiceProcessor serviceProcessor;
+	private SvcReq serviceRequest;
+	private SvcReqExec serviceProcessor;
 	private ServiceRequestCompletion event;
 	
 	
@@ -25,14 +25,14 @@ public class ServiceRequestCompletionTest {
 		model = new SimulationEngine(null, "Test model", false, false);
 		exp = new Experiment("Test Experiment", false);		
 		model.connectToExperiment(exp);
-		serviceRequest = new ServiceRequest(model, "Test SR", false);
+		serviceRequest = new SvcReq(model, "Test SR", false);
 		serviceRequest.setParameters(
-				new Queue<ServiceRequest>(model, "Test wait queue", false, false),
-				new Queue<ServiceProcessor>(model, "Test idel queue", false, false),
+				new Queue<SvcReq>(model, "Test wait queue", false, false),
+				new Queue<SvcReqExec>(model, "Test idel queue", false, false),
 				null,
 				null,
 				null);
-		serviceProcessor = new ServiceProcessor(model, "Test Service Processor", false);
+		serviceProcessor = new SvcReqExec(model, "Test Service Processor", false);
 		serviceRequest.setServiceProcessor(serviceProcessor);
 		event = new ServiceRequestCompletion(model, "Test event", false);
 	}
