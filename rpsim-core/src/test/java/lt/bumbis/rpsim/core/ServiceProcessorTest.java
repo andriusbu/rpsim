@@ -10,7 +10,7 @@ import org.junit.Test;
 
 import desmoj.core.simulator.Experiment;
 
-public class ServiceProcessTest {
+public class ServiceProcessorTest {
 	
 	private SimModel model;
 	private Experiment exp;
