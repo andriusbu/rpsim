@@ -1,14 +1,9 @@
 package lt.bumbis.rpsim.core;
 
 import java.util.HashMap;
-import java.util.Map;
-
-import lt.bumbis.rpsim.core.entities.SvcReqExec;
-import lt.bumbis.rpsim.core.entities.SvcReq;
 
 import desmoj.core.dist.ContDist;
 import desmoj.core.simulator.Model;
-import desmoj.core.simulator.Queue;
 
 public class SimModel extends Model {
 	
@@ -41,12 +36,35 @@ public class SimModel extends Model {
 		for (TokenGenerator tokenGen: tokenGenerators.values()) tokenGen.init(this);
 	}
 	
-	public HashMap<String, Distribution> getDists() {
-		return distributions;
-	}
-	
 	public ContDist getDist(String name) {
 		return distributions.get(name).getDist();
+	}
+
+	public HashMap<String, Distribution> getDistributions() {
+		return distributions;
+	}
+
+	public SimModel setDistributions(HashMap<String, Distribution> distributions) {
+		this.distributions = distributions;
+		return this;
+	}
+
+	public HashMap<String, ServiceProcessor> getSvcProcessors() {
+		return svcProcessors;
+	}
+
+	public SimModel setSvcProcessors(HashMap<String, ServiceProcessor> svcProcessors) {
+		this.svcProcessors = svcProcessors;
+		return this;
+	}
+
+	public HashMap<String, TokenGenerator> getTokenGenerators() {
+		return tokenGenerators;
+	}
+
+	public SimModel setTokenGenerators(HashMap<String, TokenGenerator> tokenGenerators) {
+		this.tokenGenerators = tokenGenerators;
+		return this;
 	}
 
 }

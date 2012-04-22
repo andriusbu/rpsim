@@ -56,11 +56,4 @@ public class DistributionTest {
 		dist.init(model);
 		assertEquals(0.0, dist.getDist().sample(), 1.0);
 	}
-
-
-//	@Test
-	public void testGetDist() {
-		fail("Not yet implemented");
-	}
-
 }
