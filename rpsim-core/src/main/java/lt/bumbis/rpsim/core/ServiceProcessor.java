@@ -7,7 +7,7 @@ import lt.bumbis.rpsim.core.entities.SvcReqExec;
 import desmoj.core.dist.ContDist;
 import desmoj.core.simulator.Queue;
 
-public class ServiceProcessor {
+public class ServiceProcessor extends SimModelElement {
 	
 	private String name;
 	private int numReqExec;
@@ -38,6 +38,13 @@ public class ServiceProcessor {
 		}
 		serviceTimeDist = model.getDist(distName);
 	}
+	
+	@Override
+	public void doInitialSchedules(SimModel model) {
+		// TODO Auto-generated method stub
+		
+	}
+
 		
 	public Queue<SvcReq> getWaitQueue() {
 		return waitQueue;
