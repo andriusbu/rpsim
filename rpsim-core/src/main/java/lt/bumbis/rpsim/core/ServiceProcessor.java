@@ -38,8 +38,7 @@ public class ServiceProcessor {
 		}
 		serviceTimeDist = model.getDist(distName);
 	}
-	
-	
+		
 	public Queue<SvcReq> getWaitQueue() {
 		return waitQueue;
 	}
