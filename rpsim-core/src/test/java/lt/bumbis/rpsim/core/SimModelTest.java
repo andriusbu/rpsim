@@ -3,7 +3,12 @@ package lt.bumbis.rpsim.core;
 import static org.junit.Assert.*;
 
 import java.util.HashMap;
+import java.util.Observable;
+import java.util.Observer;
 import java.util.concurrent.TimeUnit;
+
+import lt.bumbis.rpsim.core.elements.Distribution;
+import lt.bumbis.rpsim.core.elements.ServiceProcessor;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -27,9 +32,11 @@ public class SimModelTest {
 		tGens.put("TG1", new TestTokenGenerator("TG1"));
 		tGens.put("TG2", new TestTokenGenerator("TG1"));
 		model.setTokenGenerators(tGens);
+		model.setTimeSyncHandler(new TestProcessEngine());
 		model.connectToExperiment(exp);
-		model.doInitialSchedules();
-		assertEquals(2, TestTokenGenerator.schedulesCalled);		
+		exp.start();
+		assertEquals(3, TestTokenGenerator.schedulesCalled);
+		assertEquals(0, TestProcessEngine.updateCalled);
 	}
 
 	@Test
@@ -96,7 +103,7 @@ public class SimModelTest {
 		static public int schedulesCalled;
 
 		public TestTokenGenerator(String name) {
-			super(name, "Process", "Dist", TimeUnit.MINUTES);
+			super(name, "Process", "Dist", TimeUnit.MINUTES, false);
 			initCalled = 0;
 			schedulesCalled = 0;
 		}
@@ -107,8 +114,27 @@ public class SimModelTest {
 		}
 		
 		@Override
-		public void doInitialSchedules() {
+		public void doInitialSchedules(SimModel model) {
 			schedulesCalled++;
 		}
+	}
+	
+	private static class TestProcessEngine implements IProcessEngine, Observer {
+		static public int updateCalled;
+		public TestProcessEngine() {
+			updateCalled = 0;
+		}
+		public void update(Observable o, Object arg) {
+			updateCalled ++;
+		}
+		public ProcessEngine startEngine() {
+			// TODO Auto-generated method stub
+			return null;
+		}
+		public long startProcess(String processName) {
+			// TODO Auto-generated method stub
+			return 0;
+		}
+		
 	}
 }

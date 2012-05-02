@@ -5,6 +5,8 @@ import static org.junit.Assert.*;
 import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
 
+import lt.bumbis.rpsim.core.elements.Distribution;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -25,7 +27,7 @@ public class TokenGeneratorTest {
 	public void doBefore() {
 		model = new SimModel(null, "Test", true, false);
 		tGens = new HashMap<String, TokenGenerator>();
-		tGen = new TokenGenerator("Main", "Process", "Dist", TimeUnit.MINUTES);
+		tGen = new TokenGenerator("Main", "Process", "Dist", TimeUnit.MINUTES, false);
 		tGens.put(
 				"TG",
 				tGen

@@ -1,7 +1,9 @@
-package lt.bumbis.rpsim.core;
+package lt.bumbis.rpsim.core.elements;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
+
+import lt.bumbis.rpsim.core.SimModel;
 
 import desmoj.core.dist.ContDist;
 import desmoj.core.simulator.Model;

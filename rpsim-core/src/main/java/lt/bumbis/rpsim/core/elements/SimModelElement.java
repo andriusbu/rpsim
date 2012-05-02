@@ -1,4 +1,6 @@
-package lt.bumbis.rpsim.core;
+package lt.bumbis.rpsim.core.elements;
+
+import lt.bumbis.rpsim.core.SimModel;
 
 public abstract class SimModelElement {
 	

@@ -2,6 +2,7 @@ package lt.bumbis.rpsim.core;
 
 import java.util.concurrent.TimeUnit;
 
+import lt.bumbis.rpsim.core.elements.SimModelElement;
 import lt.bumbis.rpsim.core.events.NewProcessToken;
 
 import desmoj.core.dist.ContDist;

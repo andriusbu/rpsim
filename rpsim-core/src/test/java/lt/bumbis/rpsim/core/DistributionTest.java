@@ -1,6 +1,7 @@
 package lt.bumbis.rpsim.core;
 
 import static org.junit.Assert.*;
+import lt.bumbis.rpsim.core.elements.Distribution;
 
 import org.junit.Before;
 import org.junit.Test;

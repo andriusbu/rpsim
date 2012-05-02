@@ -2,6 +2,8 @@ package lt.bumbis.rpsim.core.events;
 
 import java.util.concurrent.TimeUnit;
 
+import lt.bumbis.rpsim.core.SimModel;
+
 import desmoj.core.dist.ContDist;
 import desmoj.core.simulator.ExternalEvent;
 import desmoj.core.simulator.Model;
@@ -13,13 +15,16 @@ public class NewProcessToken extends ExternalEvent {
 	private ContDist dist;
 	private TimeUnit timeUnit;
 	
-	public NewProcessToken(Model arg0, String arg1, boolean arg2) {
-		super(arg0, arg1, arg2);
+	private SimModel model;
+	
+	public NewProcessToken(Model model, String name, boolean showInReport) {
+		super(model, name, showInReport);
+		this.model = (SimModel) model;
 	}
 
 	@Override
 	public void eventRoutine() {
-		//TODO Start process in process engine
+		model.getProcEngine().startProcess(processName);
 		schedule(new TimeInstant(dist.sample(), timeUnit));
 	}
 	

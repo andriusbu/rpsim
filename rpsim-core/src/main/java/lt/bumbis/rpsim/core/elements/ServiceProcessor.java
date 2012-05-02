@@ -1,7 +1,8 @@
-package lt.bumbis.rpsim.core;
+package lt.bumbis.rpsim.core.elements;
 
 import java.util.concurrent.TimeUnit;
 
+import lt.bumbis.rpsim.core.SimModel;
 import lt.bumbis.rpsim.core.entities.SvcReq;
 import lt.bumbis.rpsim.core.entities.SvcReqExec;
 import desmoj.core.dist.ContDist;
