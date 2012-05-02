@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
 
 import lt.bumbis.rpsim.core.elements.Distribution;
+import lt.bumbis.rpsim.core.elements.TokenGenerator;
 
 import org.junit.Before;
 import org.junit.Test;

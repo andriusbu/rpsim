@@ -5,6 +5,7 @@ import java.util.Observer;
 
 import lt.bumbis.rpsim.core.elements.Distribution;
 import lt.bumbis.rpsim.core.elements.ServiceProcessor;
+import lt.bumbis.rpsim.core.elements.TokenGenerator;
 
 import desmoj.core.dist.ContDist;
 import desmoj.core.simulator.Model;

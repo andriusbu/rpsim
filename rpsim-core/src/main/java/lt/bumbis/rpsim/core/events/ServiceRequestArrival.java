@@ -1,7 +1,7 @@
 package lt.bumbis.rpsim.core.events;
 
 import lt.bumbis.rpsim.core.SimulationEngine;
-import lt.bumbis.rpsim.core.entities.SvcReqExec;
+import lt.bumbis.rpsim.core.entities.SvcProcessorExec;
 import lt.bumbis.rpsim.core.entities.SvcReq;
 import desmoj.core.simulator.Event;
 import desmoj.core.simulator.Model;
@@ -17,11 +17,11 @@ public class ServiceRequestArrival extends Event<SvcReq> {
     }
 
     public void eventRoutine(final SvcReq request) {
-    	Queue<SvcReqExec> idleQueue = request.getProcIdleQueue();
+    	Queue<SvcProcessorExec> idleQueue = request.getProcIdleQueue();
     	Queue<SvcReq> waitQueue = request.getWaitQueue();
     	waitQueue.insert(request);
         if ( ! idleQueue.isEmpty() ) {
-        	SvcReqExec proc = idleQueue.first();
+        	SvcProcessorExec proc = idleQueue.first();
         	request.setServiceProcessor(proc);
         	idleQueue.remove(proc);
         	waitQueue.remove(request);

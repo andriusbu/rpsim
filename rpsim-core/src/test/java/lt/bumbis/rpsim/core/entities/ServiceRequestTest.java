@@ -29,7 +29,7 @@ public class ServiceRequestTest {
 	@Test
 	public void testSettings() {		
 		Queue<SvcReq> queue1 = new Queue<SvcReq>(model, "test", false, false);
-		Queue<SvcReqExec> queue2 = new Queue<SvcReqExec>(model, "Test", false, false);
+		Queue<SvcProcessorExec> queue2 = new Queue<SvcProcessorExec>(model, "Test", false, false);
 		TestClass testClass = new TestClass();
 		serviceRequest.setParameters(queue1, queue2, null, null, testClass);
 		assertEquals(serviceRequest.getWaitQueue(), queue1);

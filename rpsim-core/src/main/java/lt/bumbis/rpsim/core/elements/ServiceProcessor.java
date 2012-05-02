@@ -4,7 +4,7 @@ import java.util.concurrent.TimeUnit;
 
 import lt.bumbis.rpsim.core.SimModel;
 import lt.bumbis.rpsim.core.entities.SvcReq;
-import lt.bumbis.rpsim.core.entities.SvcReqExec;
+import lt.bumbis.rpsim.core.entities.SvcProcessorExec;
 import desmoj.core.dist.ContDist;
 import desmoj.core.simulator.Queue;
 
@@ -17,7 +17,7 @@ public class ServiceProcessor extends SimModelElement {
 	private boolean showInTrace;
 	
 	private Queue<SvcReq> waitQueue;
-	private Queue<SvcReqExec> idleQueue;
+	private Queue<SvcProcessorExec> idleQueue;
 	private ContDist serviceTimeDist;
 	private TimeUnit serviceTimeUnit;
 		
@@ -32,9 +32,9 @@ public class ServiceProcessor extends SimModelElement {
 	
 	public void init(SimModel model) {
 		waitQueue = new Queue<SvcReq>(model, name, showInReport, showInTrace); 
-		idleQueue = new Queue<SvcReqExec>(model, name, showInReport, showInTrace);
+		idleQueue = new Queue<SvcProcessorExec>(model, name, showInReport, showInTrace);
 		for (int i=0; i<numReqExec; i++) {
-			SvcReqExec svcReqExec = new SvcReqExec(model, name+"_exec_"+i, showInTrace);
+			SvcProcessorExec svcReqExec = new SvcProcessorExec(model, name+"_exec_"+i, showInTrace);
 			idleQueue.insert(svcReqExec);
 		}
 		serviceTimeDist = model.getDist(distName);
@@ -51,7 +51,7 @@ public class ServiceProcessor extends SimModelElement {
 		return waitQueue;
 	}
 
-	public Queue<SvcReqExec> getIdleQueue() {
+	public Queue<SvcProcessorExec> getIdleQueue() {
 		return idleQueue;
 	}
 

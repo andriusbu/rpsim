@@ -11,10 +11,10 @@ public class SvcReq extends Entity {
 	
 	private Object externalRef;
 	private Queue<SvcReq> waitQueue;
-	private Queue<SvcReqExec> procIdleQueue;
+	private Queue<SvcProcessorExec> procIdleQueue;
 	private TimeUnit timeUnit;
 	private ContDist dist;
-	private SvcReqExec serviceProcessor;
+	private SvcProcessorExec serviceProcessor;
 
 	public SvcReq(Model model, String name, boolean showInTrace) {
         super(model, name, showInTrace);
@@ -30,7 +30,7 @@ public class SvcReq extends Entity {
     	return this;
     }
     
-    public SvcReq setProcIdleQueue(Queue<SvcReqExec> procIdleQueue) {
+    public SvcReq setProcIdleQueue(Queue<SvcProcessorExec> procIdleQueue) {
     	this.procIdleQueue = procIdleQueue;
     	return this;
     }
@@ -43,15 +43,15 @@ public class SvcReq extends Entity {
 		return waitQueue;
 	}
 
-	public Queue<SvcReqExec> getProcIdleQueue() {
+	public Queue<SvcProcessorExec> getProcIdleQueue() {
 		return procIdleQueue;
 	}
 	
-    public SvcReqExec getServiceProcessor() {
+    public SvcProcessorExec getServiceProcessor() {
 		return serviceProcessor;
 	}
 
-	public SvcReq setServiceProcessor(SvcReqExec serviceProcessor) {
+	public SvcReq setServiceProcessor(SvcProcessorExec serviceProcessor) {
 		this.serviceProcessor = serviceProcessor;
 		return this;
 	}
@@ -74,7 +74,7 @@ public class SvcReq extends Entity {
 		return this;
 	}
 
-	public SvcReq setParameters(Queue<SvcReq> waitQueue, Queue<SvcReqExec> procIdleQueue, ContDist dist, TimeUnit timeUnit, Object externalRef) {
+	public SvcReq setParameters(Queue<SvcReq> waitQueue, Queue<SvcProcessorExec> procIdleQueue, ContDist dist, TimeUnit timeUnit, Object externalRef) {
     	setExternalRef(externalRef);
     	setWaitQueue(waitQueue);
     	setProcIdleQueue(procIdleQueue);

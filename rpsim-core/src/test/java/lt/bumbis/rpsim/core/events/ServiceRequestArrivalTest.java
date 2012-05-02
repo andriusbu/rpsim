@@ -5,7 +5,7 @@ import static org.junit.Assert.*;
 import java.util.concurrent.TimeUnit;
 
 import lt.bumbis.rpsim.core.SimulationEngine;
-import lt.bumbis.rpsim.core.entities.SvcReqExec;
+import lt.bumbis.rpsim.core.entities.SvcProcessorExec;
 import lt.bumbis.rpsim.core.entities.SvcReq;
 
 import org.junit.Before;
@@ -32,7 +32,7 @@ public class ServiceRequestArrivalTest {
 		serviceRequest = new SvcReq(model, "Test SR", false);
 		serviceRequest.setParameters(
 				new Queue<SvcReq>(model, "Test wait queue", false, false),
-				new Queue<SvcReqExec>(model, "Test idel queue", false, false),
+				new Queue<SvcProcessorExec>(model, "Test idel queue", false, false),
 				new TestDist(model, "Test distribution", false, false),
 				TimeUnit.SECONDS,
 				null);
@@ -55,7 +55,7 @@ public class ServiceRequestArrivalTest {
 	 */
 	@Test
 	public void testEventRoutine2() {
-		SvcReqExec serviceProcessor = new SvcReqExec(model, "Test Service Processor", false);
+		SvcProcessorExec serviceProcessor = new SvcProcessorExec(model, "Test Service Processor", false);
 		serviceRequest.getProcIdleQueue().insert(serviceProcessor);
 		event.eventRoutine(serviceRequest);
 		assertTrue(serviceRequest.getProcIdleQueue().isEmpty());
