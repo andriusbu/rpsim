@@ -2,7 +2,6 @@ package lt.bumbis.rpsim.core;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
-import java.util.HashMap;
 
 import desmoj.core.dist.ContDist;
 import desmoj.core.simulator.Model;
@@ -10,49 +9,48 @@ import desmoj.core.simulator.Queue;
 import lt.bumbis.rpsim.core.entities.SvcProcessor;
 import lt.bumbis.rpsim.core.entities.SvcProcessorExec;
 import lt.bumbis.rpsim.core.entities.SvcReq;
+import lt.bumbis.rpsim.core.events.NewProcessToken;
 import lt.bumbis.rpsim.core.simconfig.Distribution;
 import lt.bumbis.rpsim.core.simconfig.ServiceProcessor;
 import lt.bumbis.rpsim.core.simconfig.SimConfig;
+import lt.bumbis.rpsim.core.simconfig.TokenGenerator;
 
 public class ModelBuilder {
 
 	public static void init(SimModel2 model, SimConfig config) {
-		
-		for (Distribution dist : ((HashMap<String, Distribution>)config.get(Distribution.class)).values())
-				createDist(model, dist.getName(), dist.getDistClass(), dist.getDistParams(), dist.isShowInReport(), dist.isShowInTrace());
-		
-		for (ServiceProcessor svcProc: ((HashMap<String, ServiceProcessor>)config.get(ServiceProcessor.class)).values())
-			createSvcProcessor(model, svcProc);
-				
+		for (Distribution dist : config.getDists().values()) createDist(model, dist);
+		for (ServiceProcessor svcProc: config.getSvcProcs().values()) createSvcProcessor(model, svcProc);
+		for (TokenGenerator tokenGen: config.getTokenGens().values()) createTokenGenerator(model, tokenGen);
 	}
 	
 	public static void doInitialSchedules(SimModel2 model, SimConfig config) {
 		//TODO
 	}
 	
-	private static ContDist createDist(SimModel2 model, String name, Class distClass, Object[] distParams,
-			boolean showInReport, boolean showInTrace) {
-		Class[] types = new Class [4+distParams.length];
-		Object[] args = new Object[4+distParams.length];
+	@SuppressWarnings("rawtypes")
+	private static void createDist(SimModel2 model, Distribution dist) {
+		Class[] types = new Class [4+dist.getDistParams().length];
+		Object[] args = new Object[4+dist.getDistParams().length];
 		types[0] = Model.class;
 		args[0] = model;
 		types[1] = String.class;
-		args[1] = name;
+		args[1] = dist.getName();
 		int i;
-		for (i=0; i<distParams.length; i++) {
+		for (i=0; i<dist.getDistParams().length; i++) {
 			types[i+2] = double.class;
-			args[i+2] = distParams[i];
+			args[i+2] = dist.getDistParams()[i];
 		}
 		i=i+2;
 		types[i]=boolean.class;
-		args[i++]=showInReport;
+		args[i++]=dist.isShowInReport();
 		types[i]=boolean.class;
-		args[i]=showInTrace;		
+		args[i]=dist.isShowInTrace();		
 		Constructor cons;
-		ContDist dist = null;
+		ContDist contDist = null;
 		try {
-			cons = distClass.getConstructor(types);
-			dist = (ContDist)cons.newInstance(args);
+			cons = dist.getDistClass().getConstructor(types);
+			contDist = (ContDist)cons.newInstance(args);
+			model.addDist(dist.getName(), contDist);
 		} catch (NoSuchMethodException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -72,10 +70,9 @@ public class ModelBuilder {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return dist;
 	}
 	
-	private static void createSvcProcessor(SimModel model, ServiceProcessor cfg) {
+	private static void createSvcProcessor(SimModel2 model, ServiceProcessor cfg) {
 		SvcProcessor svcProc = new SvcProcessor(model, cfg.getName(), cfg.isShowInReport());
 		svcProc.setWaitQueue(new Queue<SvcReq>(model, cfg.getName()+"_WQ", cfg.isShowInReport(), cfg.isShowInTrace()));
 		svcProc.setIdleQueue(new Queue<SvcProcessorExec>(model, cfg.getName()+"_IQ", cfg.isShowInReport(), cfg.isShowInTrace()));
@@ -83,8 +80,14 @@ public class ModelBuilder {
 			SvcProcessorExec svcReqExec = new SvcProcessorExec(model, cfg.getName()+"_Exec"+i, cfg.isShowInTrace());
 			svcProc.getIdleQueue().insert(svcReqExec);
 		}
-		serviceTimeDist = model.getDist(distName);
-
+		svcProc.setServiceTimeDist(model.getDist(cfg.getDistName()));
+	}
+	
+	private static void createTokenGenerator(SimModel2 model, TokenGenerator cfg) {
+		NewProcessToken tokenGen = new NewProcessToken(model, cfg.getName(), cfg.isShowInReport());
+		tokenGen.setProcessName(cfg.getProcessName());
+		tokenGen.setDist(model.getDist(cfg.getDistName()));
+		tokenGen.setTimeUnit(cfg.getTimeUnit());
 	}
 	
 }

@@ -34,4 +34,28 @@ public class NewProcessToken extends ExternalEvent {
 		this.timeUnit = timeUnit;
 		return this;
 	}
+
+	public String getProcessName() {
+		return processName;
+	}
+
+	public void setProcessName(String processName) {
+		this.processName = processName;
+	}
+
+	public ContDist getDist() {
+		return dist;
+	}
+
+	public void setDist(ContDist dist) {
+		this.dist = dist;
+	}
+
+	public TimeUnit getTimeUnit() {
+		return timeUnit;
+	}
+
+	public void setTimeUnit(TimeUnit timeUnit) {
+		this.timeUnit = timeUnit;
+	}
 }
