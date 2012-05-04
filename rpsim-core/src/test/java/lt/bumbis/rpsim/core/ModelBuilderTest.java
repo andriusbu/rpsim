@@ -69,14 +69,20 @@ public class ModelBuilderTest {
 		SvcProcessor svcProc = (SvcProcessor) model.getEntities(false).get(indexSvcProc);
 		assertEquals(model.getReportables().get(2), svcProc.getWaitQueue());
 		assertEquals(model.getReportables().get(3), svcProc.getIdleQueue());
+		assertEquals(3, svcProc.getIdleQueue().getQueueList().size());
 		assertEquals(model.getDist("Dist2"), svcProc.getServiceTimeDist());
 		assertEquals(TimeUnit.MINUTES, svcProc.getServiceTimeUnit());
 		//Check token generator
-		//TODO
+		assertEquals("TG1#1", model.getTokenGenerator("TG1").getName());
+		assertEquals("Process", model.getTokenGenerator("TG1").getProcessName());
+		assertEquals(model.getDist("Dist1"), model.getTokenGenerator("TG1").getDist());
+		assertEquals(TimeUnit.MINUTES, model.getTokenGenerator("TG1").getTimeUnit());
 	}
 
 	@Test 
 	public void testDoInitialSchedules() {
-		//TODO
+		model.connectToExperiment(exp);
+		ModelBuilder.doInitialSchedules(model, conf);
+		assertTrue(model.getTokenGenerator("TG1").isScheduled());
 	}
 }

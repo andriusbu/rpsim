@@ -24,7 +24,8 @@ public class NewProcessToken extends ExternalEvent {
 
 	@Override
 	public void eventRoutine() {
-		model.getProcEngine().startProcess(processName);
+		//TODO execute process in process engine
+//		model.getProcEngine().startProcess(processName);
 		schedule(new TimeInstant(dist.sample(), timeUnit));
 	}
 	

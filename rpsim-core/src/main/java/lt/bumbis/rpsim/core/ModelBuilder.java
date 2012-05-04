@@ -6,6 +6,7 @@ import java.lang.reflect.InvocationTargetException;
 import desmoj.core.dist.ContDist;
 import desmoj.core.simulator.Model;
 import desmoj.core.simulator.Queue;
+import desmoj.core.simulator.TimeSpan;
 import lt.bumbis.rpsim.core.entities.SvcProcessor;
 import lt.bumbis.rpsim.core.entities.SvcProcessorExec;
 import lt.bumbis.rpsim.core.entities.SvcReq;
@@ -24,7 +25,7 @@ public class ModelBuilder {
 	}
 	
 	public static void doInitialSchedules(SimModel model, SimConfig config) {
-		//TODO
+		for (TokenGenerator tokenGen: config.getTokenGens().values()) scheduleTokenGen(model, tokenGen);
 	}
 	
 	@SuppressWarnings("rawtypes")
@@ -89,6 +90,12 @@ public class ModelBuilder {
 		tokenGen.setProcessName(cfg.getProcessName());
 		tokenGen.setDist(model.getDist(cfg.getDistName()));
 		tokenGen.setTimeUnit(cfg.getTimeUnit());
+		model.addTokenGenerator(cfg.getName(), tokenGen);
+	}
+	
+	private static void scheduleTokenGen(SimModel model, TokenGenerator cfg) {
+		NewProcessToken tokenGen = model.getTokenGenerator(cfg.getName());
+		tokenGen.schedule(new TimeSpan(tokenGen.getDist().sample(), tokenGen.getTimeUnit()));
 	}
 	
 }
