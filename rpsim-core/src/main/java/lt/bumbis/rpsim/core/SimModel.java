@@ -9,7 +9,7 @@ import desmoj.core.simulator.Model;
 public class SimModel extends Model {
 	
 	private SimConfig config;
-	private HashMap<String, ContDist> dists;
+	private HashMap<String, ContDist> dists = new HashMap<String, ContDist>();
 
 	public SimModel(SimConfig config) {
 		super(null, config.getName(), config.isShowInReport(), config.isShowInTrace());

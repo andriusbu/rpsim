@@ -13,6 +13,7 @@ public class ServiceProcessor extends ConfigElement {
 			boolean showInTrace) {
 		super(name, showInReport, showInTrace);
 		this.numExec = numExec;
+		this.distName = distName;
 		this.timeUnit = timeUnit;
 	}
 

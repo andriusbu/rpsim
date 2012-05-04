@@ -28,8 +28,8 @@ public class ModelBuilder {
 	}
 	
 	@SuppressWarnings("rawtypes")
-	private static void createDist(SimModel model, Distribution dist) {
-		Class[] types = new Class [4+dist.getDistParams().length];
+	protected static void createDist(SimModel model, Distribution dist) {
+		Class[] types = new Class [4+dist.getDistParams().length];  
 		Object[] args = new Object[4+dist.getDistParams().length];
 		types[0] = Model.class;
 		args[0] = model;
@@ -72,7 +72,7 @@ public class ModelBuilder {
 		}
 	}
 	
-	private static void createSvcProcessor(SimModel model, ServiceProcessor cfg) {
+	protected static void createSvcProcessor(SimModel model, ServiceProcessor cfg) {
 		SvcProcessor svcProc = new SvcProcessor(model, cfg.getName(), cfg.isShowInReport());
 		svcProc.setWaitQueue(new Queue<SvcReq>(model, cfg.getName()+"_WQ", cfg.isShowInReport(), cfg.isShowInTrace()));
 		svcProc.setIdleQueue(new Queue<SvcProcessorExec>(model, cfg.getName()+"_IQ", cfg.isShowInReport(), cfg.isShowInTrace()));
@@ -81,9 +81,10 @@ public class ModelBuilder {
 			svcProc.getIdleQueue().insert(svcReqExec);
 		}
 		svcProc.setServiceTimeDist(model.getDist(cfg.getDistName()));
+		svcProc.setServiceTimeUnit(cfg.getTimeUnit());
 	}
 	
-	private static void createTokenGenerator(SimModel model, TokenGenerator cfg) {
+	protected static void createTokenGenerator(SimModel model, TokenGenerator cfg) {
 		NewProcessToken tokenGen = new NewProcessToken(model, cfg.getName(), cfg.isShowInReport());
 		tokenGen.setProcessName(cfg.getProcessName());
 		tokenGen.setDist(model.getDist(cfg.getDistName()));
