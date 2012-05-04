@@ -16,7 +16,6 @@ import org.junit.Test;
 
 import desmoj.core.dist.ContDistNormal;
 import desmoj.core.simulator.Experiment;
-import desmoj.core.simulator.TimeInstant;
 
 public class ModelBuilderTest {
 	
