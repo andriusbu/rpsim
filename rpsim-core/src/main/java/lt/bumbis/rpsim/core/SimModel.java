@@ -12,6 +12,8 @@ public class SimModel extends Model {
 	private SimConfig config;
 	private HashMap<String, ContDist> dists = new HashMap<String, ContDist>();
 	private HashMap<String, NewProcessToken> tokenGens = new HashMap<String, NewProcessToken>();
+	
+	private IProcessEngine processEngine;
 
 	public SimModel(SimConfig config) {
 		super(null, config.getName(), config.isShowInReport(), config.isShowInTrace());
@@ -48,5 +50,13 @@ public class SimModel extends Model {
 	
 	public NewProcessToken getTokenGenerator(String name) {
 		return tokenGens.get(name);
+	}
+
+	public IProcessEngine getProcessEngine() {
+		return processEngine;
+	}
+
+	public void setProcessEngine(IProcessEngine processEngine) {
+		this.processEngine = processEngine;
 	}
 }
