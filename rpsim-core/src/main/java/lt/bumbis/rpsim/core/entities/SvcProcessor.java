@@ -49,16 +49,4 @@ public class SvcProcessor extends Entity {
 	public void setServiceTimeUnit(TimeUnit serviceTimeUnit) {
 		this.serviceTimeUnit = serviceTimeUnit;
 	}
-	
-//	public SvcProcessor set(
-//				Queue<SvcReq> waitQueue,
-//				Queue<SvcProcessorExec> idleQueue,
-//				ContDist serviceTimeDist,
-//				TimeUnit serviceTimeUnit) {
-//		this.waitQueue = waitQueue;
-//		this.idleQueue = idleQueue;
-//		this.serviceTimeDist = serviceTimeDist;
-//		this.serviceTimeUnit = serviceTimeUnit;
-//		return this;
-//	}
 }

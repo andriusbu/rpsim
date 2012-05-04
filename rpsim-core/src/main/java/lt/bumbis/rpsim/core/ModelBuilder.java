@@ -17,18 +17,18 @@ import lt.bumbis.rpsim.core.simconfig.TokenGenerator;
 
 public class ModelBuilder {
 
-	public static void init(SimModel2 model, SimConfig config) {
+	public static void init(SimModel model, SimConfig config) {
 		for (Distribution dist : config.getDists().values()) createDist(model, dist);
 		for (ServiceProcessor svcProc: config.getSvcProcs().values()) createSvcProcessor(model, svcProc);
 		for (TokenGenerator tokenGen: config.getTokenGens().values()) createTokenGenerator(model, tokenGen);
 	}
 	
-	public static void doInitialSchedules(SimModel2 model, SimConfig config) {
+	public static void doInitialSchedules(SimModel model, SimConfig config) {
 		//TODO
 	}
 	
 	@SuppressWarnings("rawtypes")
-	private static void createDist(SimModel2 model, Distribution dist) {
+	private static void createDist(SimModel model, Distribution dist) {
 		Class[] types = new Class [4+dist.getDistParams().length];
 		Object[] args = new Object[4+dist.getDistParams().length];
 		types[0] = Model.class;
@@ -72,7 +72,7 @@ public class ModelBuilder {
 		}
 	}
 	
-	private static void createSvcProcessor(SimModel2 model, ServiceProcessor cfg) {
+	private static void createSvcProcessor(SimModel model, ServiceProcessor cfg) {
 		SvcProcessor svcProc = new SvcProcessor(model, cfg.getName(), cfg.isShowInReport());
 		svcProc.setWaitQueue(new Queue<SvcReq>(model, cfg.getName()+"_WQ", cfg.isShowInReport(), cfg.isShowInTrace()));
 		svcProc.setIdleQueue(new Queue<SvcProcessorExec>(model, cfg.getName()+"_IQ", cfg.isShowInReport(), cfg.isShowInTrace()));
@@ -83,7 +83,7 @@ public class ModelBuilder {
 		svcProc.setServiceTimeDist(model.getDist(cfg.getDistName()));
 	}
 	
-	private static void createTokenGenerator(SimModel2 model, TokenGenerator cfg) {
+	private static void createTokenGenerator(SimModel model, TokenGenerator cfg) {
 		NewProcessToken tokenGen = new NewProcessToken(model, cfg.getName(), cfg.isShowInReport());
 		tokenGen.setProcessName(cfg.getProcessName());
 		tokenGen.setDist(model.getDist(cfg.getDistName()));
