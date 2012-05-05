@@ -55,6 +55,10 @@ public class SimModel extends Model {
 	public NewProcessToken getTokenGenerator(String name) {
 		return tokenGens.get(name);
 	}
+	
+	public HashMap<String, NewProcessToken> getTokenGenerators() {
+		return tokenGens;
+	}
 
 	public IProcessEngine getProcessEngine() {
 		return processEngine;

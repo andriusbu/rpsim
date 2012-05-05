@@ -28,8 +28,9 @@ public class ModelBuilder {
 	}
 	
 	public static void doInitialSchedules(SimModel model) {
-		SimConfig config = model.getConfig();
-		for (TokenGenerator tokenGen: config.getTokenGens().values()) scheduleTokenGen(model, tokenGen);
+//		SimConfig config = model.getConfig();
+//		for (TokenGenerator tokenGen: config.getTokenGens().values()) scheduleTokenGen(model, tokenGen);
+		for (NewProcessToken token: model.getTokenGenerators().values()) scheduleTokenGen(token);
 	}
 	
 	@SuppressWarnings("rawtypes")
@@ -92,13 +93,17 @@ public class ModelBuilder {
 		model.addTokenGenerator(cfg.getName(), tokenGen);
 	}
 	
-	private static void scheduleTokenGen(SimModel model, TokenGenerator cfg) {
-		NewProcessToken tokenGen = model.getTokenGenerator(cfg.getName());
-		tokenGen.schedule(new TimeSpan(tokenGen.getDist().sample(), tokenGen.getTimeUnit()));
+//	private static void scheduleTokenGen(SimModel model, TokenGenerator cfg) {
+//		NewProcessToken tokenGen = model.getTokenGenerator(cfg.getName());
+//		tokenGen.schedule(new TimeSpan(tokenGen.getDist().sample(), tokenGen.getTimeUnit()));
+//	}
+	
+	private static void scheduleTokenGen(NewProcessToken token) {
+		token.schedule(new TimeSpan(token.getDist().sample(), token.getTimeUnit()));
 	}
 	
-	private static void createActivity(SimModel model, Activity activity) {
-		model.addActivity(activity.getName(), model.getSvcProcessor(activity.getProcessor()));
+	private static void createActivity(SimModel model, Activity cfg) {
+		model.addActivity(cfg.getName(), model.getSvcProcessor(cfg.getProcessor()));
 	}
 	
 }
