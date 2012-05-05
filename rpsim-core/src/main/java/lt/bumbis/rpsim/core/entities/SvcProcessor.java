@@ -18,6 +18,7 @@ public class SvcProcessor extends Entity {
 
 	public SvcProcessor(Model model, String name, boolean showInReport) {
 		super(model, name, showInReport);
+		map = new HashMap<SvcReq, SvcProcessorExec>();
 	}
 	
 	public void add(SvcReq request) {

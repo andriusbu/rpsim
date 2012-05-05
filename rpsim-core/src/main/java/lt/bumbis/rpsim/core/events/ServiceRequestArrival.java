@@ -1,5 +1,6 @@
 package lt.bumbis.rpsim.core.events; 
 
+import lt.bumbis.rpsim.core.ModelBuilder;
 import lt.bumbis.rpsim.core.entities.SvcProcessor;
 import lt.bumbis.rpsim.core.entities.SvcReq;
 import desmoj.core.simulator.EventOf2Entities;
@@ -7,7 +8,7 @@ import desmoj.core.simulator.Model;
 
 public class ServiceRequestArrival extends EventOf2Entities<SvcReq, SvcProcessor> {
 		
-    public ServiceRequestArrival(Model model, String name, boolean showInTrace) {
+  	public ServiceRequestArrival(Model model, String name, boolean showInTrace) {
         super(model, name, showInTrace);
     }
 
@@ -16,9 +17,7 @@ public class ServiceRequestArrival extends EventOf2Entities<SvcReq, SvcProcessor
     	processor.add(request);
     	if ( processor.isAvailable() ) {
     		processor.start(request);
-        	//TODO create and schedule completion event
-//        	ServiceRequestCompletion completionEvent = ModelBuilder.newServiceRequestCompletion(model)
-//        	completionEvent.schedule(request, request.getDist().sampleTimeSpan(request.getTimeUnit()));       	
+        	//TODO Completion event      	
         }
     }
 }
