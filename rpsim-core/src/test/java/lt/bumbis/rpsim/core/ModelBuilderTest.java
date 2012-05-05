@@ -82,7 +82,7 @@ public class ModelBuilderTest {
 	@Test 
 	public void testDoInitialSchedules() {
 		model.connectToExperiment(exp);
-		ModelBuilder.doInitialSchedules(model, conf);
+		ModelBuilder.doInitialSchedules(model);
 		assertTrue(model.getTokenGenerator("TG1").isScheduled());
 	}
 }

@@ -4,11 +4,12 @@ import java.util.HashMap;
 
 public class SimConfig extends ConfigElement {
 
-	private String name;
-
+	//Simulation Objects
 	private HashMap<String, Distribution> dists = new HashMap<String, Distribution>();
 	private HashMap<String, ServiceProcessor> svcProcs = new HashMap<String, ServiceProcessor>();
 	private HashMap<String, TokenGenerator> tokenGens = new HashMap<String, TokenGenerator>();
+	private HashMap<String, Activity> activities = new HashMap<String, Activity>();
+		 
 
 	@SuppressWarnings("serial")
 	private HashMap<Class<? extends ConfigElement>, HashMap<String, ? extends ConfigElement>> mapping = new HashMap<Class<? extends ConfigElement>, HashMap<String, ? extends ConfigElement>>() {
@@ -16,6 +17,7 @@ public class SimConfig extends ConfigElement {
 			put(Distribution.class, dists);
 			put(ServiceProcessor.class, svcProcs);
 			put(TokenGenerator.class, tokenGens);
+			put(Activity.class, activities);
 		}
 	};
 
@@ -30,11 +32,7 @@ public class SimConfig extends ConfigElement {
 		col.put(element.getName(), element);
 		return this;
 	}
-
-	public String getName() {
-		return name;
-	}
-
+	
 	public HashMap<String, Distribution> getDists() {
 		return dists;
 	}
@@ -45,5 +43,9 @@ public class SimConfig extends ConfigElement {
 
 	public HashMap<String, TokenGenerator> getTokenGens() {
 		return tokenGens;
+	}
+
+	public HashMap<String, Activity> getActivities() {
+		return activities;
 	}
 }

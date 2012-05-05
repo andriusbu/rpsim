@@ -18,13 +18,15 @@ import desmoj.core.simulator.TimeSpan;
 
 public class ModelBuilder {
 
-	public static void init(SimModel model, SimConfig config) {
+	public static void init(SimModel model) {
+		SimConfig config = model.getConfig();
 		for (Distribution dist : config.getDists().values()) createDist(model, dist);
 		for (ServiceProcessor svcProc: config.getSvcProcs().values()) createSvcProcessor(model, svcProc);
 		for (TokenGenerator tokenGen: config.getTokenGens().values()) createTokenGenerator(model, tokenGen);
 	}
 	
-	public static void doInitialSchedules(SimModel model, SimConfig config) {
+	public static void doInitialSchedules(SimModel model) {
+		SimConfig config = model.getConfig();
 		for (TokenGenerator tokenGen: config.getTokenGens().values()) scheduleTokenGen(model, tokenGen);
 	}
 	

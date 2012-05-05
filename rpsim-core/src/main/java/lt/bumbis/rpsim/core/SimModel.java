@@ -28,12 +28,12 @@ public class SimModel extends Model {
 
 	@Override
 	public void doInitialSchedules() {
-		ModelBuilder.doInitialSchedules(this, config);
+		ModelBuilder.doInitialSchedules(this);
 	}
 
 	@Override
 	public void init() {
-		ModelBuilder.init(this, config);		
+		ModelBuilder.init(this);		
 	}
 	
 	public void addDist(String name, ContDist dist) {
