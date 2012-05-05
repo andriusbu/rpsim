@@ -7,6 +7,7 @@ import lt.bumbis.rpsim.core.entities.SvcProcessor;
 import lt.bumbis.rpsim.core.entities.SvcProcessorExec;
 import lt.bumbis.rpsim.core.entities.SvcReq;
 import lt.bumbis.rpsim.core.events.NewProcessToken;
+import lt.bumbis.rpsim.core.simconfig.Activity;
 import lt.bumbis.rpsim.core.simconfig.Distribution;
 import lt.bumbis.rpsim.core.simconfig.ServiceProcessor;
 import lt.bumbis.rpsim.core.simconfig.SimConfig;
@@ -23,6 +24,7 @@ public class ModelBuilder {
 		for (Distribution dist : config.getDists().values()) createDist(model, dist);
 		for (ServiceProcessor svcProc: config.getSvcProcs().values()) createSvcProcessor(model, svcProc);
 		for (TokenGenerator tokenGen: config.getTokenGens().values()) createTokenGenerator(model, tokenGen);
+		for (Activity activity: config.getActivities().values()) createActivity(model, activity);
 	}
 	
 	public static void doInitialSchedules(SimModel model) {
@@ -79,6 +81,7 @@ public class ModelBuilder {
 		}
 		svcProc.setServiceTimeDist(model.getDist(cfg.getDistName()));
 		svcProc.setServiceTimeUnit(cfg.getTimeUnit());
+		model.getSvcProcessors().put(cfg.getName(), svcProc);
 	}
 	
 	private static void createTokenGenerator(SimModel model, TokenGenerator cfg) {
@@ -92,5 +95,10 @@ public class ModelBuilder {
 	private static void scheduleTokenGen(SimModel model, TokenGenerator cfg) {
 		NewProcessToken tokenGen = model.getTokenGenerator(cfg.getName());
 		tokenGen.schedule(new TimeSpan(tokenGen.getDist().sample(), tokenGen.getTimeUnit()));
-	}	
+	}
+	
+	private static void createActivity(SimModel model, Activity activity) {
+		model.getActivityMapping().put(activity.getName(), model.getSvcProcessors().get(activity.getProcessor()));
+	}
+	
 }
