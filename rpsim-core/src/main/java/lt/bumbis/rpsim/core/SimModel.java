@@ -68,19 +68,19 @@ public class SimModel extends Model {
 		return config;
 	}
 
-	public HashMap<String, SvcProcessor> getActivityMapping() {
-		return activityMapping;
+	public SvcProcessor getActivity(String name) {
+		return activityMapping.get(name);
 	}
 
-	public void setActivityMapping(HashMap<String, SvcProcessor> activityMapping) {
-		this.activityMapping = activityMapping;
+	public void addActivity(String name, SvcProcessor processor) {
+		this.activityMapping.put(name, processor);
 	}
 
-	public HashMap<String, SvcProcessor> getSvcProcessors() {
-		return svcProcessors;
+	public SvcProcessor getSvcProcessor(String name) {
+		return svcProcessors.get(name);
 	}
 
-	public void setSvcProcessors(HashMap<String, SvcProcessor> svcProcessors) {
-		this.svcProcessors = svcProcessors;
+	public void addSvcProcessor(String name, SvcProcessor processor) {
+		this.svcProcessors.put(name, processor);
 	}
 }

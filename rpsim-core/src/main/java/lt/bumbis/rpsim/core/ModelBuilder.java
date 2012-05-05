@@ -81,7 +81,7 @@ public class ModelBuilder {
 		}
 		svcProc.setServiceTimeDist(model.getDist(cfg.getDistName()));
 		svcProc.setServiceTimeUnit(cfg.getTimeUnit());
-		model.getSvcProcessors().put(cfg.getName(), svcProc);
+		model.addSvcProcessor(cfg.getName(), svcProc);
 	}
 	
 	private static void createTokenGenerator(SimModel model, TokenGenerator cfg) {
@@ -98,7 +98,7 @@ public class ModelBuilder {
 	}
 	
 	private static void createActivity(SimModel model, Activity activity) {
-		model.getActivityMapping().put(activity.getName(), model.getSvcProcessors().get(activity.getProcessor()));
+		model.addActivity(activity.getName(), model.getSvcProcessor(activity.getProcessor()));
 	}
 	
 }

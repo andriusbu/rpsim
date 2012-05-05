@@ -6,6 +6,7 @@ import java.util.concurrent.TimeUnit;
 
 import lt.bumbis.rpsim.core.entities.SvcProcessor;
 import lt.bumbis.rpsim.core.entities.SvcProcessorExec;
+import lt.bumbis.rpsim.core.simconfig.Activity;
 import lt.bumbis.rpsim.core.simconfig.Distribution;
 import lt.bumbis.rpsim.core.simconfig.ServiceProcessor;
 import lt.bumbis.rpsim.core.simconfig.SimConfig;
@@ -27,6 +28,8 @@ public class ModelBuilderTest {
 	public void setUp() throws Exception {
 		conf = new SimConfig("TestModel", false, false);
 		conf
+			.add(new Activity("Activity1", "SvcProc1"))
+			.add(new Activity("Activity2", "SvcProc1"))
 			.add(new TokenGenerator("TG1", "Process", "Dist1", TimeUnit.MINUTES, false, false))
 			.add(new ServiceProcessor("SvcProc1", 3, "Dist2", TimeUnit.MINUTES, false, false))
 			.add(new Distribution("Dist1", ContDistNormal.class, new Object[] {3.0, 3.0}, false, false))
@@ -77,6 +80,9 @@ public class ModelBuilderTest {
 		assertEquals("Process", model.getTokenGenerator("TG1").getProcessName());
 		assertEquals(model.getDist("Dist1"), model.getTokenGenerator("TG1").getDist());
 		assertEquals(TimeUnit.MINUTES, model.getTokenGenerator("TG1").getTimeUnit());
+		//Check activities
+		assertEquals(model.getSvcProcessor("SvcProc1"), model.getActivity("Activity1"));
+		assertEquals(model.getSvcProcessor("SvcProc1"), model.getActivity("Activity2"));
 	}
 
 	@Test 
