@@ -1,6 +1,5 @@
 package lt.bumbis.rpsim.core.events; 
 
-import lt.bumbis.rpsim.core.ModelBuilder;
 import lt.bumbis.rpsim.core.entities.SvcProcessor;
 import lt.bumbis.rpsim.core.entities.SvcReq;
 import desmoj.core.simulator.EventOf2Entities;
