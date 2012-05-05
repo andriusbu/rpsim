@@ -1,7 +1,5 @@
 package lt.bumbis.rpsim.core.entities;
 
-import java.util.concurrent.TimeUnit;
-
 import desmoj.core.simulator.Entity;
 import desmoj.core.simulator.Model;
 
@@ -14,5 +12,11 @@ public class SvcReq extends Entity {
         super(owner, name, showInTrace);
 	}
 	
+	public SvcProcessor getSvcProcessor() {
+		return svcProcessor;
+	}
 
+	public void setSvcProcessor(SvcProcessor svcProcessor) {
+		this.svcProcessor = svcProcessor;
+	}
 }

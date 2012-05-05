@@ -59,4 +59,8 @@ public class SimModel extends Model {
 	public void setProcessEngine(IProcessEngine processEngine) {
 		this.processEngine = processEngine;
 	}
+
+	public SimConfig getConfig() {
+		return config;
+	}
 }

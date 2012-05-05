@@ -8,14 +8,12 @@ import lt.bumbis.rpsim.core.SimModel;
 import lt.bumbis.rpsim.core.TestDist;
 import lt.bumbis.rpsim.core.TestProcessEngine;
 import lt.bumbis.rpsim.core.simconfig.Distribution;
-import lt.bumbis.rpsim.core.simconfig.ServiceProcessor;
 import lt.bumbis.rpsim.core.simconfig.SimConfig;
 import lt.bumbis.rpsim.core.simconfig.TokenGenerator;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import desmoj.core.dist.ContDistNormal;
 import desmoj.core.simulator.Experiment;
 import desmoj.core.simulator.TimeInstant;
 

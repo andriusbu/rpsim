@@ -7,7 +7,6 @@ import lt.bumbis.rpsim.core.SimModel;
 import desmoj.core.dist.ContDist;
 import desmoj.core.simulator.ExternalEvent;
 import desmoj.core.simulator.Model;
-import desmoj.core.simulator.TimeInstant;
 import desmoj.core.simulator.TimeSpan;
 
 public class NewProcessToken extends ExternalEvent {

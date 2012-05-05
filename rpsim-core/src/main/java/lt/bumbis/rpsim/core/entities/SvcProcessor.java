@@ -1,5 +1,6 @@
 package lt.bumbis.rpsim.core.entities;
 
+import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
 
 import desmoj.core.dist.ContDist;
@@ -11,11 +12,42 @@ public class SvcProcessor extends Entity {
 	
 	private Queue<SvcReq> waitQueue;
 	private Queue<SvcProcessorExec> idleQueue;
+	private HashMap<SvcReq, SvcProcessorExec> map;
 	private ContDist serviceTimeDist;
 	private TimeUnit serviceTimeUnit;
 
 	public SvcProcessor(Model model, String name, boolean showInReport) {
 		super(model, name, showInReport);
+	}
+	
+	public void add(SvcReq request) {
+		waitQueue.insert(request);
+	}
+	
+	public boolean isAvailable() {
+		return ! idleQueue.isEmpty();
+	}
+	
+	public boolean haveRequest() {
+		return ! waitQueue.isEmpty();
+	}
+	
+	public void start(SvcReq request) {
+    	SvcProcessorExec reqExec = idleQueue.first();
+    	idleQueue.remove(reqExec);
+    	waitQueue.remove(request);
+    	map.put(request, reqExec);
+	}
+	
+	public SvcReq startNext() {
+		SvcReq request = waitQueue.first();
+		start(request);
+		return request;		
+	}
+	
+	public void complete(SvcReq request) {
+		idleQueue.insert(map.get(request));
+		map.remove(request);
 	}
 
 	public Queue<SvcReq> getWaitQueue() {

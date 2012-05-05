@@ -3,10 +3,6 @@ package lt.bumbis.rpsim.core;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 
-import desmoj.core.dist.ContDist;
-import desmoj.core.simulator.Model;
-import desmoj.core.simulator.Queue;
-import desmoj.core.simulator.TimeSpan;
 import lt.bumbis.rpsim.core.entities.SvcProcessor;
 import lt.bumbis.rpsim.core.entities.SvcProcessorExec;
 import lt.bumbis.rpsim.core.entities.SvcReq;
@@ -15,6 +11,10 @@ import lt.bumbis.rpsim.core.simconfig.Distribution;
 import lt.bumbis.rpsim.core.simconfig.ServiceProcessor;
 import lt.bumbis.rpsim.core.simconfig.SimConfig;
 import lt.bumbis.rpsim.core.simconfig.TokenGenerator;
+import desmoj.core.dist.ContDist;
+import desmoj.core.simulator.Model;
+import desmoj.core.simulator.Queue;
+import desmoj.core.simulator.TimeSpan;
 
 public class ModelBuilder {
 
@@ -53,22 +53,16 @@ public class ModelBuilder {
 			contDist = (ContDist)cons.newInstance(args);
 			model.addDist(dist.getName(), contDist);
 		} catch (NoSuchMethodException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		} catch (SecurityException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();			
 		} catch (InstantiationException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IllegalAccessException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IllegalArgumentException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (InvocationTargetException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -96,6 +90,5 @@ public class ModelBuilder {
 	private static void scheduleTokenGen(SimModel model, TokenGenerator cfg) {
 		NewProcessToken tokenGen = model.getTokenGenerator(cfg.getName());
 		tokenGen.schedule(new TimeSpan(tokenGen.getDist().sample(), tokenGen.getTimeUnit()));
-	}
-	
+	}	
 }
