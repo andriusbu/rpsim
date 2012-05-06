@@ -35,6 +35,7 @@ public class ProcessSimulationTest {
 		model = new SimModel(conf);
 		procEngine = new TestProcessEngine(model, "Activity1");
 		model.setProcessEngine(procEngine);
+		model.setTimeSyncHandler(procEngine);
 		exp = new Experiment("TestExperiment",false);
 		model.connectToExperiment(exp);
 		exp.setShowProgressBar(false);
@@ -46,6 +47,7 @@ public class ProcessSimulationTest {
 		exp.start();
 		assertEquals(3, procEngine.getCompletedActivities());
 		assertEquals(5, procEngine.getProcStartCount());
+		assertEquals(14, procEngine.getTimeUpdateCount());
 		exp.finish();
 	}
 

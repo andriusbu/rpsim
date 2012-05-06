@@ -14,7 +14,6 @@ import org.junit.Test;
 
 import desmoj.core.simulator.Experiment;
 import desmoj.core.simulator.TimeInstant;
-import desmoj.core.simulator.TimeSpan;
 
 public class SimModelTest {
 

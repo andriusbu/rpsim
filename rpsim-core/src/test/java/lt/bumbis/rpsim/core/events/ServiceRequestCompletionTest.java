@@ -4,7 +4,6 @@ import static org.junit.Assert.*;
 
 import java.util.concurrent.TimeUnit;
 
-import lt.bumbis.rpsim.core.IHandler;
 import lt.bumbis.rpsim.core.SimModel;
 import lt.bumbis.rpsim.core.TestDist;
 import lt.bumbis.rpsim.core.TestHandler;
