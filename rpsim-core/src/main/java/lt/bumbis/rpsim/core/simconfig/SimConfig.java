@@ -1,23 +1,24 @@
 package lt.bumbis.rpsim.core.simconfig;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public class SimConfig extends ConfigElement {
 
 	//Simulation Objects
-	private HashMap<String, Distribution> dists = new HashMap<String, Distribution>();
-	private HashMap<String, ServiceProcessor> svcProcs = new HashMap<String, ServiceProcessor>();
-	private HashMap<String, TokenGenerator> tokenGens = new HashMap<String, TokenGenerator>();
-	private HashMap<String, Activity> activities = new HashMap<String, Activity>();
+	private Map<String, Distribution> dists = new HashMap<String, Distribution>();
+	private Map<String, ServiceProcessor> svcProcs = new HashMap<String, ServiceProcessor>();
+	private Map<String, TokenGenerator> tokenGens = new HashMap<String, TokenGenerator>();
+	private Map<String, Activity> activities = new HashMap<String, Activity>();
 		 
 
 	@SuppressWarnings("serial")
-	private HashMap<Class<? extends ConfigElement>, HashMap<String, ? extends ConfigElement>> mapping = new HashMap<Class<? extends ConfigElement>, HashMap<String, ? extends ConfigElement>>() {
+	private Map<Class<? extends ConfigElement>, HashMap<String, ? extends ConfigElement>> mapping = new HashMap<Class<? extends ConfigElement>, HashMap<String, ? extends ConfigElement>>() {
 		{
-			put(Distribution.class, dists);
-			put(ServiceProcessor.class, svcProcs);
-			put(TokenGenerator.class, tokenGens);
-			put(Activity.class, activities);
+			put(Distribution.class, (HashMap<String, Distribution>) dists);
+			put(ServiceProcessor.class, (HashMap<String, ServiceProcessor>) svcProcs);
+			put(TokenGenerator.class, (HashMap<String, TokenGenerator>) tokenGens);
+			put(Activity.class, (HashMap<String, Activity>) activities);
 		}
 	};
 
@@ -33,19 +34,19 @@ public class SimConfig extends ConfigElement {
 		return this;
 	}
 	
-	public HashMap<String, Distribution> getDists() {
+	public Map<String, Distribution> getDists() {
 		return dists;
 	}
 
-	public HashMap<String, ServiceProcessor> getSvcProcs() {
+	public Map<String, ServiceProcessor> getSvcProcs() {
 		return svcProcs;
 	}
 
-	public HashMap<String, TokenGenerator> getTokenGens() {
+	public Map<String, TokenGenerator> getTokenGens() {
 		return tokenGens;
 	}
 
-	public HashMap<String, Activity> getActivities() {
+	public Map<String, Activity> getActivities() {
 		return activities;
 	}
 }
