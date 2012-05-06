@@ -48,7 +48,7 @@ public class NewProcessEngineTest {
 	
 	@Test
 	public void testEventRoutine2() {
-		exp.setShowProgressBar(false);
+		
 		exp.stop(new TimeInstant(70, TimeUnit.MINUTES));
 		exp.start();
 		assertEquals(2, procEngine.getProcStartCount());

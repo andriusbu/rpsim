@@ -27,9 +27,10 @@ public class ProcessSimulationTest {
 	public void setUp() throws Exception {		
 		conf = new SimConfig("TestModel", false, false);
 		conf
-			.add(new TokenGenerator("TG1", "Process", "Dist", TimeUnit.SECONDS, false, false))
-			.add(new ServiceProcessor("SvcProc1", 1, "Dist", TimeUnit.MINUTES, false, false))
-			.add(new Distribution("Dist", TestDist.class, new Object[] {}, false, false))
+			.add(new TokenGenerator("TG1", "Process", "Dist1", TimeUnit.MINUTES, false, false))
+			.add(new ServiceProcessor("SvcProc1", 1, "Dist2", TimeUnit.MINUTES, false, false))
+			.add(new Distribution("Dist1", TestDist.class, new Object[] {5.0}, false, false))
+			.add(new Distribution("Dist2", TestDist.class, new Object[] {8.0}, false, false))
 			.add(new Activity("Activity1", "SvcProc1"));
 		model = new SimModel(conf);
 		procEngine = new TestProcessEngine(model, "Activity1");
@@ -41,9 +42,10 @@ public class ProcessSimulationTest {
 
 	@Test
 	public void test() {
-		exp.stop(new TimeInstant(100, TimeUnit.MINUTES));
+		exp.stop(new TimeInstant(30, TimeUnit.MINUTES));
 		exp.start();
 		assertEquals(3, procEngine.getCompletedActivities());
+		assertEquals(5, procEngine.getProcStartCount());
 		exp.finish();
 	}
 
