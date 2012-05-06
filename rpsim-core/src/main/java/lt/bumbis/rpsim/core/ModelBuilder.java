@@ -17,7 +17,7 @@ import desmoj.core.simulator.Model;
 import desmoj.core.simulator.Queue;
 import desmoj.core.simulator.TimeSpan;
 
-public class ModelBuilder {
+public final class ModelBuilder {
 	
 	private ModelBuilder() { }
 
