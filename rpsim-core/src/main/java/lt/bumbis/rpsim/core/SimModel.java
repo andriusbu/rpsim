@@ -16,7 +16,7 @@ public class SimModel extends Model {
 	private Map<String, NewProcessToken> tokenGens = new HashMap<String, NewProcessToken>();
 	private Map<String, SvcProcessor> svcProcessors = new HashMap<String, SvcProcessor>();
 	
-	private HashMap<String, SvcProcessor> activityMapping = new HashMap<String, SvcProcessor>();
+	private Map<String, SvcProcessor> activityMapping = new HashMap<String, SvcProcessor>();
 	
 	private IProcessEngine processEngine;
 

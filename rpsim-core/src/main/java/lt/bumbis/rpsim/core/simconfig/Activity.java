@@ -6,7 +6,7 @@ public class Activity extends ConfigElement{
 	
 	public Activity(String name, String processor) {
 		super(name, false, false);
-		this.setProcessor(processor);
+		this.processor = processor;
 	}
 
 	public String getProcessor() {

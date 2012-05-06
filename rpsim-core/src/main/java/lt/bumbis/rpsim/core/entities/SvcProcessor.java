@@ -1,6 +1,7 @@
 package lt.bumbis.rpsim.core.entities;
 
 import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import desmoj.core.dist.ContDist;
@@ -12,7 +13,7 @@ public class SvcProcessor extends Entity {
 	
 	private Queue<SvcReq> waitQueue;
 	private Queue<SvcProcessorExec> idleQueue;
-	private HashMap<SvcReq, SvcProcessorExec> map;
+	private Map<SvcReq, SvcProcessorExec> map;
 	private ContDist serviceTimeDist;
 	private TimeUnit serviceTimeUnit;
 
