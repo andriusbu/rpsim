@@ -43,8 +43,8 @@ public class ModelBuilder {
 
 	@SuppressWarnings("rawtypes")
 	private static void createDist(SimModel model, Distribution dist) {
-		Class[] types = new Class[4 + dist.getDistParams().length];
-		Object[] args = new Object[4 + dist.getDistParams().length];
+		Class[] types = new Class[dist.getDistParams().length + 4];
+		Object[] args = new Object[dist.getDistParams().length + 4];
 		types[0] = Model.class;
 		args[0] = model;
 		types[1] = String.class;
