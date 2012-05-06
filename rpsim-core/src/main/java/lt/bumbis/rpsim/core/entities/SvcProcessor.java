@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
-import desmoj.core.advancedModellingFeatures.WaitQueue;
 import desmoj.core.dist.ContDist;
 import desmoj.core.simulator.Entity;
 import desmoj.core.simulator.Model;

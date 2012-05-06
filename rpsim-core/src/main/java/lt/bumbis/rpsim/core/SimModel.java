@@ -2,14 +2,18 @@ package lt.bumbis.rpsim.core;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import lt.bumbis.rpsim.core.entities.SvcProcessor;
+import lt.bumbis.rpsim.core.entities.SvcReq;
 import lt.bumbis.rpsim.core.events.NewProcessToken;
+import lt.bumbis.rpsim.core.events.ServiceRequestArrival;
 import lt.bumbis.rpsim.core.simconfig.SimConfig;
 import desmoj.core.dist.ContDist;
 import desmoj.core.simulator.Model;
+import desmoj.core.simulator.TimeSpan;
 
-public class SimModel extends Model {
+public class SimModel extends Model implements ISimEngine {
 	
 	private SimConfig config;
 	private Map<String, ContDist> dists = new HashMap<String, ContDist>();
@@ -87,5 +91,15 @@ public class SimModel extends Model {
 
 	public void addSvcProcessor(String name, SvcProcessor processor) {
 		this.svcProcessors.put(name, processor);
+	}
+
+	public void newServiceRequest(String name, IHandler handler) {
+		//TODO analyze possibility to move to separate class
+		SvcProcessor svcProc = activityMapping.get(name);
+		String svcProcName = config.getActivity(name).getProcessor();
+		boolean svcProcShowInTrace = config.getSvcProc(svcProcName).isShowInTrace();
+		SvcReq svcReq = new SvcReq(handler, this, svcProcName+"SR", svcProcShowInTrace);
+		ServiceRequestArrival event = new ServiceRequestArrival(this, svcProcName+"_SRA", svcProcShowInTrace);
+		event.schedule(svcReq, svcProc, new TimeSpan(1, TimeUnit.MICROSECONDS));
 	}
 }

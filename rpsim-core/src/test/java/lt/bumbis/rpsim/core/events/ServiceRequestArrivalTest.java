@@ -6,6 +6,7 @@ import java.util.concurrent.TimeUnit;
 
 import lt.bumbis.rpsim.core.SimModel;
 import lt.bumbis.rpsim.core.TestDist;
+import lt.bumbis.rpsim.core.TestHandler;
 import lt.bumbis.rpsim.core.entities.SvcProcessor;
 import lt.bumbis.rpsim.core.entities.SvcReq;
 import lt.bumbis.rpsim.core.simconfig.Distribution;
@@ -37,8 +38,8 @@ public class ServiceRequestArrivalTest {
 		exp = new Experiment("TestExperiment",false);
 		model.connectToExperiment(exp);
 		svcProc = model.getSvcProcessor("SvcProc1");
-		svcPreq1 = new SvcReq(model, "Req1", false);
-		svcPreq2 = new SvcReq(model, "Req2", false);
+		svcPreq1 = new SvcReq(new TestHandler(), model, "Req1", false);
+		svcPreq2 = new SvcReq(new TestHandler(), model, "Req2", false);
 		event = new ServiceRequestArrival(model, "Event", false);
 	}
 

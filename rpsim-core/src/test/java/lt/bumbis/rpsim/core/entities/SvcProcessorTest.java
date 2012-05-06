@@ -6,6 +6,7 @@ import java.util.concurrent.TimeUnit;
 
 import lt.bumbis.rpsim.core.SimModel;
 import lt.bumbis.rpsim.core.TestDist;
+import lt.bumbis.rpsim.core.TestHandler;
 import lt.bumbis.rpsim.core.simconfig.Distribution;
 import lt.bumbis.rpsim.core.simconfig.ServiceProcessor;
 import lt.bumbis.rpsim.core.simconfig.SimConfig;
@@ -35,8 +36,8 @@ public class SvcProcessorTest {
 	@Test
 	public void testAll() {
 		SvcProcessor svcProc = model.getSvcProcessor("SvcProc1");
-		SvcReq svcPreq1 = new SvcReq(model, "Req1", false);
-		SvcReq svcPreq2 = new SvcReq(model, "Req2", false);
+		SvcReq svcPreq1 = new SvcReq(new TestHandler(), model, "Req1", false);
+		SvcReq svcPreq2 = new SvcReq(new TestHandler(), model, "Req2", false);
 		
 		svcProc.add(svcPreq1);
 		assertTrue(svcProc.isAvailable());

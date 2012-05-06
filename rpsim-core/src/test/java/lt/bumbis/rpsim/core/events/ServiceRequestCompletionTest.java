@@ -4,8 +4,10 @@ import static org.junit.Assert.*;
 
 import java.util.concurrent.TimeUnit;
 
+import lt.bumbis.rpsim.core.IHandler;
 import lt.bumbis.rpsim.core.SimModel;
 import lt.bumbis.rpsim.core.TestDist;
+import lt.bumbis.rpsim.core.TestHandler;
 import lt.bumbis.rpsim.core.entities.SvcProcessor;
 import lt.bumbis.rpsim.core.entities.SvcReq;
 import lt.bumbis.rpsim.core.simconfig.Distribution;
@@ -26,6 +28,7 @@ public class ServiceRequestCompletionTest {
 	private SvcReq svcPreq1;
 	private SvcReq svcPreq2;
 	private ServiceRequestCompletion event;
+	private TestHandler handler = new TestHandler();
 
 	@Before
 	public void setUp() throws Exception {
@@ -37,8 +40,8 @@ public class ServiceRequestCompletionTest {
 		exp = new Experiment("TestExperiment",false);
 		model.connectToExperiment(exp);
 		svcProc = model.getSvcProcessor("SvcProc1");
-		svcPreq1 = new SvcReq(model, "Req1", false);
-		svcPreq2 = new SvcReq(model, "Req2", false);
+		svcPreq1 = new SvcReq(handler, model, "Req1", false);
+		svcPreq2 = new SvcReq(handler, model, "Req2", false);
 		event = new ServiceRequestCompletion(model, "Event", false);
 	}
 
@@ -49,6 +52,7 @@ public class ServiceRequestCompletionTest {
 		event.eventRoutine(svcPreq1, svcProc);
 		assertTrue(svcProc.isAvailable());
 		assertTrue(!svcProc.haveRequest());
+		assertEquals(1, handler.getUpdateCalled());
 	}
 	
 	@Test
@@ -60,6 +64,7 @@ public class ServiceRequestCompletionTest {
 		assertTrue("No servivce processoes should be available", !svcProc.isAvailable());
 		assertTrue("No service requests shall be in waitQueue", !svcProc.haveRequest());
 		assertTrue("Second service request must be scheduled", svcPreq2.isScheduled());
+		assertEquals(1, handler.getUpdateCalled());
 	}
 
 }

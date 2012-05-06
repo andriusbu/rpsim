@@ -42,11 +42,19 @@ public class SimConfig extends ConfigElement {
 		return svcProcs;
 	}
 
+	public ServiceProcessor getSvcProc(String name) {
+		return svcProcs.get(name);
+	}
+	
 	public Map<String, TokenGenerator> getTokenGens() {
 		return tokenGens;
 	}
 
 	public Map<String, Activity> getActivities() {
 		return activities;
+	}
+	
+	public Activity getActivity(String name) {
+		return activities.get(name);
 	}
 }

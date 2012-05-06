@@ -15,6 +15,7 @@ public class ServiceRequestCompletion extends EventOf2Entities<SvcReq, SvcProces
 
     public void eventRoutine(SvcReq request, SvcProcessor processor) {
     	processor.complete(request);
+    	request.getHandler().update();
     	SvcReq nextRequest = processor.getNextRequest();
         if ( nextRequest != null ) {
         	TimeSpan timeSpan = processor.start(nextRequest);
