@@ -4,6 +4,7 @@ import lt.bumbis.rpsim.core.entities.SvcProcessor;
 import lt.bumbis.rpsim.core.entities.SvcReq;
 import desmoj.core.simulator.EventOf2Entities;
 import desmoj.core.simulator.Model;
+import desmoj.core.simulator.TimeSpan;
 
 public class ServiceRequestArrival extends EventOf2Entities<SvcReq, SvcProcessor> {
 		
@@ -15,8 +16,10 @@ public class ServiceRequestArrival extends EventOf2Entities<SvcReq, SvcProcessor
     public void eventRoutine(SvcReq request, SvcProcessor processor) {
     	processor.add(request);
     	if ( processor.isAvailable() ) {
-    		processor.start(request);
-        	//TODO Completion event      	
+    		TimeSpan timeSpan = processor.start(request);
+    		//TODO implement event creation routine in ModelBuilder
+    		ServiceRequestCompletion event = new ServiceRequestCompletion(getModel(), "test", false);
+        	event.schedule(request, processor, timeSpan);
         }
     }
 }

@@ -1,4 +1,4 @@
-package lt.bumbis.rpsim.core.entities;
+package lt.bumbis.rpsim.core.events;
 
 import static org.junit.Assert.*;
 
@@ -6,6 +6,8 @@ import java.util.concurrent.TimeUnit;
 
 import lt.bumbis.rpsim.core.SimModel;
 import lt.bumbis.rpsim.core.TestDist;
+import lt.bumbis.rpsim.core.entities.SvcProcessor;
+import lt.bumbis.rpsim.core.entities.SvcReq;
 import lt.bumbis.rpsim.core.simconfig.Distribution;
 import lt.bumbis.rpsim.core.simconfig.ServiceProcessor;
 import lt.bumbis.rpsim.core.simconfig.SimConfig;
@@ -15,11 +17,15 @@ import org.junit.Test;
 
 import desmoj.core.simulator.Experiment;
 
-public class SvcProcessorTest {
+public class ServiceRequestArrivalTest {
 	
 	private SimConfig conf;
 	private SimModel model;
 	private Experiment exp;
+	private SvcProcessor svcProc;
+	private SvcReq svcPreq1;
+	private SvcReq svcPreq2;
+	private ServiceRequestArrival event;
 
 	@Before
 	public void setUp() throws Exception {
@@ -30,29 +36,29 @@ public class SvcProcessorTest {
 		model = new SimModel(conf);
 		exp = new Experiment("TestExperiment",false);
 		model.connectToExperiment(exp);
+		svcProc = model.getSvcProcessor("SvcProc1");
+		svcPreq1 = new SvcReq(model, "Req1", false);
+		svcPreq2 = new SvcReq(model, "Req2", false);
+		event = new ServiceRequestArrival(model, "Event", false);
 	}
 
 	@Test
-	public void testAll() {
-		SvcProcessor svcProc = model.getSvcProcessor("SvcProc1");
-		SvcReq svcPreq1 = new SvcReq(model, "Req1", false);
-		SvcReq svcPreq2 = new SvcReq(model, "Req2", false);
-		
-		svcProc.add(svcPreq1);
-		assertTrue(svcProc.isAvailable());
-		svcProc.start(svcPreq1);
+	public void testEventRoutine_procAvailable() {
+
+		event.eventRoutine(svcPreq1, svcProc);
 		assertTrue(!svcProc.isAvailable());
 		assertTrue(!svcProc.haveRequest());
-
-		svcProc.add(svcPreq2);
-		assertTrue(svcProc.haveRequest());
-
-		svcProc.complete(svcPreq1);
-		assertTrue(svcProc.isAvailable());
-		assertEquals(svcPreq2, svcProc.getNextRequest());
-		svcProc.start(svcProc.getNextRequest());
-		assertTrue(!svcProc.isAvailable());
-		assertTrue(!svcProc.haveRequest());
-		svcProc.complete(svcPreq2);
+		assertTrue(svcPreq1.isScheduled());
 	}
+	
+	@Test
+	public void testEventRoutine_procNotAvailable() {
+		event.eventRoutine(svcPreq2, svcProc);
+		event.eventRoutine(svcPreq1, svcProc);
+		assertTrue(!svcProc.isAvailable());
+		assertTrue(svcProc.haveRequest());
+		assertTrue(!svcPreq1.isScheduled());
+		assertTrue(svcPreq2.isScheduled());
+	}
+
 }

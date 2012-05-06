@@ -4,10 +4,12 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
+import desmoj.core.advancedModellingFeatures.WaitQueue;
 import desmoj.core.dist.ContDist;
 import desmoj.core.simulator.Entity;
 import desmoj.core.simulator.Model;
 import desmoj.core.simulator.Queue;
+import desmoj.core.simulator.TimeSpan;
 
 public class SvcProcessor extends Entity {
 	
@@ -34,17 +36,20 @@ public class SvcProcessor extends Entity {
 		return ! waitQueue.isEmpty();
 	}
 	
-	public void start(SvcReq request) {
+	public TimeSpan start(SvcReq request) {
     	SvcProcessorExec reqExec = idleQueue.first();
     	idleQueue.remove(reqExec);
     	waitQueue.remove(request);
     	map.put(request, reqExec);
+    	return getServiceTime();
 	}
 	
-	public SvcReq startNext() {
-		SvcReq request = waitQueue.first();
-		start(request);
-		return request;		
+	public SvcReq getNextRequest() {
+		if (waitQueue.isEmpty()) {
+			return null;
+		} else {
+			return waitQueue.first();
+		}
 	}
 	
 	public void complete(SvcReq request) {
@@ -82,5 +87,9 @@ public class SvcProcessor extends Entity {
 
 	public void setServiceTimeUnit(TimeUnit serviceTimeUnit) {
 		this.serviceTimeUnit = serviceTimeUnit;
+	}
+	
+	private TimeSpan getServiceTime() {
+		return new TimeSpan(serviceTimeDist.sample(), serviceTimeUnit);
 	}
 }
