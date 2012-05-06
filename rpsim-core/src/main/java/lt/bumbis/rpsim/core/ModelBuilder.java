@@ -18,6 +18,8 @@ import desmoj.core.simulator.Queue;
 import desmoj.core.simulator.TimeSpan;
 
 public class ModelBuilder {
+	
+	private ModelBuilder() { }
 
 	public static void init(SimModel model) {
 		SimConfig config = model.getConfig();
