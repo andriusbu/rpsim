@@ -69,9 +69,11 @@ public class ProcessEngineImpl extends ProcessEngine {
     @objid ("2900d70a-7aa6-11e1-9a4b-028037ec0200")
     public long startProcess(final String processName) {
         ProcessInstance process = ksession.startProcess(processName);
-        if (process == null)
+        if (process == null) {
             return 0;
-            else return process.getId();
+        } else {
+        	return process.getId();
+    	}
     }
 
     @Deprecated
@@ -85,7 +87,9 @@ public class ProcessEngineImpl extends ProcessEngine {
     public void setTime(final long time) {
         long currentTime = clock.getCurrentTime();
         long advanceTime = time - currentTime;
-        if (advanceTime > 0) clock.advanceTime(advanceTime, TimeUnit.MILLISECONDS);
+        if (advanceTime > 0) {
+        	clock.advanceTime(advanceTime, TimeUnit.MILLISECONDS);
+        }
     }
 
 	public void update(Observable o, Object arg) {
