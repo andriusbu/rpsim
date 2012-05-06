@@ -1,6 +1,7 @@
 package lt.bumbis.rpsim.core;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import lt.bumbis.rpsim.core.entities.SvcProcessor;
 import lt.bumbis.rpsim.core.events.NewProcessToken;
@@ -11,9 +12,9 @@ import desmoj.core.simulator.Model;
 public class SimModel extends Model {
 	
 	private SimConfig config;
-	private HashMap<String, ContDist> dists = new HashMap<String, ContDist>();
-	private HashMap<String, NewProcessToken> tokenGens = new HashMap<String, NewProcessToken>();
-	private HashMap<String, SvcProcessor> svcProcessors = new HashMap<String, SvcProcessor>();
+	private Map<String, ContDist> dists = new HashMap<String, ContDist>();
+	private Map<String, NewProcessToken> tokenGens = new HashMap<String, NewProcessToken>();
+	private Map<String, SvcProcessor> svcProcessors = new HashMap<String, SvcProcessor>();
 	
 	private HashMap<String, SvcProcessor> activityMapping = new HashMap<String, SvcProcessor>();
 	
@@ -56,7 +57,7 @@ public class SimModel extends Model {
 		return tokenGens.get(name);
 	}
 	
-	public HashMap<String, NewProcessToken> getTokenGenerators() {
+	public Map<String, NewProcessToken> getTokenGenerators() {
 		return tokenGens;
 	}
 
