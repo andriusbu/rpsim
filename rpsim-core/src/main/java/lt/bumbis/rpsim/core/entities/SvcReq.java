@@ -10,7 +10,7 @@ public class SvcReq extends Entity {
 
 	public SvcReq(IHandler handler, Model owner, String name, boolean showInTrace) {
         super(owner, name, showInTrace);
-        this.setHandler(handler);        
+        this.handler = handler;        
 	}
 
 	public IHandler getHandler() {
