@@ -68,18 +68,22 @@ public class ModelBuilder {
 			contDist = (ContDist) cons.newInstance(args);
 			model.addDist(dist.getName(), contDist);
 		} catch (NoSuchMethodException e1) {
-			e1.printStackTrace();
+			createDistExceptionHandling();
 		} catch (SecurityException e1) {
-			e1.printStackTrace();
+			createDistExceptionHandling();
 		} catch (InstantiationException e) {
-			e.printStackTrace();
+			createDistExceptionHandling();
 		} catch (IllegalAccessException e) {
-			e.printStackTrace();
+			createDistExceptionHandling();
 		} catch (IllegalArgumentException e) {
-			e.printStackTrace();
+			createDistExceptionHandling();
 		} catch (InvocationTargetException e) {
-			e.printStackTrace();
+			createDistExceptionHandling();
 		}
+	}
+	
+	private static void createDistExceptionHandling () {
+		//TODO implement exception handling
 	}
 
 	private static void createSvcProcessor(SimModel model, ServiceProcessor cfg) {
