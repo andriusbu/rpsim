@@ -7,6 +7,7 @@ public class TestProcessEngine implements IProcessEngine {
 	private int procStartCount = 0;
 	private String lastProcessName;
 	private long timeUpdateCount = 0;
+	private boolean engineStarted = false;
 	private ISimEngine simEngine;
 	private TestHandler handler = new TestHandler();
 	private String activityName = "";
@@ -46,5 +47,14 @@ public class TestProcessEngine implements IProcessEngine {
 	
 	public void syncTime(long time, TimeUnit timeUnit) {
 		timeUpdateCount++;		
+	}
+
+	public IProcessEngine startEngine() {
+		this.engineStarted = true;
+		return this;
+	}
+	
+	public boolean isEngineStarted() {
+		return engineStarted;
 	}
 }

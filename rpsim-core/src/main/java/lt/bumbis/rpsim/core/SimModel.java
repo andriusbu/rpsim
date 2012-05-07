@@ -40,6 +40,7 @@ public class SimModel extends Model implements ISimEngine {
 	@Override
 	public void doInitialSchedules() {
 		if (processEngine != null) {
+			processEngine.startEngine();
 			Experiment exp = getExperiment();
 			clockObserver = new SimClockObserver(exp.getReferenceUnit(), processEngine);
 			exp.getSimClock().addObserver(clockObserver);

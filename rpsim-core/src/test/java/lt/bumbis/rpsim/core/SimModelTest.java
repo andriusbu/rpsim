@@ -21,6 +21,7 @@ public class SimModelTest {
 	private SimModel model;
 	private Experiment exp;
 	private TestHandler handler;
+	private TestProcessEngine procEngine;
 	
 	@Before
 	public void setUp() throws Exception {
@@ -30,6 +31,8 @@ public class SimModelTest {
 			.add(new Distribution("Dist", TestDist.class, new Object[] {}, false, false))
 			.add(new Activity("Activity1", "SvcProc1"));
 		model = new SimModel(conf);
+		procEngine = new TestProcessEngine(model, "Activity1");
+		model.setProcessEngine(procEngine);
 		exp = new Experiment("TestExperiment",false);
 		model.connectToExperiment(exp);
 		handler = new TestHandler();
@@ -46,6 +49,12 @@ public class SimModelTest {
 		assertTrue(!model.getEntities(false).get(1).isScheduled());
 		assertEquals(1, handler.getUpdateCalled());
 		exp.finish();
+	}
+	
+	@Test
+	public void testDoInitialSchedules_procEnginStart() {
+		model.doInitialSchedules();
+		assertTrue("Process engine not started", procEngine.isEngineStarted());
 	}
 	
 	
