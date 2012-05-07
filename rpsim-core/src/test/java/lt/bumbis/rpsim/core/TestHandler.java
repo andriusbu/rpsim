@@ -1,6 +1,6 @@
 package lt.bumbis.rpsim.core;
 
-public class TestHandler implements IHandler {
+public class TestHandler implements IServiceHandler {
 	
 	private int updateCalled;
 

@@ -1,6 +1,6 @@
 package lt.bumbis.rpsim.core;
 
-public interface IHandler {
+public interface IServiceHandler {
 	
 	void update();
 

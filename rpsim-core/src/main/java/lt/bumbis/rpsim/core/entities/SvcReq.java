@@ -1,23 +1,23 @@
 package lt.bumbis.rpsim.core.entities;
 
-import lt.bumbis.rpsim.core.IHandler;
+import lt.bumbis.rpsim.core.IServiceHandler;
 import desmoj.core.simulator.Entity;
 import desmoj.core.simulator.Model;
 
 public class SvcReq extends Entity {
 	
-	private IHandler handler;
+	private IServiceHandler handler;
 
-	public SvcReq(IHandler handler, Model owner, String name, boolean showInTrace) {
+	public SvcReq(IServiceHandler handler, Model owner, String name, boolean showInTrace) {
         super(owner, name, showInTrace);
         this.handler = handler;        
 	}
 
-	public IHandler getHandler() {
+	public IServiceHandler getHandler() {
 		return handler;
 	}
 
-	public void setHandler(IHandler handler) {
+	public void setHandler(IServiceHandler handler) {
 		this.handler = handler;
 	}
 }

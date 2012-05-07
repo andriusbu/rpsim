@@ -76,7 +76,7 @@ public class ProcessEngineImpl implements IProcessEngine, Observer {
     }
 
 	public void update(Observable o, Object arg) {
-		// TODO Implement time sync between SimulationEngine and ProcessEngine
+		
 		
 	}
 

@@ -98,7 +98,7 @@ public class SimModel extends Model implements ISimEngine {
 		this.svcProcessors.put(name, processor);
 	}
 
-	public void newServiceRequest(String name, IHandler handler) {
+	public void newServiceRequest(String name, IServiceHandler handler) {
 		//TODO analyze possibility to move to separate class
 		SvcProcessor svcProc = activityMapping.get(name);
 		String svcProcName = config.getActivity(name).getProcessor();

@@ -21,7 +21,7 @@ public class ProcessEngineImplTest extends JbpmJUnitTestCase {
 	public void testStartEngine() {
 		ProcessEngineImpl engine = new ProcessEngineImpl();
 		engine.addChangeSet(ResourceFactory.newClassPathResource("changeSet1.xml"));
-		assertNotNull("Engine not starte - Knowledge session is Null", ((ProcessEngineImpl)engine.startEngine()).getKnowledgeSession());
+		assertNotNull("Engine not started - Knowledge session is Null", ((ProcessEngineImpl)engine.startEngine()).getKnowledgeSession());
 		assertEquals("pseudo", ((ProcessEngineImpl)engine.startEngine()).getKnowledgeSession().getSessionConfiguration().getOption(ClockTypeOption.class).getClockType());
 	}
 	
