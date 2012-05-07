@@ -1,7 +1,5 @@
 package lt.bumbis.rpsim.droolsjbpm;
 
-import java.util.Observable;
-import java.util.Observer;
 import java.util.concurrent.TimeUnit;
 
 import lt.bumbis.rpsim.core.IProcessEngine;
@@ -16,7 +14,7 @@ import org.drools.runtime.conf.ClockTypeOption;
 import org.drools.runtime.process.ProcessInstance;
 import org.drools.time.impl.PseudoClockScheduler;
 
-public class ProcessEngineImpl implements IProcessEngine, Observer {
+public class ProcessEngineImpl implements IProcessEngine {
     private static String resAgentName = "ProcessEngineAgent";
 
     private KnowledgeAgent kagent;
@@ -61,23 +59,12 @@ public class ProcessEngineImpl implements IProcessEngine, Observer {
     	}
     }
 
-    @Deprecated
-    public void setAdvanceTime(final long amount, final TimeUnit unit) {
-        clock.advanceTime(amount, unit);
-    }
-
-    @Deprecated
-    public void setTime(final long time) {
-        long currentTime = clock.getCurrentTime();
-        long advanceTime = time - currentTime;
-        if (advanceTime > 0) {
-        	clock.advanceTime(advanceTime, TimeUnit.MILLISECONDS);
-        }
-    }
-
-	public void update(Observable o, Object arg) {
-		
-		
+	public void syncTime(long time, TimeUnit timeUnit) {
+		long currentTime = clock.getCurrentTime();
+		long newTime = TimeUnit.MILLISECONDS.convert(time, timeUnit);
+		long advanceTime = newTime - currentTime;
+		if (advanceTime > 0) {
+			clock.advanceTime(advanceTime, TimeUnit.MILLISECONDS);
+		}
 	}
-
 }
