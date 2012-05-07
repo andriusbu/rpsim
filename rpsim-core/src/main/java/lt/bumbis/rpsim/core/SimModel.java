@@ -2,7 +2,6 @@ package lt.bumbis.rpsim.core;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Observer;
 import java.util.concurrent.TimeUnit;
 
 import lt.bumbis.rpsim.core.entities.SvcProcessor;
@@ -11,6 +10,7 @@ import lt.bumbis.rpsim.core.events.NewProcessToken;
 import lt.bumbis.rpsim.core.events.ServiceRequestArrival;
 import lt.bumbis.rpsim.core.simconfig.SimConfig;
 import desmoj.core.dist.ContDist;
+import desmoj.core.simulator.Experiment;
 import desmoj.core.simulator.Model;
 import desmoj.core.simulator.TimeSpan;
 
@@ -24,7 +24,7 @@ public class SimModel extends Model implements ISimEngine {
 	private Map<String, SvcProcessor> activityMapping = new HashMap<String, SvcProcessor>();
 
 	private IProcessEngine processEngine;
-	private Observer timeSyncHandler;
+	private SimClockObserver clockObserver;
 
 	public SimModel(SimConfig config) {
 		super(null, config.getName(), config.isShowInReport(), config.isShowInTrace());
@@ -39,8 +39,10 @@ public class SimModel extends Model implements ISimEngine {
 
 	@Override
 	public void doInitialSchedules() {
-		if ( timeSyncHandler != null ) {
-			getExperiment().getSimClock().addObserver(timeSyncHandler);
+		if (processEngine != null) {
+			Experiment exp = getExperiment();
+			clockObserver = new SimClockObserver(exp.getReferenceUnit(), processEngine);
+			exp.getSimClock().addObserver(clockObserver);
 		}
 		ModelBuilder.doInitialSchedules(this);
 	}
@@ -106,13 +108,5 @@ public class SimModel extends Model implements ISimEngine {
 		SvcReq svcReq = new SvcReq(handler, this, svcProcName+"SR", svcProcShowInTrace);
 		ServiceRequestArrival event = new ServiceRequestArrival(this, svcProcName+"_SRA", svcProcShowInTrace);
 		event.schedule(svcReq, svcProc, new TimeSpan(1, TimeUnit.MICROSECONDS));
-	}
-
-	public Observer getTimeSyncHandler() {
-		return timeSyncHandler;
-	}
-
-	public void setTimeSyncHandler(Observer timeSyncHandler) {
-		this.timeSyncHandler = timeSyncHandler;
 	}
 }
