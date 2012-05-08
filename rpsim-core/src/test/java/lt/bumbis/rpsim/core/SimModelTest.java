@@ -4,6 +4,8 @@ import static org.junit.Assert.*;
 
 import java.util.concurrent.TimeUnit;
 
+import lt.bumbis.rpsim.core.entities.ProcessEvent;
+import lt.bumbis.rpsim.core.events.EventArrival;
 import lt.bumbis.rpsim.core.simconfig.Activity;
 import lt.bumbis.rpsim.core.simconfig.Distribution;
 import lt.bumbis.rpsim.core.simconfig.ServiceProcessor;
@@ -57,6 +59,12 @@ public class SimModelTest {
 		assertTrue("Process engine not started", procEngine.isEngineStarted());
 	}
 	
-	
-
+	@Test
+	public void testNewEvent() {
+		model.newEvent(10, TimeUnit.MINUTES);
+		assertEquals(ProcessEvent.class, model.getEntities(false).get(2).getClass());
+		assertTrue(model.getEntities(false).get(2).isScheduled());
+		assertEquals(EventArrival.class, model.getEntities(false).get(2).getScheduledEvents().get(0).getClass());
+		assertEquals(600, model.getEntities(false).get(2).getScheduledEvents().get(0).scheduledNext().getTimeRounded(TimeUnit.SECONDS));
+	}
 }

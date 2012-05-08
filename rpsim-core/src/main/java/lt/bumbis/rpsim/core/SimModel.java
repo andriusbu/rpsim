@@ -114,7 +114,7 @@ public class SimModel extends Model implements ISimEngine {
 	}
 
 	public void newEvent(long time, TimeUnit timeUnit) {
-		ProcessEvent procEvent = new ProcessEvent(this, "Event", false);
+		ProcessEvent procEvent = new ProcessEvent(this, "ProcessEvent", false);
 		EventArrival event = new EventArrival(this, "Event", false);
 		event.schedule(procEvent, new TimeSpan(time, timeUnit));
 	}
