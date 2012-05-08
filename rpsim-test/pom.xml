@@ -50,5 +50,10 @@
 			<version>${jUnitVersion}</version>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>desmoj</groupId>
+			<artifactId>desmoj-core</artifactId>
+			<version>${desmojVersion}</version>
+		</dependency>
 	</dependencies>
 </project>

@@ -36,22 +36,22 @@ public class ProcessSimulation {
 	public void test() {
 		conf = new SimConfig("TestModel", false, false);
 		conf
-			.add(new TokenGenerator("TG1", "changeSet1_process1", "DistArrival", TimeUnit.MINUTES, false, false))
+			.add(new TokenGenerator("TG1", "changeSet2_process1", "DistArrival", TimeUnit.MINUTES, false, false))
 			.add(new ServiceProcessor("SvcProc1", 5, "DistService", TimeUnit.MINUTES, false, false))
 			.add(new Distribution("DistArrival", ContDistExponential.class, new Object[] {3.0}, false, false))
 			.add(new Distribution("DistService", ContDistUniform.class, new Object[] {3.0, 7.0}, false, false))
 			.add(new Activity("ScriptTask_1", "SvcProc1"));
 		model = new SimModel(conf);
 		
-		ProcessEngineImpl procEngine = new ProcessEngineImpl();
-		procEngine.addChangeSet(ResourceFactory.newClassPathResource("changeSet1.xml"));
+		ProcessEngineImpl procEngine = new ProcessEngineImpl(model);
+		procEngine.addChangeSet(ResourceFactory.newClassPathResource("changeSet2.xml"));
 		model.setProcessEngine(procEngine);
 		
 		exp = new Experiment("TestExperiment",false);
 		model.connectToExperiment(exp);
 		exp.setShowProgressBar(false);
 		
-		exp.stop(new TimeInstant(100, TimeUnit.MINUTES));
+		exp.stop(new TimeInstant(1000, TimeUnit.MINUTES));
 		exp.start();
 		exp.finish();
 		
