@@ -4,8 +4,10 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
+import lt.bumbis.rpsim.core.entities.ProcessEvent;
 import lt.bumbis.rpsim.core.entities.SvcProcessor;
 import lt.bumbis.rpsim.core.entities.SvcReq;
+import lt.bumbis.rpsim.core.events.EventArrival;
 import lt.bumbis.rpsim.core.events.NewProcessToken;
 import lt.bumbis.rpsim.core.events.ServiceRequestArrival;
 import lt.bumbis.rpsim.core.simconfig.SimConfig;
@@ -109,5 +111,11 @@ public class SimModel extends Model implements ISimEngine {
 		SvcReq svcReq = new SvcReq(handler, this, svcProcName+"SR", svcProcShowInTrace);
 		ServiceRequestArrival event = new ServiceRequestArrival(this, svcProcName+"_SRA", svcProcShowInTrace);
 		event.schedule(svcReq, svcProc, new TimeSpan(1, TimeUnit.MICROSECONDS));
+	}
+
+	public void newEvent(long time, TimeUnit timeUnit) {
+		ProcessEvent procEvent = new ProcessEvent(this, "Event", false);
+		EventArrival event = new EventArrival(this, "Event", false);
+		event.schedule(procEvent, new TimeSpan(time, timeUnit));
 	}
 }
