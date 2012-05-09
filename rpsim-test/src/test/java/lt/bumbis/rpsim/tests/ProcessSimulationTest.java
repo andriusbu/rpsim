@@ -5,7 +5,6 @@ import static org.junit.Assert.*;
 import java.util.concurrent.TimeUnit;
 
 import lt.bumbis.rpsim.core.SimModel;
-import lt.bumbis.rpsim.core.TestDist;
 import lt.bumbis.rpsim.core.simconfig.Activity;
 import lt.bumbis.rpsim.core.simconfig.Distribution;
 import lt.bumbis.rpsim.core.simconfig.ServiceProcessor;
@@ -22,7 +21,7 @@ import desmoj.core.dist.ContDistUniform;
 import desmoj.core.simulator.Experiment;
 import desmoj.core.simulator.TimeInstant;
 
-public class ProcessSimulation {
+public class ProcessSimulationTest {
 	
 	private SimConfig conf;
 	private SimModel model;
@@ -51,7 +50,7 @@ public class ProcessSimulation {
 		model.connectToExperiment(exp);
 		exp.setShowProgressBar(false);
 		
-		exp.stop(new TimeInstant(1000, TimeUnit.MINUTES));
+		exp.stop(new TimeInstant(3, TimeUnit.MINUTES));
 		exp.start();
 		exp.finish();
 		

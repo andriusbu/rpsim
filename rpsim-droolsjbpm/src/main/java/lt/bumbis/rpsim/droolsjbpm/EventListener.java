@@ -1,5 +1,7 @@
 package lt.bumbis.rpsim.droolsjbpm;
 
+import java.util.concurrent.TimeUnit;
+
 import lt.bumbis.rpsim.core.ISimEngine;
 
 import org.drools.event.process.ProcessCompletedEvent;
@@ -24,7 +26,8 @@ public class EventListener implements ProcessEventListener {
 
 	public void afterNodeTriggered(ProcessNodeTriggeredEvent event) {
 		if (event.getNodeInstance().getClass().equals(TimerNodeInstance.class)) {
-			//TODO
+//			ActionNodeInstance node = (ActionNodeInstance) event.getNodeInstance();
+			simEngine.newEvent(10, TimeUnit.MINUTES);
 		}
 	}
 
