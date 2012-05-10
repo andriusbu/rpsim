@@ -16,12 +16,14 @@ import desmoj.core.dist.ContDist;
 import desmoj.core.simulator.Experiment;
 import desmoj.core.simulator.Model;
 import desmoj.core.simulator.TimeSpan;
+import desmoj.core.statistic.Count;
 
 public class SimModel extends Model implements ISimEngine {
 	
 	private SimConfig config;
 	private Map<String, ContDist> dists = new HashMap<String, ContDist>();
 	private Map<String, NewProcessToken> tokenGens = new HashMap<String, NewProcessToken>();
+	private Map<String, Count> tokentGeneratorCounter = new HashMap<String, Count>();
 	private Map<String, SvcProcessor> svcProcessors = new HashMap<String, SvcProcessor>();
 	
 	private Map<String, SvcProcessor> activityMapping = new HashMap<String, SvcProcessor>();
@@ -53,7 +55,7 @@ public class SimModel extends Model implements ISimEngine {
 
 	@Override
 	public void init() {
-		ModelBuilder.init(this);		
+		ModelBuilder.init(this);	
 	}
 	
 	public void addDist(String name, ContDist dist) {
@@ -119,5 +121,9 @@ public class SimModel extends Model implements ISimEngine {
 		EventArrival event = new EventArrival(this, "Event", false);
 		TimerEvent timerEvent = this.config.getTimerEvent(eventName);
 		event.schedule(procEvent, new TimeSpan(timerEvent.getTime(), timerEvent.getTimeUnit()));
+	}
+
+	public void addCounterForTokenGenerator(String name, Count count) {
+		tokentGeneratorCounter.put(name, count);
 	}
 }

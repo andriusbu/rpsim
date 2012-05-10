@@ -42,7 +42,7 @@ public class ModelBuilderTest {
 	public void testInit() {
 		model.connectToExperiment(exp);
 		//Check number of objects in a model
-		assertEquals(4, model.getReportables().size());
+		assertEquals("Numer of reportable object not match", 5, model.getReportables().size());
 		assertEquals(4, model.getEntities(true).size());
 		//Check Distributions
 		assertEquals(model.getDist("Dist1"), model.getReportables().get(0));
@@ -80,6 +80,8 @@ public class ModelBuilderTest {
 		assertEquals("Process", model.getTokenGenerator("TG1").getProcessName());
 		assertEquals(model.getDist("Dist1"), model.getTokenGenerator("TG1").getDist());
 		assertEquals(TimeUnit.MINUTES, model.getTokenGenerator("TG1").getTimeUnit());
+		//Check token generator counters
+		assertEquals("Count_TG1", model.getReportables().get(4).getName());
 		//Check activities
 		assertEquals(model.getSvcProcessor("SvcProc1"), model.getActivity("Activity1"));
 		assertEquals(model.getSvcProcessor("SvcProc1"), model.getActivity("Activity2"));

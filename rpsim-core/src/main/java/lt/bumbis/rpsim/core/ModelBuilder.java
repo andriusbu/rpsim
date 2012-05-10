@@ -16,6 +16,7 @@ import desmoj.core.dist.ContDist;
 import desmoj.core.simulator.Model;
 import desmoj.core.simulator.Queue;
 import desmoj.core.simulator.TimeSpan;
+import desmoj.core.statistic.Count;
 
 public final class ModelBuilder {
 	
@@ -31,6 +32,7 @@ public final class ModelBuilder {
 		}
 		for (TokenGenerator tokenGen : config.getTokenGens().values()) {
 			createTokenGenerator(model, tokenGen);
+			createCounterForTokenGenerato(model, tokenGen);
 		}
 		for (Activity activity : config.getActivities().values()) {
 			createActivity(model, activity);
@@ -110,6 +112,13 @@ public final class ModelBuilder {
 		tokenGen.setDist(model.getDist(cfg.getDistName()));
 		tokenGen.setTimeUnit(cfg.getTimeUnit());
 		model.addTokenGenerator(cfg.getName(), tokenGen);
+	}
+	
+	private static void createCounterForTokenGenerato(SimModel model,
+			TokenGenerator tokenGen) {
+		Count count = new Count(model, "Count_" + tokenGen.getName(), tokenGen.isShowInReport(), tokenGen.isShowInTrace());
+		model.addCounterForTokenGenerator(tokenGen.getName(), count);
+		
 	}
 
 	private static void scheduleTokenGen(NewProcessToken token) {
