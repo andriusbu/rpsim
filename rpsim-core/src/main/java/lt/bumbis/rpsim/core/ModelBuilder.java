@@ -17,6 +17,7 @@ import desmoj.core.simulator.Model;
 import desmoj.core.simulator.Queue;
 import desmoj.core.simulator.TimeSpan;
 import desmoj.core.statistic.Count;
+import desmoj.core.statistic.Tally;
 
 public final class ModelBuilder {
 	
@@ -29,6 +30,7 @@ public final class ModelBuilder {
 		}
 		for (ServiceProcessor svcProc : config.getSvcProcs().values()) {
 			createSvcProcessor(model, svcProc);
+			createSvcProcessorWaitTimeCollector(model, svcProc);
 		}
 		for (TokenGenerator tokenGen : config.getTokenGens().values()) {
 			createTokenGenerator(model, tokenGen);
@@ -104,6 +106,13 @@ public final class ModelBuilder {
 		svcProc.setServiceTimeUnit(cfg.getTimeUnit());
 		model.addSvcProcessor(cfg.getName(), svcProc);
 	}
+	
+	private static void createSvcProcessorWaitTimeCollector(SimModel model,
+			ServiceProcessor svcProc) {
+		Tally tally = new Tally(model, "WaitTime_"+svcProc.getName(), svcProc.isShowInReport(), svcProc.isShowInTrace());
+		model.addServiceProcessorWaitTimeCollector("WaitTime_"+svcProc.getName(), tally);		
+	}
+
 
 	private static void createTokenGenerator(SimModel model, TokenGenerator cfg) {
 		NewProcessToken tokenGen = new NewProcessToken(model, cfg.getName(),

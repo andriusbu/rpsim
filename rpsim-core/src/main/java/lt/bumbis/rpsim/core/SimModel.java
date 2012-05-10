@@ -17,6 +17,7 @@ import desmoj.core.simulator.Experiment;
 import desmoj.core.simulator.Model;
 import desmoj.core.simulator.TimeSpan;
 import desmoj.core.statistic.Count;
+import desmoj.core.statistic.Tally;
 
 public class SimModel extends Model implements ISimEngine {
 	
@@ -25,6 +26,7 @@ public class SimModel extends Model implements ISimEngine {
 	private Map<String, NewProcessToken> tokenGens = new HashMap<String, NewProcessToken>();
 	private Map<String, Count> tokenGeneratorCounter = new HashMap<String, Count>();
 	private Map<String, SvcProcessor> svcProcessors = new HashMap<String, SvcProcessor>();
+	private Map<String, Tally> svcProcessorWaitTime = new HashMap<String, Tally>();
 	
 	private Map<String, SvcProcessor> activityMapping = new HashMap<String, SvcProcessor>();
 
@@ -129,5 +131,13 @@ public class SimModel extends Model implements ISimEngine {
 	
 	public Count getCounterForTokenGenerator(String name) {
 		return tokenGeneratorCounter.get(name);
+	}
+	
+	public void addServiceProcessorWaitTimeCollector(String name, Tally tally) {
+		svcProcessorWaitTime.put(name, tally);
+	}
+	
+	public Tally getServiceProcessWaitTimeCollector(String name) {
+		return svcProcessorWaitTime.get(name);
 	}
 }
