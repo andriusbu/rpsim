@@ -22,7 +22,7 @@ public class SvcProcessor extends Entity {
 	private Tally waitTimeStats;
 	private Tally procTimeStats;
 	private Tally totalTimeStats;
-
+	
 	public SvcProcessor(Model model, String name, boolean showInReport) {
 		super(model, name, showInReport);
 		map = new HashMap<SvcReq, SvcProcessorExec>();
@@ -116,5 +116,5 @@ public class SvcProcessor extends Entity {
 
 	public Tally getTotalTimeStats() {
 		return totalTimeStats;
-	}
+	}	
 }

@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
+import lt.bumbis.rpsim.core.entities.ProcessContainer;
 import lt.bumbis.rpsim.core.entities.ProcessEvent;
 import lt.bumbis.rpsim.core.entities.SvcProcessor;
 import lt.bumbis.rpsim.core.entities.SvcReq;
@@ -24,6 +25,7 @@ public class SimModel extends Model implements ISimEngine {
 	private Map<String, NewProcessToken> tokenGens = new HashMap<String, NewProcessToken>();
 	private Map<String, SvcProcessor> svcProcessors = new HashMap<String, SvcProcessor>();
 	private Map<String, SvcProcessor> activityMapping = new HashMap<String, SvcProcessor>();
+	private ProcessContainer processContainer;
 
 	private IProcessEngine processEngine;
 	private SimClockObserver clockObserver;
@@ -118,5 +120,13 @@ public class SimModel extends Model implements ISimEngine {
 		EventArrival event = new EventArrival(this, "Event", false);
 		TimerEvent timerEvent = this.config.getTimerEvent(eventName);
 		event.schedule(procEvent, new TimeSpan(timerEvent.getTime(), timerEvent.getTimeUnit()));
+	}
+
+	public void newProcessArrival(String procName) {
+		
+	}
+	
+	public void newProcessCompletion(String procName) {
+		
 	}
 }

@@ -1,7 +1,5 @@
 package lt.bumbis.rpsim.droolsjbpm;
 
-import java.util.concurrent.TimeUnit;
-
 import lt.bumbis.rpsim.core.ISimEngine;
 
 import org.drools.event.process.ProcessCompletedEvent;
