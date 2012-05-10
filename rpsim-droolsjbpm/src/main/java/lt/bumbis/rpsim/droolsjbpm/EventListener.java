@@ -27,7 +27,7 @@ public class EventListener implements ProcessEventListener {
 	public void afterNodeTriggered(ProcessNodeTriggeredEvent event) {
 		if (event.getNodeInstance().getClass().equals(TimerNodeInstance.class)) {
 //			ActionNodeInstance node = (ActionNodeInstance) event.getNodeInstance();
-			simEngine.newEvent(10, TimeUnit.MINUTES);
+			simEngine.newEvent(event.getNodeInstance().getNodeName());
 		}
 	}
 
