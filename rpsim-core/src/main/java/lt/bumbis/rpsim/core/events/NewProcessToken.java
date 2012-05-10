@@ -11,6 +11,7 @@ import desmoj.core.simulator.TimeSpan;
 
 public class NewProcessToken extends ExternalEvent {
 	
+	private String name;
 	private String processName;
 	private ContDist dist;
 	private TimeUnit timeUnit;
@@ -20,10 +21,12 @@ public class NewProcessToken extends ExternalEvent {
 	public NewProcessToken(Model model, String name, boolean showInReport) {
 		super(model, name, showInReport);
 		this.model = (SimModel) model;
+		this.name = name;
 	}
 
 	@Override
 	public void eventRoutine() {
+		model.getCounterForTokenGenerator("Count_" + name).update();
 		model.getProcessEngine().startProcess(processName);
 		schedule(new TimeSpan(dist.sample(), timeUnit));
 	}

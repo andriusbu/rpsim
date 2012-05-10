@@ -23,7 +23,7 @@ public class SimModel extends Model implements ISimEngine {
 	private SimConfig config;
 	private Map<String, ContDist> dists = new HashMap<String, ContDist>();
 	private Map<String, NewProcessToken> tokenGens = new HashMap<String, NewProcessToken>();
-	private Map<String, Count> tokentGeneratorCounter = new HashMap<String, Count>();
+	private Map<String, Count> tokenGeneratorCounter = new HashMap<String, Count>();
 	private Map<String, SvcProcessor> svcProcessors = new HashMap<String, SvcProcessor>();
 	
 	private Map<String, SvcProcessor> activityMapping = new HashMap<String, SvcProcessor>();
@@ -124,6 +124,10 @@ public class SimModel extends Model implements ISimEngine {
 	}
 
 	public void addCounterForTokenGenerator(String name, Count count) {
-		tokentGeneratorCounter.put(name, count);
+		tokenGeneratorCounter.put(name, count);
+	}
+	
+	public Count getCounterForTokenGenerator(String name) {
+		return tokenGeneratorCounter.get(name);
 	}
 }
