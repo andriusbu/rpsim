@@ -16,8 +16,6 @@ import desmoj.core.dist.ContDist;
 import desmoj.core.simulator.Model;
 import desmoj.core.simulator.Queue;
 import desmoj.core.simulator.TimeSpan;
-import desmoj.core.statistic.Count;
-import desmoj.core.statistic.Tally;
 
 public final class ModelBuilder {
 	
@@ -30,11 +28,9 @@ public final class ModelBuilder {
 		}
 		for (ServiceProcessor svcProc : config.getSvcProcs().values()) {
 			createSvcProcessor(model, svcProc);
-			createSvcProcessorWaitTimeCollector(model, svcProc);
 		}
 		for (TokenGenerator tokenGen : config.getTokenGens().values()) {
 			createTokenGenerator(model, tokenGen);
-			createCounterForTokenGenerato(model, tokenGen);
 		}
 		for (Activity activity : config.getActivities().values()) {
 			createActivity(model, activity);
@@ -107,13 +103,6 @@ public final class ModelBuilder {
 		model.addSvcProcessor(cfg.getName(), svcProc);
 	}
 	
-	private static void createSvcProcessorWaitTimeCollector(SimModel model,
-			ServiceProcessor svcProc) {
-		Tally tally = new Tally(model, "WaitTime_"+svcProc.getName(), svcProc.isShowInReport(), svcProc.isShowInTrace());
-		model.addServiceProcessorWaitTimeCollector("WaitTime_"+svcProc.getName(), tally);		
-	}
-
-
 	private static void createTokenGenerator(SimModel model, TokenGenerator cfg) {
 		NewProcessToken tokenGen = new NewProcessToken(model, cfg.getName(),
 				cfg.isShowInReport());
@@ -123,13 +112,6 @@ public final class ModelBuilder {
 		model.addTokenGenerator(cfg.getName(), tokenGen);
 	}
 	
-	private static void createCounterForTokenGenerato(SimModel model,
-			TokenGenerator tokenGen) {
-		Count count = new Count(model, "Count_" + tokenGen.getName(), tokenGen.isShowInReport(), tokenGen.isShowInTrace());
-		model.addCounterForTokenGenerator("Count_" + tokenGen.getName(), count);
-		
-	}
-
 	private static void scheduleTokenGen(NewProcessToken token) {
 		token.schedule(new TimeSpan(token.getDist().sample(), token
 				.getTimeUnit()));

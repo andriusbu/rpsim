@@ -56,11 +56,11 @@ public class NewProcessEngineTest {
 	}
 	
 	@Test
-	public void testEventRoutine_Count() {
+	public void testEventRoutine_CountStats() {
 		tokenGen.eventRoutine();
-		assertEquals(1, model.getCounterForTokenGenerator("Count_TG1").getValue());
+		assertEquals(1, tokenGen.getTokenCount().getValue());
 		tokenGen.eventRoutine();
-		assertEquals(2, model.getCounterForTokenGenerator("Count_TG1").getValue());
+		assertEquals(2, tokenGen.getTokenCount().getValue());
 	}
 
 }

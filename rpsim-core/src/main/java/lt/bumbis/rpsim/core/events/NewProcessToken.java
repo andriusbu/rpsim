@@ -8,25 +8,26 @@ import desmoj.core.dist.ContDist;
 import desmoj.core.simulator.ExternalEvent;
 import desmoj.core.simulator.Model;
 import desmoj.core.simulator.TimeSpan;
+import desmoj.core.statistic.Count;
 
 public class NewProcessToken extends ExternalEvent {
 	
-	private String name;
 	private String processName;
 	private ContDist dist;
 	private TimeUnit timeUnit;
 	
 	private SimModel model;
+	private Count tokenCount;
 	
 	public NewProcessToken(Model model, String name, boolean showInReport) {
 		super(model, name, showInReport);
 		this.model = (SimModel) model;
-		this.name = name;
+		tokenCount = new Count(model, "TokeCount_" + name, showInReport, showInReport);
 	}
 
 	@Override
 	public void eventRoutine() {
-		model.getCounterForTokenGenerator("Count_" + name).update();
+		tokenCount.update();
 		model.getProcessEngine().startProcess(processName);
 		schedule(new TimeSpan(dist.sample(), timeUnit));
 	}
@@ -53,5 +54,9 @@ public class NewProcessToken extends ExternalEvent {
 
 	public void setTimeUnit(TimeUnit timeUnit) {
 		this.timeUnit = timeUnit;
+	}
+
+	public Count getTokenCount() {
+		return tokenCount;
 	}
 }

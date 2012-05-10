@@ -43,7 +43,7 @@ public class ModelBuilderTest {
 	public void testInit() {
 		model.connectToExperiment(exp);
 		//Check number of objects in a model
-		assertEquals("Numer of reportable object not match", 9, model.getReportables().size());
+		assertEquals("Numer of reportable object not match", 8, model.getReportables().size());
 		assertEquals(4, model.getEntities(true).size());
 		//Check Distributions
 		assertEquals(model.getDist("Dist1"), model.getReportables().get(0));
@@ -76,15 +76,11 @@ public class ModelBuilderTest {
 		assertEquals(3, svcProc.getIdleQueue().getQueueList().size());
 		assertEquals(model.getDist("Dist2"), svcProc.getServiceTimeDist());
 		assertEquals(TimeUnit.MINUTES, svcProc.getServiceTimeUnit());
-		//Check SvcProcessor Collectors
-		assertEquals("WaitTime_SvcProc1", model.getReportables().get(7).getName());
 		//Check token generator
 		assertEquals("TG1#1", model.getTokenGenerator("TG1").getName());
 		assertEquals("Process", model.getTokenGenerator("TG1").getProcessName());
 		assertEquals("3.", model.getDist("Dist1"), model.getTokenGenerator("TG1").getDist());
 		assertEquals(TimeUnit.MINUTES, model.getTokenGenerator("TG1").getTimeUnit());
-		//Check token generator counters
-		assertEquals("Count_TG1", model.getReportables().get(8).getName());
 		//Check activities
 		assertEquals("4.", model.getSvcProcessor("SvcProc1"), model.getActivity("Activity1"));
 		assertEquals("5.", model.getSvcProcessor("SvcProc1"), model.getActivity("Activity2"));

@@ -16,18 +16,13 @@ import desmoj.core.dist.ContDist;
 import desmoj.core.simulator.Experiment;
 import desmoj.core.simulator.Model;
 import desmoj.core.simulator.TimeSpan;
-import desmoj.core.statistic.Count;
-import desmoj.core.statistic.Tally;
 
 public class SimModel extends Model implements ISimEngine {
 	
 	private SimConfig config;
 	private Map<String, ContDist> dists = new HashMap<String, ContDist>();
 	private Map<String, NewProcessToken> tokenGens = new HashMap<String, NewProcessToken>();
-	private Map<String, Count> tokenGeneratorCounter = new HashMap<String, Count>();
 	private Map<String, SvcProcessor> svcProcessors = new HashMap<String, SvcProcessor>();
-	private Map<String, Tally> svcProcessorWaitTime = new HashMap<String, Tally>();
-	
 	private Map<String, SvcProcessor> activityMapping = new HashMap<String, SvcProcessor>();
 
 	private IProcessEngine processEngine;
@@ -123,21 +118,5 @@ public class SimModel extends Model implements ISimEngine {
 		EventArrival event = new EventArrival(this, "Event", false);
 		TimerEvent timerEvent = this.config.getTimerEvent(eventName);
 		event.schedule(procEvent, new TimeSpan(timerEvent.getTime(), timerEvent.getTimeUnit()));
-	}
-
-	public void addCounterForTokenGenerator(String name, Count count) {
-		tokenGeneratorCounter.put(name, count);
-	}
-	
-	public Count getCounterForTokenGenerator(String name) {
-		return tokenGeneratorCounter.get(name);
-	}
-	
-	public void addServiceProcessorWaitTimeCollector(String name, Tally tally) {
-		svcProcessorWaitTime.put(name, tally);
-	}
-	
-	public Tally getServiceProcessWaitTimeCollector(String name) {
-		return svcProcessorWaitTime.get(name);
 	}
 }
