@@ -15,6 +15,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import desmoj.core.simulator.Experiment;
+import desmoj.core.simulator.TimeInstant;
+import desmoj.core.simulator.TimeSpan;
 
 public class SvcProcessorTest {
 	
@@ -30,6 +32,7 @@ public class SvcProcessorTest {
 			.add(new Distribution("Dist", TestDist.class, new Object[] {}, false, false));
 		model = new SimModel(conf);
 		exp = new Experiment("TestExperiment",false);
+		exp.setShowProgressBar(false);
 		model.connectToExperiment(exp);
 	}
 
@@ -56,4 +59,32 @@ public class SvcProcessorTest {
 		assertTrue(!svcProc.haveRequest());
 		svcProc.complete(svcPreq2);
 	}
+	
+	@Test
+	public void testTiming() {
+		SvcProcessor svcProc = model.getSvcProcessor("SvcProc1");
+		SvcReq svcPreq1 = new SvcReq(new TestHandler(), model, "Req1", false);
+		
+		exp.stop(new TimeInstant(1, TimeUnit.MINUTES));
+		exp.start();
+		svcProc.add(svcPreq1);
+		assertEquals(60, svcPreq1.getArrivalTime(), 0);
+		assertEquals(0, svcPreq1.getStartTime(), 0);
+		assertEquals(0, svcPreq1.getCompleteTime(), 0);
+		
+		exp.stop(new TimeInstant(2, TimeUnit.MINUTES));
+		exp.start();
+		svcProc.start(svcPreq1);
+		assertEquals(60, svcPreq1.getArrivalTime(), 0);
+		assertEquals(120, svcPreq1.getStartTime(), 0);
+		assertEquals(0, svcPreq1.getCompleteTime(), 0);
+		
+		exp.stop(new TimeInstant(3, TimeUnit.MINUTES));
+		exp.start();
+		svcProc.complete(svcPreq1);
+		assertEquals(60, svcPreq1.getArrivalTime(), 0);
+		assertEquals(120, svcPreq1.getStartTime(), 0);	
+		assertEquals(180, svcPreq1.getCompleteTime(), 0);
+	}
 }
+

@@ -17,7 +17,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import desmoj.core.simulator.Experiment;
-import desmoj.core.simulator.TimeInstant;
 
 public class ServiceRequestArrivalTest {
 	
@@ -37,6 +36,7 @@ public class ServiceRequestArrivalTest {
 			.add(new Distribution("Dist", TestDist.class, new Object[] {}, false, false));
 		model = new SimModel(conf);
 		exp = new Experiment("TestExperiment",false);
+		exp.setShowProgressBar(false);
 		model.connectToExperiment(exp);
 		svcProc = model.getSvcProcessor("SvcProc1");
 		svcPreq1 = new SvcReq(new TestHandler(), model, "Req1", false);
@@ -63,13 +63,13 @@ public class ServiceRequestArrivalTest {
 		assertTrue(svcPreq2.isScheduled());
 	}
 	
-	@Test
-	public void testEventRoutine_startTime() {
-		exp.stop(new TimeInstant(10, TimeUnit.MINUTES));
-		exp.start();
-		event.eventRoutine(svcPreq1, svcProc);
-		assertEquals(600.0, svcPreq1.getStartTime(), 0);
-		exp.finish();
-	}
+//	@Test
+//	public void testEventRoutine_startTime() {
+//		exp.stop(new TimeInstant(10, TimeUnit.MINUTES));
+//		exp.start();
+//		event.eventRoutine(svcPreq1, svcProc);
+//		assertEquals(600.0, svcPreq1.getStartTime(), 0);
+//		exp.finish();
+//	}
 
 }

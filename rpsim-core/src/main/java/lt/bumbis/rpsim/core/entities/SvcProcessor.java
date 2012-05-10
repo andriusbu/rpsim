@@ -24,6 +24,7 @@ public class SvcProcessor extends Entity {
 	}
 	
 	public void add(SvcReq request) {
+		request.setArrivalTime(presentTime().getTimeAsDouble());
 		waitQueue.insert(request);
 	}
 	
@@ -36,6 +37,7 @@ public class SvcProcessor extends Entity {
 	}
 	
 	public TimeSpan start(SvcReq request) {
+		request.setStartTime(presentTime().getTimeAsDouble());
     	SvcProcessorExec reqExec = idleQueue.first();
     	idleQueue.remove(reqExec);
     	waitQueue.remove(request);
@@ -54,6 +56,7 @@ public class SvcProcessor extends Entity {
 	public void complete(SvcReq request) {
 		idleQueue.insert(map.get(request));
 		map.remove(request);
+		request.setCompleteTime(presentTime().getTimeAsDouble());
 	}
 
 	public Queue<SvcReq> getWaitQueue() {

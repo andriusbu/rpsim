@@ -7,7 +7,9 @@ import desmoj.core.simulator.Model;
 public class SvcReq extends Entity {
 	
 	private IServiceHandler handler;
+	private double arrivalTime;
 	private double startTime;
+	private double completeTime;
 
 	public SvcReq(IServiceHandler handler, Model owner, String name, boolean showInTrace) {
         super(owner, name, showInTrace);
@@ -28,5 +30,21 @@ public class SvcReq extends Entity {
 
 	public void setStartTime(double startTime) {
 		this.startTime = startTime;
+	}
+
+	public double getArrivalTime() {
+		return arrivalTime;
+	}
+
+	public void setArrivalTime(double arrivalTime) {
+		this.arrivalTime = arrivalTime;
+	}
+
+	public double getCompleteTime() {
+		return completeTime;
+	}
+
+	public void setCompleteTime(double completeTime) {
+		this.completeTime = completeTime;
 	}
 }
