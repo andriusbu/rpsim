@@ -69,4 +69,20 @@ public class SimModelTest {
 		assertEquals(EventArrival.class, model.getEntities(false).get(1).getScheduledEvents().get(0).getClass());
 		assertEquals(600, model.getEntities(false).get(1).getScheduledEvents().get(0).scheduledNext().getTimeRounded(TimeUnit.SECONDS));
 	}
+	
+	@Test
+	public void testProcessArrivalCompleteion() {
+		model.newProcessArrival("Proc1");
+		assertTrue(model.getActiveProcesses().containsKey("Proc1"));
+		exp.stop(new TimeInstant(0));
+		exp.start();
+		assertEquals(1, model.getProcessContainer().getActiveProcessQueue().length());
+		
+		model.newProcessCompletion("Proc1");
+		assertTrue(!model.getActiveProcesses().containsKey("Proc1"));
+		exp.stop(new TimeInstant(0));
+		exp.start();
+		assertEquals(0, model.getProcessContainer().getActiveProcessQueue().length());
+		exp.finish();
+	}
 }

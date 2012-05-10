@@ -4,12 +4,15 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
+import lt.bumbis.rpsim.core.entities.Process;
 import lt.bumbis.rpsim.core.entities.ProcessContainer;
 import lt.bumbis.rpsim.core.entities.ProcessEvent;
 import lt.bumbis.rpsim.core.entities.SvcProcessor;
 import lt.bumbis.rpsim.core.entities.SvcReq;
 import lt.bumbis.rpsim.core.events.EventArrival;
 import lt.bumbis.rpsim.core.events.NewProcessToken;
+import lt.bumbis.rpsim.core.events.ProcessArrival;
+import lt.bumbis.rpsim.core.events.ProcessCompletion;
 import lt.bumbis.rpsim.core.events.ServiceRequestArrival;
 import lt.bumbis.rpsim.core.simconfig.SimConfig;
 import lt.bumbis.rpsim.core.simconfig.TimerEvent;
@@ -25,7 +28,9 @@ public class SimModel extends Model implements ISimEngine {
 	private Map<String, NewProcessToken> tokenGens = new HashMap<String, NewProcessToken>();
 	private Map<String, SvcProcessor> svcProcessors = new HashMap<String, SvcProcessor>();
 	private Map<String, SvcProcessor> activityMapping = new HashMap<String, SvcProcessor>();
+
 	private ProcessContainer processContainer;
+	private Map<String, Process> activeProcesses = new HashMap<String, Process>();
 
 	private IProcessEngine processEngine;
 	private SimClockObserver clockObserver;
@@ -123,11 +128,16 @@ public class SimModel extends Model implements ISimEngine {
 	}
 
 	public void newProcessArrival(String procName) {
-		
+		Process process = new Process(this, "Process_"+procName, true);
+		activeProcesses.put(procName, process);
+		ProcessArrival event = new ProcessArrival(this, "ProcessArrivalEvent", true);
+		event.schedule(processContainer, process, new TimeSpan(0));
 	}
 	
 	public void newProcessCompletion(String procName) {
-		
+		Process process = activeProcesses.remove(procName);
+		ProcessCompletion event = new ProcessCompletion(this, "ProcessCompletionEvent", true);
+		event.schedule(processContainer, process, new TimeSpan(0));		
 	}
 
 	public ProcessContainer getProcessContainer() {
@@ -136,5 +146,9 @@ public class SimModel extends Model implements ISimEngine {
 
 	public void setProcessContainer(ProcessContainer processContainer) {
 		this.processContainer = processContainer;
+	}
+
+	protected Map<String, Process> getActiveProcesses() {
+		return activeProcesses;
 	}
 }

@@ -69,6 +69,18 @@ public class ProcessContainerTest {
 		assertEquals("Min exec time wrong", 600, procContainer.getExecTime().getMinimum(), 0);
 		assertEquals("Max exec time wrong", 1200, procContainer.getExecTime().getMaximum(), 0);
 		assertEquals("Mean exec time worng", 900, procContainer.getExecTime().getMean(), 0);
-
+	}
+	
+	@Test
+	public void testQueue() {
+		ProcessContainer procContainer = new ProcessContainer(model, "Container", false);
+		Process proc1 = new Process(model, "Proc1", false);
+		Process proc2 = new Process(model, "Proc2", false);
+		
+		procContainer.startProcess(proc1);
+		procContainer.startProcess(proc2);
+		assertEquals(2, procContainer.getActiveProcessQueue().length());
+		procContainer.completeProcess(proc2);
+		assertEquals(1, procContainer.getActiveProcessQueue().length());
 	}
 }
