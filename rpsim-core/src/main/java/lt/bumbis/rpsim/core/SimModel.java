@@ -11,6 +11,7 @@ import lt.bumbis.rpsim.core.events.EventArrival;
 import lt.bumbis.rpsim.core.events.NewProcessToken;
 import lt.bumbis.rpsim.core.events.ServiceRequestArrival;
 import lt.bumbis.rpsim.core.simconfig.SimConfig;
+import lt.bumbis.rpsim.core.simconfig.TimerEvent;
 import desmoj.core.dist.ContDist;
 import desmoj.core.simulator.Experiment;
 import desmoj.core.simulator.Model;
@@ -113,9 +114,10 @@ public class SimModel extends Model implements ISimEngine {
 		event.schedule(svcReq, svcProc, new TimeSpan(1, TimeUnit.MICROSECONDS));
 	}
 
-	public void newEvent(long time, TimeUnit timeUnit) {
+	public void newEvent(String eventName) {
 		ProcessEvent procEvent = new ProcessEvent(this, "ProcessEvent", false);
 		EventArrival event = new EventArrival(this, "Event", false);
-		event.schedule(procEvent, new TimeSpan(time, timeUnit));
+		TimerEvent timerEvent = this.config.getTimerEvent(eventName);
+		event.schedule(procEvent, new TimeSpan(timerEvent.getTime(), timerEvent.getTimeUnit()));
 	}
 }

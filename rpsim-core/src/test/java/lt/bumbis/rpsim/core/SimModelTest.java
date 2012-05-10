@@ -10,6 +10,7 @@ import lt.bumbis.rpsim.core.simconfig.Activity;
 import lt.bumbis.rpsim.core.simconfig.Distribution;
 import lt.bumbis.rpsim.core.simconfig.ServiceProcessor;
 import lt.bumbis.rpsim.core.simconfig.SimConfig;
+import lt.bumbis.rpsim.core.simconfig.TimerEvent;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -31,7 +32,8 @@ public class SimModelTest {
 		conf
 			.add(new ServiceProcessor("SvcProc1", 1, "Dist", TimeUnit.MINUTES, false, false))
 			.add(new Distribution("Dist", TestDist.class, new Object[] {}, false, false))
-			.add(new Activity("Activity1", "SvcProc1"));
+			.add(new Activity("Activity1", "SvcProc1"))
+			.add(new TimerEvent("Event1", 10, TimeUnit.MINUTES, false, false));
 		model = new SimModel(conf);
 		procEngine = new TestProcessEngine(model, "Activity1");
 		model.setProcessEngine(procEngine);
@@ -61,7 +63,7 @@ public class SimModelTest {
 	
 	@Test
 	public void testNewEvent() {
-		model.newEvent(10, TimeUnit.MINUTES);
+		model.newEvent("Event1");
 		assertEquals(ProcessEvent.class, model.getEntities(false).get(2).getClass());
 		assertTrue(model.getEntities(false).get(2).isScheduled());
 		assertEquals(EventArrival.class, model.getEntities(false).get(2).getScheduledEvents().get(0).getClass());
