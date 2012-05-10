@@ -43,8 +43,8 @@ public class ModelBuilderTest {
 	public void testInit() {
 		model.connectToExperiment(exp);
 		//Check number of objects in a model
-		assertEquals("Numer of reportable object not match", 8, model.getReportables().size());
-		assertEquals(4, model.getEntities(true).size());
+		assertEquals("Numer of reportable object not match", 9, model.getReportables().size());
+		assertEquals(5, model.getEntities(true).size());
 		//Check Distributions
 		assertEquals(model.getDist("Dist1"), model.getReportables().get(0));
 		assertEquals(model.getDist("Dist2"), model.getReportables().get(1));

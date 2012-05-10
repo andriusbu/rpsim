@@ -45,7 +45,7 @@ public class SimModelTest {
 	@Test
 	public void testNewServiceRequest() {
 		model.newServiceRequest("Activity1", handler);
-		assertEquals(3, model.getEntities(false).size());
+		assertEquals(4, model.getEntities(false).size());
 		assertTrue(model.getEntities(false).get(1).isScheduled());
 		assertTrue(model.getEntities(false).get(2).isScheduled());
 		exp.stop(new TimeInstant(34, TimeUnit.MINUTES));
@@ -64,9 +64,9 @@ public class SimModelTest {
 	@Test
 	public void testNewEvent() {
 		model.newEvent("Event1");
-		assertEquals(ProcessEvent.class, model.getEntities(false).get(2).getClass());
-		assertTrue(model.getEntities(false).get(2).isScheduled());
-		assertEquals(EventArrival.class, model.getEntities(false).get(2).getScheduledEvents().get(0).getClass());
-		assertEquals(600, model.getEntities(false).get(2).getScheduledEvents().get(0).scheduledNext().getTimeRounded(TimeUnit.SECONDS));
+		assertEquals(ProcessEvent.class, model.getEntities(false).get(1).getClass());
+		assertTrue("Event is not scheduled", model.getEntities(false).get(1).isScheduled());
+		assertEquals(EventArrival.class, model.getEntities(false).get(1).getScheduledEvents().get(0).getClass());
+		assertEquals(600, model.getEntities(false).get(1).getScheduledEvents().get(0).scheduledNext().getTimeRounded(TimeUnit.SECONDS));
 	}
 }

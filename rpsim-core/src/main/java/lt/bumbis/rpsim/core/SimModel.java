@@ -129,4 +129,12 @@ public class SimModel extends Model implements ISimEngine {
 	public void newProcessCompletion(String procName) {
 		
 	}
+
+	public ProcessContainer getProcessContainer() {
+		return processContainer;
+	}
+
+	public void setProcessContainer(ProcessContainer processContainer) {
+		this.processContainer = processContainer;
+	}
 }

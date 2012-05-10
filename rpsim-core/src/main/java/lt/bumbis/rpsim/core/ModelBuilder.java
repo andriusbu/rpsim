@@ -3,6 +3,7 @@ package lt.bumbis.rpsim.core;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 
+import lt.bumbis.rpsim.core.entities.ProcessContainer;
 import lt.bumbis.rpsim.core.entities.SvcProcessor;
 import lt.bumbis.rpsim.core.entities.SvcProcessorExec;
 import lt.bumbis.rpsim.core.entities.SvcReq;
@@ -35,6 +36,7 @@ public final class ModelBuilder {
 		for (Activity activity : config.getActivities().values()) {
 			createActivity(model, activity);
 		}
+		createProcessContainer(model);
 	}
 
 	public static void doInitialSchedules(SimModel model) {
@@ -120,5 +122,9 @@ public final class ModelBuilder {
 	private static void createActivity(SimModel model, Activity cfg) {
 		model.addActivity(cfg.getName(),
 				model.getSvcProcessor(cfg.getProcessor()));
+	}
+	private static void createProcessContainer(SimModel model) {
+		ProcessContainer procContainer = new ProcessContainer(model, "ProcContainer", true);
+		model.setProcessContainer(procContainer);
 	}
 }
