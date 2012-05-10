@@ -40,20 +40,27 @@ public class NewProcessEngineTest {
 	}
 
 	@Test
-	public void testEventRoutine1() {
+	public void testEventRoutine_Brahcn1() {
 		tokenGen.eventRoutine();
 		assertEquals(1, procEngine.getProcStartCount());
 		assertEquals("Process", procEngine.getLastProcessName());
 	}
 	
 	@Test
-	public void testEventRoutine2() {
-		
+	public void testEventRoutine_Branch2() {
 		exp.stop(new TimeInstant(70, TimeUnit.MINUTES));
 		exp.start();
 		assertEquals(2, procEngine.getProcStartCount());
 		assertEquals("Process", procEngine.getLastProcessName());
 		exp.finish();
+	}
+	
+	@Test
+	public void testEventRoutine_Count() {
+		tokenGen.eventRoutine();
+		assertEquals(1, model.getCounterForTokenGenerator("Count_TG1").getValue());
+		tokenGen.eventRoutine();
+		assertEquals(2, model.getCounterForTokenGenerator("Count_TG1").getValue());
 	}
 
 }

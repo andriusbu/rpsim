@@ -55,7 +55,7 @@ public class SimModel extends Model implements ISimEngine {
 
 	@Override
 	public void init() {
-		ModelBuilder.init(this);	
+		ModelBuilder.init(this);
 	}
 	
 	public void addDist(String name, ContDist dist) {

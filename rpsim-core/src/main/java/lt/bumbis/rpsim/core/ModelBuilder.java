@@ -117,7 +117,7 @@ public final class ModelBuilder {
 	private static void createCounterForTokenGenerato(SimModel model,
 			TokenGenerator tokenGen) {
 		Count count = new Count(model, "Count_" + tokenGen.getName(), tokenGen.isShowInReport(), tokenGen.isShowInTrace());
-		model.addCounterForTokenGenerator(tokenGen.getName(), count);
+		model.addCounterForTokenGenerator("Count_" + tokenGen.getName(), count);
 		
 	}
 
