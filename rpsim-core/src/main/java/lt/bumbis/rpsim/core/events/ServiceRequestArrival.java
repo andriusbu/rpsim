@@ -14,6 +14,7 @@ public class ServiceRequestArrival extends EventOf2Entities<SvcReq, SvcProcessor
 
     @Override
     public void eventRoutine(SvcReq request, SvcProcessor processor) {
+    	request.setStartTime(presentTime().getTimeAsDouble());
     	processor.add(request);
     	if ( processor.isAvailable() ) {
     		TimeSpan timeSpan = processor.start(request);

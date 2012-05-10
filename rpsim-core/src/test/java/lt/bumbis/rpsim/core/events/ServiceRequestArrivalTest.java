@@ -17,6 +17,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import desmoj.core.simulator.Experiment;
+import desmoj.core.simulator.TimeInstant;
 
 public class ServiceRequestArrivalTest {
 	
@@ -60,6 +61,15 @@ public class ServiceRequestArrivalTest {
 		assertTrue(svcProc.haveRequest());
 		assertTrue(!svcPreq1.isScheduled());
 		assertTrue(svcPreq2.isScheduled());
+	}
+	
+	@Test
+	public void testEventRoutine_startTime() {
+		exp.stop(new TimeInstant(10, TimeUnit.MINUTES));
+		exp.start();
+		event.eventRoutine(svcPreq1, svcProc);
+		assertEquals(600.0, svcPreq1.getStartTime(), 0);
+		exp.finish();
 	}
 
 }

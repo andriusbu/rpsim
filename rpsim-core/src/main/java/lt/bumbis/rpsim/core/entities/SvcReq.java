@@ -7,6 +7,7 @@ import desmoj.core.simulator.Model;
 public class SvcReq extends Entity {
 	
 	private IServiceHandler handler;
+	private double startTime;
 
 	public SvcReq(IServiceHandler handler, Model owner, String name, boolean showInTrace) {
         super(owner, name, showInTrace);
@@ -19,5 +20,13 @@ public class SvcReq extends Entity {
 
 	public void setHandler(IServiceHandler handler) {
 		this.handler = handler;
+	}
+
+	public double getStartTime() {
+		return startTime;
+	}
+
+	public void setStartTime(double startTime) {
+		this.startTime = startTime;
 	}
 }
