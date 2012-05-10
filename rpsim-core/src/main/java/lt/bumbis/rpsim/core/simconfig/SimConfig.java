@@ -10,6 +10,7 @@ public class SimConfig extends ConfigElement {
 	private Map<String, ServiceProcessor> svcProcs = new HashMap<String, ServiceProcessor>();
 	private Map<String, TokenGenerator> tokenGens = new HashMap<String, TokenGenerator>();
 	private Map<String, Activity> activities = new HashMap<String, Activity>();
+	private Map<String, TimerEvent> timerEvents = new HashMap<String, TimerEvent>();
 		 
 
 	@SuppressWarnings("serial")
@@ -19,6 +20,7 @@ public class SimConfig extends ConfigElement {
 			put(ServiceProcessor.class, (HashMap<String, ServiceProcessor>) svcProcs);
 			put(TokenGenerator.class, (HashMap<String, TokenGenerator>) tokenGens);
 			put(Activity.class, (HashMap<String, Activity>) activities);
+			put(TimerEvent.class, (HashMap<String, TimerEvent>) timerEvents);
 		}
 	};
 
@@ -56,5 +58,13 @@ public class SimConfig extends ConfigElement {
 	
 	public Activity getActivity(String name) {
 		return activities.get(name);
+	}
+	
+	public Map<String, TimerEvent> getTimerEvents() {
+		return timerEvents;
+	}
+	
+	public TimerEvent getTimerEvent(String name) {
+		return timerEvents.get(name);
 	}
 }

@@ -1,6 +1,9 @@
 package lt.bumbis.rpsim.core.simconfig;
 
 import static org.junit.Assert.*;
+
+import java.util.concurrent.TimeUnit;
+
 import org.junit.Test;
 
 public class SimConfigTest {
@@ -23,6 +26,17 @@ public class SimConfigTest {
 		assertTrue("Step6", conf.getSvcProcs().containsKey("SvcProc1"));
 		assertEquals("Step7", 2, conf.getActivities().size());
 		assertTrue("Step8", conf.getActivities().containsKey("Activity1"));
+	}
+	
+	@Test
+	public void testTimerEvent() {
+		SimConfig conf = new SimConfig("Test", false, false);
+		conf
+			.add(new TimerEvent("Timer1", 10, TimeUnit.MINUTES, false, false))
+			.add(new TimerEvent("Timer2", 1, TimeUnit.SECONDS, false, false));
+		
+		assertEquals(2, conf.getTimerEvents().size());
+		assertEquals(10, conf.getTimerEvent("Timer1").getTime());
 	}
 
 }
