@@ -9,6 +9,7 @@ import lt.bumbis.rpsim.core.simconfig.Activity;
 import lt.bumbis.rpsim.core.simconfig.Distribution;
 import lt.bumbis.rpsim.core.simconfig.ServiceProcessor;
 import lt.bumbis.rpsim.core.simconfig.SimConfig;
+import lt.bumbis.rpsim.core.simconfig.TimerEvent;
 import lt.bumbis.rpsim.core.simconfig.TokenGenerator;
 import lt.bumbis.rpsim.droolsjbpm.ProcessEngineImpl;
 
@@ -39,7 +40,9 @@ public class ProcessSimulationTest {
 			.add(new ServiceProcessor("SvcProc1", 5, "DistService", TimeUnit.MINUTES, false, false))
 			.add(new Distribution("DistArrival", ContDistExponential.class, new Object[] {3.0}, false, false))
 			.add(new Distribution("DistService", ContDistUniform.class, new Object[] {3.0, 7.0}, false, false))
-			.add(new Activity("ScriptTask_1", "SvcProc1"));
+			.add(new Activity("ScriptTask_1", "SvcProc1"))
+			.add(new TimerEvent("Catch", 6, TimeUnit.MINUTES, false, false));
+		
 		model = new SimModel(conf);
 		
 		ProcessEngineImpl procEngine = new ProcessEngineImpl(model);
@@ -50,7 +53,7 @@ public class ProcessSimulationTest {
 		model.connectToExperiment(exp);
 		exp.setShowProgressBar(false);
 		
-		exp.stop(new TimeInstant(3, TimeUnit.MINUTES));
+		exp.stop(new TimeInstant(30, TimeUnit.MINUTES));
 		exp.start();
 		exp.finish();
 		
