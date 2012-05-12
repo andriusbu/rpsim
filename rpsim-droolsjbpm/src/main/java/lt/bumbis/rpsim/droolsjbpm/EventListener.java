@@ -29,8 +29,8 @@ public class EventListener implements ProcessEventListener {
 		}
 	}
 
-	public void afterProcessCompleted(ProcessCompletedEvent arg0) {
-
+	public void afterProcessCompleted(ProcessCompletedEvent event) {
+		simEngine.newProcessCompletion(event.getProcessInstance().getProcessId(), event.getProcessInstance().getId());
 	}
 
 	public void afterProcessStarted(ProcessStartedEvent arg0) {
@@ -53,12 +53,12 @@ public class EventListener implements ProcessEventListener {
 		
 	}
 
-	public void beforeProcessStarted(ProcessStartedEvent arg0) {
-		
+	public void beforeProcessStarted(ProcessStartedEvent event) {
+		simEngine.newProcessArrival(event.getProcessInstance().getProcessId(), event.getProcessInstance().getId());		
 	}
 
-	public void beforeVariableChanged(ProcessVariableChangedEvent arg0) {
-		
+	public void beforeVariableChanged(ProcessVariableChangedEvent event) {
 	}
 
 }
+
