@@ -30,7 +30,7 @@ public class SimModel extends Model implements ISimEngine {
 	private Map<String, SvcProcessor> activityMapping = new HashMap<String, SvcProcessor>();
 
 	private ProcessContainer processContainer;
-	private Map<String, Process> activeProcesses = new HashMap<String, Process>();
+	private Map<Long, Process> activeProcesses = new HashMap<Long, Process>();
 
 	private IProcessEngine processEngine;
 	private SimClockObserver clockObserver;
@@ -127,15 +127,15 @@ public class SimModel extends Model implements ISimEngine {
 		event.schedule(procEvent, new TimeSpan(timerEvent.getTime(), timerEvent.getTimeUnit()));
 	}
 
-	public void newProcessArrival(String procName) {
-		Process process = new Process(this, "Process_"+procName, true);
-		activeProcesses.put(procName, process);
+	public void newProcessArrival(String procName, long procInstanceId) {
+		Process process = new Process(this, "Process_"+procName+"_"+procInstanceId, true);
+		activeProcesses.put(procInstanceId, process);
 		ProcessArrival event = new ProcessArrival(this, "ProcessArrivalEvent", true);
 		event.schedule(processContainer, process, new TimeSpan(0));
 	}
 	
-	public void newProcessCompletion(String procName) {
-		Process process = activeProcesses.remove(procName);
+	public void newProcessCompletion(String procName, long procInstanceId) {
+		Process process = activeProcesses.remove(procInstanceId);
 		ProcessCompletion event = new ProcessCompletion(this, "ProcessCompletionEvent", true);
 		event.schedule(processContainer, process, new TimeSpan(0));		
 	}
@@ -148,7 +148,7 @@ public class SimModel extends Model implements ISimEngine {
 		this.processContainer = processContainer;
 	}
 
-	protected Map<String, Process> getActiveProcesses() {
+	protected Map<Long, Process> getActiveProcesses() {
 		return activeProcesses;
 	}
 }

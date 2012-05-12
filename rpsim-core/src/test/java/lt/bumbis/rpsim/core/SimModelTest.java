@@ -72,14 +72,14 @@ public class SimModelTest {
 	
 	@Test
 	public void testProcessArrivalCompleteion() {
-		model.newProcessArrival("Proc1");
-		assertTrue(model.getActiveProcesses().containsKey("Proc1"));
+		model.newProcessArrival("Proc1", 1 );
+		assertTrue("Prcess not saved as active", model.getActiveProcesses().containsKey((long)1));
 		exp.stop(new TimeInstant(0));
 		exp.start();
 		assertEquals(1, model.getProcessContainer().getActiveProcessQueue().length());
 		
-		model.newProcessCompletion("Proc1");
-		assertTrue(!model.getActiveProcesses().containsKey("Proc1"));
+		model.newProcessCompletion("Proc1", 1);
+		assertTrue(!model.getActiveProcesses().containsKey((long)1));
 		exp.stop(new TimeInstant(0));
 		exp.start();
 		assertEquals(0, model.getProcessContainer().getActiveProcessQueue().length());
