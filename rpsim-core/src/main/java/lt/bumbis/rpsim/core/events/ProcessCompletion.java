@@ -5,6 +5,7 @@ import lt.bumbis.rpsim.core.entities.Process;
 import desmoj.core.simulator.EventOf2Entities;
 import desmoj.core.simulator.Model;
 
+@Deprecated
 public class ProcessCompletion extends EventOf2Entities<ProcessContainer, Process> {
 
 	public ProcessCompletion(Model arg0, String arg1, boolean arg2) {

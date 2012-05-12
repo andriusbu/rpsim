@@ -11,8 +11,8 @@ import lt.bumbis.rpsim.core.entities.SvcProcessor;
 import lt.bumbis.rpsim.core.entities.SvcReq;
 import lt.bumbis.rpsim.core.events.EventArrival;
 import lt.bumbis.rpsim.core.events.NewProcessToken;
-import lt.bumbis.rpsim.core.events.ProcessArrival;
-import lt.bumbis.rpsim.core.events.ProcessCompletion;
+//import lt.bumbis.rpsim.core.events.ProcessArrival;
+//import lt.bumbis.rpsim.core.events.ProcessCompletion;
 import lt.bumbis.rpsim.core.events.ServiceRequestArrival;
 import lt.bumbis.rpsim.core.simconfig.SimConfig;
 import lt.bumbis.rpsim.core.simconfig.TimerEvent;
@@ -130,14 +130,16 @@ public class SimModel extends Model implements ISimEngine {
 	public void newProcessArrival(String procName, long procInstanceId) {
 		Process process = new Process(this, "Process_"+procName+"_"+procInstanceId, true);
 		activeProcesses.put(procInstanceId, process);
-		ProcessArrival event = new ProcessArrival(this, "ProcessArrivalEvent", true);
-		event.schedule(processContainer, process, new TimeSpan(0));
+		processContainer.startProcess(process);
+//		ProcessArrival event = new ProcessArrival(this, "ProcessArrivalEvent", true);
+//		event.schedule(processContainer, process, new TimeSpan(0));
 	}
 	
 	public void newProcessCompletion(String procName, long procInstanceId) {
 		Process process = activeProcesses.remove(procInstanceId);
-		ProcessCompletion event = new ProcessCompletion(this, "ProcessCompletionEvent", true);
-		event.schedule(processContainer, process, new TimeSpan(0));		
+//		ProcessCompletion event = new ProcessCompletion(this, "ProcessCompletionEvent", true);
+		processContainer.completeProcess(process);
+//		event.schedule(processContainer, process, new TimeSpan(0));		
 	}
 
 	public ProcessContainer getProcessContainer() {
