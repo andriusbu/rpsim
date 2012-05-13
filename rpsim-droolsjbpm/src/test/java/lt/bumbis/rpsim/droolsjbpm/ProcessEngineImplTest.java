@@ -74,4 +74,17 @@ public class ProcessEngineImplTest extends JbpmJUnitTestCase {
 		engine.syncTime(1, TimeUnit.MINUTES);
 		assertProcessInstanceCompleted(processId, engine.getKnowledgeSession());	
 	}
+	
+	@Test
+	public void testHandlerAndEvents() {
+		TestSimEngine simEngine = new TestSimEngine();
+		ProcessEngineImpl procEngine = new ProcessEngineImpl(simEngine);
+		procEngine.addChangeSet(ResourceFactory.newClassPathResource("changeSet3.xml"));
+		procEngine.startEngine();
+		long processId = procEngine.startProcess("changeSet3_process1");
+		assertProcessInstanceCompleted(processId, procEngine.getKnowledgeSession());
+		assertEquals(1, simEngine.getNewProcessArrivalCounter());
+		assertEquals(1, simEngine.getNewProcessCompleteionCounter());
+		assertEquals(1, simEngine.getNewServiceRequestCounter());
+	}
 }
