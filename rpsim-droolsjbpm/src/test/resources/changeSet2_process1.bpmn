@@ -7,7 +7,11 @@
     <bpmn2:endEvent id="EndEvent_1" name="End">
       <bpmn2:incoming>SequenceFlow_4</bpmn2:incoming>
     </bpmn2:endEvent>
-    <bpmn2:sequenceFlow id="SequenceFlow_4" name="" sourceRef="Task_1" targetRef="EndEvent_1"/>
+    <bpmn2:scriptTask id="ScriptTask_1" name="Script Task">
+      <bpmn2:incoming>SequenceFlow_6</bpmn2:incoming>
+      <bpmn2:outgoing>SequenceFlow_4</bpmn2:outgoing>
+    </bpmn2:scriptTask>
+    <bpmn2:sequenceFlow id="SequenceFlow_4" name="" sourceRef="ScriptTask_1" targetRef="EndEvent_1"/>
     <bpmn2:startEvent id="StartEvent_1" name="Start">
       <bpmn2:outgoing>SequenceFlow_3</bpmn2:outgoing>
     </bpmn2:startEvent>
@@ -19,16 +23,15 @@
       </bpmn2:timerEventDefinition>
     </bpmn2:intermediateCatchEvent>
     <bpmn2:sequenceFlow id="SequenceFlow_3" name="" sourceRef="StartEvent_1" targetRef="IntermediateCatchEvent_1"/>
-    <bpmn2:sequenceFlow id="SequenceFlow_6" name="" sourceRef="IntermediateCatchEvent_1" targetRef="Task_1"/>
-    <bpmn2:task id="Task_1" name="Task Name">
-      <bpmn2:incoming>SequenceFlow_6</bpmn2:incoming>
-      <bpmn2:outgoing>SequenceFlow_4</bpmn2:outgoing>
-    </bpmn2:task>
+    <bpmn2:sequenceFlow id="SequenceFlow_6" name="" sourceRef="IntermediateCatchEvent_1" targetRef="ScriptTask_1"/>
   </bpmn2:process>
   <bpmndi:BPMNDiagram id="_1ZRgYHluEeG9g7T1MeOq3Q">
     <bpmndi:BPMNPlane id="_1ZRgYXluEeG9g7T1MeOq3Q" bpmnElement="changeSet2_process1">
       <bpmndi:BPMNShape id="BPMNShape_StartEvent_1" bpmnElement="StartEvent_1">
         <dc:Bounds height="51.0" width="36.0" x="330.0" y="251.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_ScriptTask_1" bpmnElement="ScriptTask_1">
+        <dc:Bounds height="50.0" width="110.0" x="540.0" y="243.0"/>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="BPMNShape_EndEvent_1" bpmnElement="EndEvent_1">
         <dc:Bounds height="51.0" width="36.0" x="720.0" y="250.0"/>
@@ -36,10 +39,7 @@
       <bpmndi:BPMNShape id="BPMNShape_IntermediateCatchEvent_1" bpmnElement="IntermediateCatchEvent_1">
         <dc:Bounds height="51.0" width="36.0" x="440.0" y="251.0"/>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="BPMNShape_Task_1" bpmnElement="Task_1">
-        <dc:Bounds height="50.0" width="110.0" x="540.0" y="150.0"/>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_2" bpmnElement="SequenceFlow_4" sourceElement="BPMNShape_Task_1" targetElement="BPMNShape_EndEvent_1">
+      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_2" bpmnElement="SequenceFlow_4" sourceElement="BPMNShape_ScriptTask_1" targetElement="BPMNShape_EndEvent_1">
         <di:waypoint xsi:type="dc:Point" x="650.0" y="268.0"/>
         <di:waypoint xsi:type="dc:Point" x="720.0" y="268.0"/>
       </bpmndi:BPMNEdge>
@@ -47,7 +47,7 @@
         <di:waypoint xsi:type="dc:Point" x="366.0" y="269.0"/>
         <di:waypoint xsi:type="dc:Point" x="440.0" y="269.0"/>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_4" bpmnElement="SequenceFlow_6" sourceElement="BPMNShape_IntermediateCatchEvent_1" targetElement="BPMNShape_Task_1">
+      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_4" bpmnElement="SequenceFlow_6" sourceElement="BPMNShape_IntermediateCatchEvent_1" targetElement="BPMNShape_ScriptTask_1">
         <di:waypoint xsi:type="dc:Point" x="476.0" y="269.0"/>
         <di:waypoint xsi:type="dc:Point" x="540.0" y="268.0"/>
       </bpmndi:BPMNEdge>
