@@ -29,12 +29,20 @@ public class ModelBuilderTest {
 	public void setUp() throws Exception {
 		conf = new SimConfig("TestModel", false, false);
 		conf
-			.add(new Activity("Activity1", "SvcProc1"))
-			.add(new Activity("Activity2", "SvcProc1"))
-			.add(new TokenGenerator("TG1", "Process", "Dist1", TimeUnit.MINUTES, false, false))
-			.add(new ServiceProcessor("SvcProc1", 3, "Dist2", TimeUnit.MINUTES, false, false))
-			.add(new Distribution("Dist1", ContDistNormal.class, new Object[] {3.0, 3.0}, false, false))
-			.add(new Distribution("Dist2", TestDist.class, new Object[] {}, false, false));
+			.add(new Activity().name("Activity1").svcProcessor("SvcProc1"))
+			.add(new Activity().name("Activity2").svcProcessor("SvcProc1"))
+			.add(new TokenGenerator()
+				.name("TG1").process("Process").dist("Dist1").timeUnit(TimeUnit.MINUTES)
+				.showInReport(false).showInTrace(false))
+			.add(new ServiceProcessor()
+				.name("SvcProc1").numExec(3).dist("Dist2")
+				.timeUnit(TimeUnit.MINUTES).showInReport(false).showInTrace(false))
+			.add(new Distribution()
+				.name("Dist1").distClass(ContDistNormal.class).distParams(3.0, 3.0)
+				.showInReport(false).showInTrace(false))
+			.add(new Distribution()
+				.name("Dist2").distClass(TestDist.class).distParams(3)
+				.showInReport(false).showInTrace(false));
 		model = new SimModel(conf);
 		exp = new Experiment("TestExperiment",false);
 		exp.setShowProgressBar(false);
