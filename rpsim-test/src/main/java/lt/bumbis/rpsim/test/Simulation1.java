@@ -39,9 +39,9 @@ public class Simulation1 {
 			.add(new ServiceProcessor("SvcProc User Task", 10, "DistService", TimeUnit.MINUTES, true, true))
 			.add(new Distribution("DistArrival", ContDistExponential.class, new Object[] {3.0}, true, true))
 			.add(new Distribution("DistService", ContDistUniform.class, new Object[] {3.0, 7.0}, true, true))
-			.add(new Activity("Test", "SvcProc Test"))
-			.add(new Activity("Human Task", "SvcProc Human Task"))
-			.add(new Activity("Manual Task", "SvcProc User Task"))
+			.add(new Activity("1", "SvcProc Test"))
+			.add(new Activity("3", "SvcProc Human Task"))
+			.add(new Activity("4", "SvcProc User Task"))
 			.add(new TimerEvent("Catch", 5, TimeUnit.MINUTES, true, true));
 		
 		model = new SimModel(conf);
@@ -58,6 +58,5 @@ public class Simulation1 {
 		exp.start();
 		exp.report();
 		exp.finish();
-		
 	}
 }

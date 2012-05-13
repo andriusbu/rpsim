@@ -15,7 +15,6 @@ public class CustomWorkItemHandler implements WorkItemHandler {
 	}
 
 	public void abortWorkItem(WorkItem arg0, WorkItemManager arg1) {
-		// TODO Auto-generated method stub
 		
 	}
 	
