@@ -38,7 +38,7 @@ public class ProcessEngineImpl implements IProcessEngine {
         KnowledgeBase kbase = kagent.getKnowledgeBase();
         
         Properties properties = new Properties();
-        properties.put("drools.workItemManagerFactory", "lt.bumbis.rpsim.droolsjbpm.WorkItemManagerFactory");
+        properties.put("drools.workItemManagerFactory", "lt.bumbis.rpsim.droolsjbpm.CustomWorkItemManagerFactory");
         SessionConfiguration conf = new SessionConfiguration(properties);
         conf.setOption( ClockTypeOption.get("pseudo"));
                 
@@ -49,9 +49,9 @@ public class ProcessEngineImpl implements IProcessEngine {
         	ksession.addEventListener(eventListener);
         }
         ActionHandler handler =  new ActionHandler(simEngine);
-        ksession.getWorkItemManager().registerWorkItemHandler("Test", handler);
-        ksession.getWorkItemManager().registerWorkItemHandler("Human Task", handler);
-        ksession.getWorkItemManager().registerWorkItemHandler("Manual Task", handler);
+        ksession.getWorkItemManager().registerWorkItemHandler("", handler);
+//        ksession.getWorkItemManager().registerWorkItemHandler("Human Task", handler);
+//        ksession.getWorkItemManager().registerWorkItemHandler("Manual Task", handler);
         return this;
     }
 
