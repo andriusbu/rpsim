@@ -1,17 +1,17 @@
 package lt.bumbis.rpsim.droolsjbpm;
 
+import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
 import lt.bumbis.rpsim.core.IProcessEngine;
 import lt.bumbis.rpsim.core.ISimEngine;
 
 import org.drools.KnowledgeBase;
-import org.drools.KnowledgeBaseFactory;
+import org.drools.SessionConfiguration;
 import org.drools.agent.KnowledgeAgent;
 import org.drools.agent.KnowledgeAgentFactory;
 import org.drools.event.process.ProcessEventListener;
 import org.drools.io.Resource;
-import org.drools.runtime.KnowledgeSessionConfiguration;
 import org.drools.runtime.StatefulKnowledgeSession;
 import org.drools.runtime.conf.ClockTypeOption;
 import org.drools.runtime.process.ProcessInstance;
@@ -36,8 +36,13 @@ public class ProcessEngineImpl implements IProcessEngine {
 
     public ProcessEngineImpl startEngine() {
         KnowledgeBase kbase = kagent.getKnowledgeBase();
-        KnowledgeSessionConfiguration conf = KnowledgeBaseFactory.newKnowledgeSessionConfiguration();
+        
+        Properties properties = new Properties();
+//        properties.put("drools.workItemManagerFactory", "lt.bumbis.rpsim.droolsjbpm.WorkItemManagerFactory");
+        properties.put("drools.workItemManagerFactory", "org.drools.process.instance.impl.DefaultWorkItemManagerFactory");
+        SessionConfiguration conf = new SessionConfiguration(properties);
         conf.setOption( ClockTypeOption.get("pseudo"));
+                
         ksession = kbase.newStatefulKnowledgeSession(conf, null);
         clock = ksession.getSessionClock();
         if (simEngine != null) {

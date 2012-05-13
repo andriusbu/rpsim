@@ -54,7 +54,7 @@ public class Simulation1 {
 		model.connectToExperiment(exp);
 		exp.setShowProgressBar(true);
 		
-		exp.stop(new TimeInstant(365, TimeUnit.DAYS));
+		exp.stop(new TimeInstant(1, TimeUnit.DAYS));
 		exp.start();
 		exp.report();
 		exp.finish();
