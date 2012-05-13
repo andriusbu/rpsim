@@ -13,9 +13,11 @@ public class CustomWorkItemManager extends DefaultWorkItemManager {
 	
 	private WorkItemHandler handler;
 	private AtomicLong workItemCounter = new AtomicLong(0);
+	private InternalKnowledgeRuntime kruntime;
 	
 	public CustomWorkItemManager(InternalKnowledgeRuntime kruntime) {
 		super(kruntime);
+		this.kruntime = kruntime;
 	}
 	
 	@Override
@@ -26,6 +28,7 @@ public class CustomWorkItemManager extends DefaultWorkItemManager {
 	@Override
 	public void internalExecuteWorkItem(WorkItem workItem) {
 		((WorkItemImpl) workItem).setId(workItemCounter.incrementAndGet());
+		kruntime.getProcessInstance(workItem.getProcessInstanceId());
 	    internalAddWorkItem(workItem);
 	    if (handler != null) {
 	            handler.executeWorkItem(workItem, this);
