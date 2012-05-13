@@ -22,7 +22,7 @@ public class AbstractJasperReport {
 		JasperPrint jPring;
 		
 		try {
-			jReport = JasperCompileManager.compileReport("target/classes/Report1.jrxml");
+			jReport = JasperCompileManager.compileReport("src/main/jasperreports/Report1.jrxml");
 			jPring = JasperFillManager.fillReport(jReport, new HashMap(), new JREmptyDataSource());
 			JasperExportManager.exportReportToPdfFile(jPring, "Report.pdf");
 		}

@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
@@ -20,7 +21,7 @@
 			<artifactId>desmoj-core</artifactId>
 			<version>${desmojVersion}</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>jasperreports</groupId>
 			<artifactId>jasperreports</artifactId>
@@ -47,6 +48,42 @@
 			<version>${jUnitVersion}</version>
 			<scope>test</scope>
 		</dependency>
-		
+
 	</dependencies>
+
+	<build>
+		<plugins>
+
+<!-- 			<plugin> -->
+<!-- 				<groupId>org.codehaus.mojo</groupId> -->
+<!-- 				<artifactId>jasperreports-maven-plugin</artifactId> -->
+<!-- 				<version>1.0-beta-2</version> -->
+<!-- 				<configuration /> -->
+<!-- 				<executions> -->
+<!-- 					<execution> -->
+<!-- 						<goals> -->
+<!-- 							<goal>compile-reports</goal> -->
+<!-- 						</goals> -->
+<!-- 						<phase>compile</phase> -->
+<!-- 					</execution> -->
+<!-- 				</executions> -->
+<!-- 				<dependencies> -->
+<!-- 					note this must be repeated here to pick up correct xml validation -->
+<!-- 					<dependency> -->
+<!-- 						<groupId>jasperreports</groupId> -->
+<!-- 						<artifactId>jasperreports</artifactId> -->
+<!-- 						<version>${JasperReportsVersion}</version> -->
+<!-- 					</dependency> -->
+<!-- 							<dependency> -->
+<!-- 			<groupId>log4j</groupId> -->
+<!-- 			<artifactId>log4j</artifactId> -->
+<!-- 			<version>1.2.12</version> -->
+<!-- 		</dependency> -->
+					
+<!-- 				</dependencies> -->
+<!-- 			</plugin> -->
+
+		</plugins>
+
+	</build>
 </project>
