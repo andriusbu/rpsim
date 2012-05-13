@@ -4,12 +4,14 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 
 import lt.bumbis.rpsim.core.entities.ProcessContainer;
+import lt.bumbis.rpsim.core.entities.ResPool;
 import lt.bumbis.rpsim.core.entities.SvcProcessor;
 import lt.bumbis.rpsim.core.entities.SvcProcessorExec;
 import lt.bumbis.rpsim.core.entities.SvcReq;
 import lt.bumbis.rpsim.core.events.NewProcessToken;
 import lt.bumbis.rpsim.core.simconfig.Activity;
 import lt.bumbis.rpsim.core.simconfig.Distribution;
+import lt.bumbis.rpsim.core.simconfig.ResourcePool;
 import lt.bumbis.rpsim.core.simconfig.ServiceProcessor;
 import lt.bumbis.rpsim.core.simconfig.SimConfig;
 import lt.bumbis.rpsim.core.simconfig.TokenGenerator;
@@ -26,6 +28,9 @@ public final class ModelBuilder {
 		SimConfig config = model.getConfig();
 		for (Distribution dist : config.getDists().values()) {
 			createDist(model, dist);
+		}
+		for (ResourcePool resPool: config.getResourcePools().values()){
+			createResPool(model, resPool);
 		}
 		for (ServiceProcessor svcProc : config.getSvcProcs().values()) {
 			createSvcProcessor(model, svcProc);
@@ -126,5 +131,10 @@ public final class ModelBuilder {
 	private static void createProcessContainer(SimModel model) {
 		ProcessContainer procContainer = new ProcessContainer(model, "ProcContainer", true);
 		model.setProcessContainer(procContainer);
+	}
+	
+	private static void createResPool(SimModel model, ResourcePool cfg) {
+		ResPool resPool = new ResPool(model, cfg.getName(), cfg.getResourceCount(), cfg.isShowInReport(), cfg.isShowInTrace());
+		model.addResourcePool(cfg.getName(), resPool);
 	}
 }

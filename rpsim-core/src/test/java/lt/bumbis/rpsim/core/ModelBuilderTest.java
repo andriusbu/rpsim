@@ -8,6 +8,7 @@ import lt.bumbis.rpsim.core.entities.SvcProcessor;
 import lt.bumbis.rpsim.core.entities.SvcProcessorExec;
 import lt.bumbis.rpsim.core.simconfig.Activity;
 import lt.bumbis.rpsim.core.simconfig.Distribution;
+import lt.bumbis.rpsim.core.simconfig.ResourcePool;
 import lt.bumbis.rpsim.core.simconfig.ServiceProcessor;
 import lt.bumbis.rpsim.core.simconfig.SimConfig;
 import lt.bumbis.rpsim.core.simconfig.TokenGenerator;
@@ -84,6 +85,19 @@ public class ModelBuilderTest {
 		//Check activities
 		assertEquals("4.", model.getSvcProcessor("SvcProc1"), model.getActivity("Activity1"));
 		assertEquals("5.", model.getSvcProcessor("SvcProc1"), model.getActivity("Activity2"));
+	}
+	
+	@Test
+	public void testInit_resourcePool() {
+		conf = new SimConfig("TestModel", false, false);
+		conf.add(new ResourcePool("ResPool1", 3, 2.0, TimeUnit.HOURS, false, false))
+			.add(new ResourcePool("ResPool2", 2, 1.0, TimeUnit.HOURS, false, false));
+		model = new SimModel(conf);
+		exp = new Experiment("TestExperiment",false);
+		exp.setShowProgressBar(false);
+		model.connectToExperiment(exp);
+		assertEquals(3, model.getResourcePool("ResPool1").getResQueue().length());
+		assertEquals(2, model.getResourcePool("ResPool2").getResQueue().length());
 	}
 
 	@Test 

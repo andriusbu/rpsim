@@ -7,6 +7,7 @@ import java.util.concurrent.TimeUnit;
 import lt.bumbis.rpsim.core.entities.Process;
 import lt.bumbis.rpsim.core.entities.ProcessContainer;
 import lt.bumbis.rpsim.core.entities.ProcessEvent;
+import lt.bumbis.rpsim.core.entities.ResPool;
 import lt.bumbis.rpsim.core.entities.SvcProcessor;
 import lt.bumbis.rpsim.core.entities.SvcReq;
 import lt.bumbis.rpsim.core.events.EventArrival;
@@ -28,6 +29,7 @@ public class SimModel extends Model implements ISimEngine {
 	private Map<String, NewProcessToken> tokenGens = new HashMap<String, NewProcessToken>();
 	private Map<String, SvcProcessor> svcProcessors = new HashMap<String, SvcProcessor>();
 	private Map<String, SvcProcessor> activityMapping = new HashMap<String, SvcProcessor>();
+	private Map<String, ResPool> resPools = new HashMap<String, ResPool>();
 
 	private ProcessContainer processContainer;
 	private Map<Long, Process> activeProcesses = new HashMap<Long, Process>();
@@ -152,5 +154,12 @@ public class SimModel extends Model implements ISimEngine {
 
 	protected Map<Long, Process> getActiveProcesses() {
 		return activeProcesses;
+	}
+	
+	public void addResourcePool(String name, ResPool resPool) {
+		resPools.put(name, resPool);
+	}
+	public ResPool getResourcePool(String name) {
+		return resPools.get(name);
 	}
 }
