@@ -36,25 +36,28 @@ public class ProcessSimulationTest {
 	public void test() {
 		conf = new SimConfig("TestModel", false, false);
 		conf
-			.add(new TokenGenerator("TG1", "changeSet2_process1", "DistArrival", TimeUnit.MINUTES, false, false))
+			.add(new TokenGenerator("TG1", "changeSet3_process1", "DistArrival", TimeUnit.MINUTES, false, false))
 			.add(new ServiceProcessor("SvcProc1", 5, "DistService", TimeUnit.MINUTES, false, false))
 			.add(new Distribution("DistArrival", ContDistExponential.class, new Object[] {3.0}, false, false))
 			.add(new Distribution("DistService", ContDistUniform.class, new Object[] {3.0, 7.0}, false, false))
-			.add(new Activity("ScriptTask_1", "SvcProc1"))
+			.add(new Activity("Test", "SvcProc1"))
+			.add(new Activity("Human Task", "SvcProc1"))
+			.add(new Activity("Manual Task", "SvcProc1"))
 			.add(new TimerEvent("Catch", 6, TimeUnit.MINUTES, false, false));
 		
 		model = new SimModel(conf);
 		
 		ProcessEngineImpl procEngine = new ProcessEngineImpl(model);
-		procEngine.addChangeSet(ResourceFactory.newClassPathResource("changeSet2.xml"));
+		procEngine.addChangeSet(ResourceFactory.newClassPathResource("changeSet3.xml"));
 		model.setProcessEngine(procEngine);
 		
 		exp = new Experiment("TestExperiment",false);
 		model.connectToExperiment(exp);
 		exp.setShowProgressBar(false);
 		
-		exp.stop(new TimeInstant(30, TimeUnit.MINUTES));
+		exp.stop(new TimeInstant(10, TimeUnit.MINUTES));
 		exp.start();
+		exp.report();
 		exp.finish();
 		
 	}

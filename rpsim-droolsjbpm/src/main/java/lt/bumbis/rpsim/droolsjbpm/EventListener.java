@@ -30,6 +30,7 @@ public class EventListener implements ProcessEventListener {
 	}
 
 	public void afterProcessCompleted(ProcessCompletedEvent event) {
+//		System.out.println(event.getKnowledgeRuntime().getSessionClock().getCurrentTime() + ": Process completed " + event.getProcessInstance().getId());
 		simEngine.newProcessCompletion(event.getProcessInstance().getProcessId(), event.getProcessInstance().getId());
 	}
 
@@ -45,7 +46,8 @@ public class EventListener implements ProcessEventListener {
 		
 	}
 
-	public void beforeNodeTriggered(ProcessNodeTriggeredEvent arg0) {
+	public void beforeNodeTriggered(ProcessNodeTriggeredEvent event) {
+//		System.out.println(event.getKnowledgeRuntime().getSessionClock().getCurrentTime() + " : " + event.getProcessInstance().getId() +" : "+ event.getNodeInstance().getClass() + " : " + event.getNodeInstance().getNodeName());
 		
 	}
 

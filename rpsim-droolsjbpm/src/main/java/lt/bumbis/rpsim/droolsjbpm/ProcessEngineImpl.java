@@ -44,6 +44,10 @@ public class ProcessEngineImpl implements IProcessEngine {
         	ProcessEventListener eventListener = new EventListener(simEngine);
         	ksession.addEventListener(eventListener);
         }
+        ActionHandler handler =  new ActionHandler(simEngine);
+        ksession.getWorkItemManager().registerWorkItemHandler("Test", handler);
+        ksession.getWorkItemManager().registerWorkItemHandler("Human Task", handler);
+        ksession.getWorkItemManager().registerWorkItemHandler("Manual Task", handler);
         return this;
     }
 
