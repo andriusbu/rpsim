@@ -37,6 +37,7 @@ public class ServiceRequestCompletionTest {
 			.add(new Distribution("Dist", TestDist.class, new Object[] {}, false, false));
 		model = new SimModel(conf);
 		exp = new Experiment("TestExperiment",false);
+		exp.setShowProgressBar(false);
 		model.connectToExperiment(exp);
 		svcProc = model.getSvcProcessor("SvcProc1");
 		svcPreq1 = new SvcReq(handler, model, "Req1", false);

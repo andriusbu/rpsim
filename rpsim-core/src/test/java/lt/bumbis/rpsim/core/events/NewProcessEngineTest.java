@@ -35,6 +35,7 @@ public class NewProcessEngineTest {
 		procEngine = new TestProcessEngine();
 		model.setProcessEngine(procEngine);
 		exp = new Experiment("TestExperiment",false);
+		exp.setShowProgressBar(false);
 		model.connectToExperiment(exp);
 		tokenGen = model.getTokenGenerator("TG1");
 	}

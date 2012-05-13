@@ -38,6 +38,7 @@ public class SimModelTest {
 		procEngine = new TestProcessEngine(model, "Activity1");
 		model.setProcessEngine(procEngine);
 		exp = new Experiment("TestExperiment",false);
+		exp.setShowProgressBar(false);
 		model.connectToExperiment(exp);
 		handler = new TestHandler();
 	}

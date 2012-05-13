@@ -29,7 +29,9 @@ public class CustomWorkItemManager extends DefaultWorkItemManager {
 	    internalAddWorkItem(workItem);
 	    if (handler != null) {
 	            handler.executeWorkItem(workItem, this);
-	        } else throw new WorkItemHandlerNotFoundException( "Could not find work item handler for ", workItem.getName());
+	        } else {
+	        	throw new WorkItemHandlerNotFoundException( "Could not find work item handler for ", workItem.getName());
+	        }
 	    }
 	
 	   public void internalAbortWorkItem(long id) {
