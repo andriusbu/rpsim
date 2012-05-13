@@ -19,8 +19,7 @@ public class ServiceRequestCompletion extends EventOf2Entities<SvcReq, SvcProces
     	SvcReq nextRequest = processor.getNextRequest();
         if ( nextRequest != null ) {
         	TimeSpan timeSpan = processor.start(nextRequest);
-        	//TODO implement event creation routine in ModelBuilder
-        	ServiceRequestCompletion event = new ServiceRequestCompletion(getModel(), "test", false);
+        	ServiceRequestCompletion event = new ServiceRequestCompletion(getModel(), "SR_Completion", false);
         	event.schedule(nextRequest, processor, timeSpan);
         }
     }

@@ -17,7 +17,8 @@ public class SimConfigTest {
 			.add(new TokenGenerator("TG1", null, null, null, false, false))
 			.add(new ServiceProcessor("SvcProc1", 1, null, null, false, false))
 			.add(new Activity("Activity1", "SvcProc1"))
-			.add(new Activity("Activity2", "SvcProc1"));
+			.add(new Activity("Activity2", "SvcProc1"))
+			.add(new ResourcePool("ResPool1", 100, 10.0, TimeUnit.HOURS, false, false));
 		assertEquals("Step1", 2, conf.getDists().size());
 		assertTrue("Step2", conf.getDists().containsKey("Dist2"));
 		assertEquals("Step3", 1, conf.getTokenGens().size());
@@ -26,6 +27,8 @@ public class SimConfigTest {
 		assertTrue("Step6", conf.getSvcProcs().containsKey("SvcProc1"));
 		assertEquals("Step7", 2, conf.getActivities().size());
 		assertTrue("Step8", conf.getActivities().containsKey("Activity1"));
+		assertEquals("Step9", 1, conf.getResourcePools().size());
+		assertNotNull("Step10", conf.getResourcePool("ResPool1"));
 	}
 	
 	@Test

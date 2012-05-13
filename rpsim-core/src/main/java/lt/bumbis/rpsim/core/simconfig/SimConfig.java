@@ -17,6 +17,7 @@ public class SimConfig extends ConfigElement implements Serializable{
 	private Map<String, TokenGenerator> tokenGens = new HashMap<String, TokenGenerator>();
 	private Map<String, Activity> activities = new HashMap<String, Activity>();
 	private Map<String, TimerEvent> timerEvents = new HashMap<String, TimerEvent>();
+	private Map<String, ResourcePool> resPools = new HashMap<String, ResourcePool>();
 		 
 
 	@SuppressWarnings("serial")
@@ -27,6 +28,7 @@ public class SimConfig extends ConfigElement implements Serializable{
 			put(TokenGenerator.class, (HashMap<String, TokenGenerator>) tokenGens);
 			put(Activity.class, (HashMap<String, Activity>) activities);
 			put(TimerEvent.class, (HashMap<String, TimerEvent>) timerEvents);
+			put(ResourcePool.class, (HashMap<String, ResourcePool>) resPools);
 		}
 	};
 
@@ -72,5 +74,13 @@ public class SimConfig extends ConfigElement implements Serializable{
 	
 	public TimerEvent getTimerEvent(String name) {
 		return timerEvents.get(name);
+	}
+	
+	public Map<String, ResourcePool> getResourcePools() {
+		return this.resPools;
+	}
+	
+	public ResourcePool getResourcePool(String name) {
+		return resPools.get(name);
 	}
 }
