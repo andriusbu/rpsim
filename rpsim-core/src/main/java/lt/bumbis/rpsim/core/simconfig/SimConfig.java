@@ -31,9 +31,38 @@ public class SimConfig extends ConfigElement implements Serializable{
 			put(ResourcePool.class, (HashMap<String, ResourcePool>) resPools);
 		}
 	};
+	
+	//---------------------------------------------
+	// Constructors
+	//---------------------------------------------
+	public SimConfig() {
+		super();
+		setName("Simulation Config");
+	}
 
 	public SimConfig(String name, boolean showInReport, boolean showInTrace) {
 		super(name, showInReport, showInTrace);
+	}
+	
+	//---------------------------------------------
+	// Configuration methods
+	//---------------------------------------------
+	@Override
+	public SimConfig name(String name) {
+		setName(name);
+		return this;
+	}
+	
+	@Override
+	public SimConfig showInReport(boolean showInReport) {
+		setShowInReport(showInReport);
+		return this;
+	}
+	
+	@Override
+	public SimConfig showInTrace(boolean showInTrace) {
+		setShowInTrace(showInTrace);
+		return this;
 	}
 
 	@SuppressWarnings("unchecked")
@@ -47,17 +76,25 @@ public class SimConfig extends ConfigElement implements Serializable{
 	public Map<String, Distribution> getDists() {
 		return dists;
 	}
+	
+	public Distribution getDist(String name) {
+		return getDists().get(name);
+	}
 
 	public Map<String, ServiceProcessor> getSvcProcs() {
 		return svcProcs;
 	}
 
 	public ServiceProcessor getSvcProc(String name) {
-		return svcProcs.get(name);
+		return getSvcProcs().get(name);
 	}
 	
 	public Map<String, TokenGenerator> getTokenGens() {
 		return tokenGens;
+	}
+	
+	public TokenGenerator getTokenGen(String name) {
+		return getTokenGens().get(name);
 	}
 
 	public Map<String, Activity> getActivities() {
@@ -65,7 +102,7 @@ public class SimConfig extends ConfigElement implements Serializable{
 	}
 	
 	public Activity getActivity(String name) {
-		return activities.get(name);
+		return getActivities().get(name);
 	}
 	
 	public Map<String, TimerEvent> getTimerEvents() {
@@ -73,7 +110,7 @@ public class SimConfig extends ConfigElement implements Serializable{
 	}
 	
 	public TimerEvent getTimerEvent(String name) {
-		return timerEvents.get(name);
+		return getTimerEvents().get(name);
 	}
 	
 	public Map<String, ResourcePool> getResourcePools() {
@@ -81,6 +118,6 @@ public class SimConfig extends ConfigElement implements Serializable{
 	}
 	
 	public ResourcePool getResourcePool(String name) {
-		return resPools.get(name);
+		return getResourcePools().get(name);
 	}
 }

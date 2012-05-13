@@ -1,20 +1,55 @@
 package lt.bumbis.rpsim.core.simconfig;
 
-public class Activity extends ConfigElement{
+public class Activity extends ConfigElement {
 	
-	private String processor;
+	private String svcProcessor;
+		
+	//---------------------------------------------
+	// Constructors
+	//---------------------------------------------
+	public Activity() {
+		super();
+	}
 	
-	public Activity(String name, String processor) {
+	public Activity(String name, String svcProcessor) {
 		super(name, false, false);
-		this.processor = processor;
+		this.svcProcessor = svcProcessor;
+	}
+	
+	//---------------------------------------------
+	// Configuration methods
+	//---------------------------------------------
+	@Override
+	public Activity name(String name) {
+		setName(name);
+		return this;
 	}
 
-	public String getProcessor() {
-		return processor;
+	@Override
+	public Activity showInReport(boolean showInReport) {
+		setShowInReport(showInReport);
+		return this;
 	}
 
-	public void setProcessor(String processor) {
-		this.processor = processor;
-	}	
+	@Override
+	public Activity showInTrace(boolean showInTrace) {
+		setShowInTrace(showInTrace);
+		return this;
+	}
+	
+	public Activity svcProcessor(String svcProcessor) {
+		setSvcProcessor(svcProcessor);
+		return this;
+	}
 
+	//---------------------------------------------
+	// Getter and Setters
+	//---------------------------------------------
+	public String getSvcProcessor() {
+		return svcProcessor;
+	}
+
+	public void setSvcProcessor(String svcProcessor) {
+		this.svcProcessor = svcProcessor;
+	}
 }

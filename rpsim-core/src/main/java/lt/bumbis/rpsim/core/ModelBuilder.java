@@ -126,7 +126,7 @@ public final class ModelBuilder {
 
 	private static void createActivity(SimModel model, Activity cfg) {
 		model.addActivity(cfg.getName(),
-				model.getSvcProcessor(cfg.getProcessor()));
+				model.getSvcProcessor(cfg.getSvcProcessor()));
 	}
 	private static void createProcessContainer(SimModel model) {
 		ProcessContainer procContainer = new ProcessContainer(model, "ProcContainer", true);

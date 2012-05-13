@@ -8,6 +8,13 @@ public class TokenGenerator extends ConfigElement {
     private String distName;
     private TimeUnit timeUnit;
 
+	//---------------------------------------------
+	// Constructors
+	//---------------------------------------------
+    public TokenGenerator() {
+    	super();
+    }
+    
 	public TokenGenerator(String name, String processName,
 			String distName, TimeUnit timeUnit, boolean showInReport, boolean showInTrace) {
 		super(name, showInReport, showInTrace);
@@ -16,6 +23,45 @@ public class TokenGenerator extends ConfigElement {
 		this.timeUnit = timeUnit;
 	}
 	
+	//---------------------------------------------
+	// Configuration methods
+	//---------------------------------------------
+	@Override
+	public TokenGenerator name(String name) {
+		setName(name);
+		return this;
+	}
+	
+	@Override
+	public TokenGenerator showInReport(boolean showInReport) {
+		setShowInReport(showInReport);
+		return this;
+	}
+	
+	@Override
+	public TokenGenerator showInTrace(boolean showInTrace) {
+		setShowInTrace(showInTrace);
+		return this;
+	}
+	
+	public TokenGenerator process(String process) {
+		setProcessName(process);
+		return this;
+	}
+	
+	public TokenGenerator dist(String dist) {
+		setDistName(dist);
+		return this;
+	}
+	
+	public TokenGenerator timeUnit(TimeUnit timeUnit) {
+		setTimeUnit(timeUnit);
+		return this;
+	}
+	
+	//---------------------------------------------
+	// Getter and Setters
+	//---------------------------------------------
 	public String getProcessName() {
 		return processName;
 	}

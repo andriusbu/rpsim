@@ -8,6 +8,15 @@ public class ServiceProcessor extends ConfigElement {
 	private String distName;
 	private TimeUnit timeUnit;
 
+	//---------------------------------------------
+	// Constructors
+	//---------------------------------------------
+	public ServiceProcessor() {
+		super();
+		this.numExec = Integer.MAX_VALUE;
+		this.timeUnit = TimeUnit.HOURS;
+	}
+	
 	public ServiceProcessor(String name, int numExec,
 			String distName, TimeUnit timeUnit, boolean showInReport,
 			boolean showInTrace) {
@@ -17,6 +26,45 @@ public class ServiceProcessor extends ConfigElement {
 		this.timeUnit = timeUnit;
 	}
 
+	//---------------------------------------------
+	// Configuration methods
+	//---------------------------------------------
+	@Override
+	public ServiceProcessor name(String name) {
+		setName(name);
+		return this;
+	}
+	
+	@Override
+	public ServiceProcessor showInReport(boolean showInReport) {
+		setShowInReport(showInReport);
+		return this;
+	}
+	
+	@Override
+	public ServiceProcessor showInTrace(boolean showInTrace) {
+		setShowInTrace(showInTrace);
+		return this;
+	}
+	
+	public ServiceProcessor numExec(int numExec) {
+		setNumExec(numExec);
+		return this;
+	}
+	
+	public ServiceProcessor dist(String dist) {
+		setDistName(dist);
+		return this;
+	}
+	
+	public ServiceProcessor timeUnit(TimeUnit timeUnit) {
+		setTimeUnit(timeUnit);
+		return this;
+	}
+	
+	//---------------------------------------------
+	// Getter and Setters
+	//---------------------------------------------	
 	public int getNumExec() {
 		return numExec;
 	}

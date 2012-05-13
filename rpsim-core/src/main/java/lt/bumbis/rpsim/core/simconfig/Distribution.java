@@ -6,6 +6,13 @@ public class Distribution extends ConfigElement {
 	
 	private Class<? extends ContDist> distClass;
 	private Object[] distParams;
+		
+	//---------------------------------------------
+	// Constructors
+	//---------------------------------------------
+	public Distribution() {
+		super();
+	}
 	
 	public Distribution(String name, Class<? extends ContDist> distClass, Object[] distParams, boolean showInReport, boolean showInTrace) {
 		super(name, showInReport, showInTrace);
@@ -13,6 +20,50 @@ public class Distribution extends ConfigElement {
 		this.distParams = distParams;
 	}
 	
+	//---------------------------------------------
+	// Configuration methods
+	//---------------------------------------------
+	public Distribution name(String name) {
+		setName(name);
+		return this;
+	}
+	
+	public Distribution showInReport(boolean showInReport) {
+		setShowInReport(showInReport);
+		return this;
+	}
+	
+	public Distribution showInTrace(boolean showInTrace) {
+		setShowInTrace(showInTrace);
+		return this;
+	}
+	
+	public Distribution distClass(Class<? extends ContDist> distClass) {
+		setDistClass(distClass);
+		return this;
+	}
+	
+	public Distribution distParams(double p1) {
+		Object[] params = new Object[] { p1 };
+		setDistParams(params);
+		return this;
+	}
+	
+	public Distribution distParams(double p1, double p2) {
+		Object[] params = new Object[] { p1, p2 };
+		setDistParams(params);
+		return this;
+	}
+	
+	public Distribution distParams(double p1, double p2, double p3) {
+		Object[] params = new Object[] { p1, p2, p3 };
+		setDistParams(params);
+		return this;
+	}
+
+	//---------------------------------------------
+	// Getter and Setters
+	//---------------------------------------------
 	public Class<? extends ContDist> getDistClass() {
 		return distClass;
 	}

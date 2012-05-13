@@ -113,9 +113,8 @@ public class SimModel extends Model implements ISimEngine {
 	}
 
 	public void newServiceRequest(String name, IServiceHandler handler) {
-		//TODO analyze possibility to move to separate class
 		SvcProcessor svcProc = activityMapping.get(name);
-		String svcProcName = config.getActivity(name).getProcessor();
+		String svcProcName = config.getActivity(name).getSvcProcessor();
 		boolean svcProcShowInTrace = config.getSvcProc(svcProcName).isShowInTrace();
 		SvcReq svcReq = new SvcReq(handler, this, svcProcName+"SR", svcProcShowInTrace);
 		ServiceRequestArrival event = new ServiceRequestArrival(this, svcProcName+"_SRA", svcProcShowInTrace);
