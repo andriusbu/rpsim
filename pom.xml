@@ -8,7 +8,7 @@
   <description>Rules based process simulation tool build on Drools, jBPM and DESMO-J</description>
   <modules>
   	<module>rpsim-core</module>
-  	
+  	<module>rpsim-reports</module>
   	<module>rpsim-droolsjbpm</module>
   	<module>rpsim-test</module>
   </modules>
@@ -31,6 +31,7 @@
 		<jUnitVersion>4.10</jUnitVersion>
 		<desmojVersion>2.3.3</desmojVersion>
 		<javadesignerVersion>2.0.13</javadesignerVersion>
-	</properties>
+		<JasperReportsVersion>3.5.3</JasperReportsVersion>
+  	</properties>
   
 </project>
