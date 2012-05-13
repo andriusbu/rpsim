@@ -38,8 +38,7 @@ public class ProcessEngineImpl implements IProcessEngine {
         KnowledgeBase kbase = kagent.getKnowledgeBase();
         
         Properties properties = new Properties();
-//        properties.put("drools.workItemManagerFactory", "lt.bumbis.rpsim.droolsjbpm.WorkItemManagerFactory");
-        properties.put("drools.workItemManagerFactory", "org.drools.process.instance.impl.DefaultWorkItemManagerFactory");
+        properties.put("drools.workItemManagerFactory", "lt.bumbis.rpsim.droolsjbpm.WorkItemManagerFactory");
         SessionConfiguration conf = new SessionConfiguration(properties);
         conf.setOption( ClockTypeOption.get("pseudo"));
                 
