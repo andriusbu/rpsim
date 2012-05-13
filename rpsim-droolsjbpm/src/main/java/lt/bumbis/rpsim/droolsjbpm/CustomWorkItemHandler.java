@@ -18,9 +18,13 @@ public class CustomWorkItemHandler implements WorkItemHandler {
 		// TODO Auto-generated method stub
 		
 	}
-
+	
+	protected void executeWorkItem(WorkItem workItem, String nodeId, WorkItemManager workItemManager) {
+		simEngine.newServiceRequest(nodeId, new ServiceRequestHandler(workItem, workItemManager));
+	}
+	
 	public void executeWorkItem(WorkItem workItem, WorkItemManager workItemManager) {
-		simEngine.newServiceRequest(workItem.getName(), new ServiceRequestHandler(workItem, workItemManager));		
+		executeWorkItem(workItem, workItem.getName(), workItemManager);		
 	}
 
 }

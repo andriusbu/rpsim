@@ -77,7 +77,7 @@ public class ProcessEngineImplTest extends JbpmJUnitTestCase {
 	
 	@Test
 	public void testHandlerAndEvents() {
-		TestSimEngine simEngine = new TestSimEngine();
+		TestSimEngine simEngine = new TestSimEngine(true);
 		ProcessEngineImpl procEngine = new ProcessEngineImpl(simEngine);
 		procEngine.addChangeSet(ResourceFactory.newClassPathResource("changeSet3.xml"));
 		procEngine.startEngine();
@@ -87,4 +87,6 @@ public class ProcessEngineImplTest extends JbpmJUnitTestCase {
 		assertEquals(1, simEngine.getNewProcessCompleteionCounter());
 		assertEquals(1, simEngine.getNewServiceRequestCounter());
 	}
+	
+	
 }

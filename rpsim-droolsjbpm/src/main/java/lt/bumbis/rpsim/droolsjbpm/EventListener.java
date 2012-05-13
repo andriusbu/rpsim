@@ -49,6 +49,10 @@ public class EventListener implements ProcessEventListener {
 	public void beforeNodeTriggered(ProcessNodeTriggeredEvent event) {
 //		System.out.println(event.getKnowledgeRuntime().getSessionClock().getCurrentTime() + " : " + event.getProcessInstance().getId() +" : "+ event.getNodeInstance().getClass() + " : " + event.getNodeInstance().getNodeName());
 		
+		CustomWorkItemManager workItemManager = (CustomWorkItemManager)event.getKnowledgeRuntime().getWorkItemManager();
+		workItemManager.setLastNode(event.getNodeInstance().getId());
+		
+		
 	}
 
 	public void beforeProcessCompleted(ProcessCompletedEvent arg0) {

@@ -4,18 +4,24 @@ import java.util.concurrent.atomic.AtomicLong;
 
 import org.drools.WorkItemHandlerNotFoundException;
 import org.drools.common.InternalKnowledgeRuntime;
+import org.drools.impl.StatefulKnowledgeSessionImpl;
 import org.drools.process.instance.WorkItem;
 import org.drools.process.instance.impl.DefaultWorkItemManager;
 import org.drools.process.instance.impl.WorkItemImpl;
 import org.drools.runtime.process.WorkItemHandler;
+import org.jbpm.ruleflow.instance.RuleFlowProcessInstance;
 
 public class CustomWorkItemManager extends DefaultWorkItemManager {
 	
 	private WorkItemHandler handler;
 	private AtomicLong workItemCounter = new AtomicLong(0);
+	private StatefulKnowledgeSessionImpl ksession;
+	private long lastNode;
 	
 	public CustomWorkItemManager(InternalKnowledgeRuntime kruntime) {
 		super(kruntime);
+		this.ksession = (StatefulKnowledgeSessionImpl) kruntime;
+//		System.out.println(kruntime.getClass().getName());
 	}
 	
 	@Override
@@ -25,6 +31,7 @@ public class CustomWorkItemManager extends DefaultWorkItemManager {
 	
 	@Override
 	public void internalExecuteWorkItem(WorkItem workItem) {
+		System.out.println(lastNode);
 		((WorkItemImpl) workItem).setId(workItemCounter.incrementAndGet());
 	    internalAddWorkItem(workItem);
 	    if (handler != null) {
@@ -52,6 +59,9 @@ public class CustomWorkItemManager extends DefaultWorkItemManager {
 	   public void removeWorkItem(Long id) {
 		   throw new WorkItemHandlerNotFoundException( "Not implemented", "!!!!!");
 	   }
-	
+
+	   public void setLastNode(long id) {
+		   this.lastNode = id;
+	   }
 	
 }

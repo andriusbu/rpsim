@@ -10,10 +10,18 @@ public class TestSimEngine implements ISimEngine {
 	private long newEventCounter;
 	private long newProcessArrivalCounter;
 	private long newProcessCompleteionCounter;
+	
+	private boolean completeWorkItem;
+	
+	public TestSimEngine(boolean completeWorkItem) {
+		this.completeWorkItem = completeWorkItem;
+	}
 
 	public void newServiceRequest(String name, IServiceHandler handler) {
 		newServiceRequestCounter++;
-		handler.update();
+		if ( completeWorkItem ) {
+			handler.update();
+		}
 	}
 
 	public void newEvent(String eventName) {
