@@ -31,18 +31,18 @@ public class Simulation1 {
 
 
 	public void test() {
-		conf = new SimConfig("Simulation1 Model", true, true);
-		conf
-			.add(new TokenGenerator("TG1", "changeSet3_process1", "DistArrival", TimeUnit.MINUTES, true, true))
-			.add(new ServiceProcessor("SvcProc Test", 3, "DistService", TimeUnit.MINUTES, true, true))
-			.add(new ServiceProcessor("SvcProc Human Task", 5, "DistService", TimeUnit.MINUTES, true, true))
-			.add(new ServiceProcessor("SvcProc User Task", 10, "DistService", TimeUnit.MINUTES, true, true))
-			.add(new Distribution("DistArrival", ContDistExponential.class, new Object[] {3.0}, true, true))
-			.add(new Distribution("DistService", ContDistUniform.class, new Object[] {3.0, 7.0}, true, true))
-			.add(new Activity("1", "SvcProc Test"))
-			.add(new Activity("3", "SvcProc Human Task"))
-			.add(new Activity("4", "SvcProc User Task"))
-			.add(new TimerEvent("Catch", 5, TimeUnit.MINUTES, true, true));
+		conf = new SimConfig()
+			.name("Simulation1 Model")
+			.add(new TokenGenerator().name("TG1").process("changeSet3_process1").dist("DistArrival").timeUnit(TimeUnit.MINUTES))
+			.add(new ServiceProcessor().name("SvcProc Test").numExec(3).dist("DistService").timeUnit(TimeUnit.MINUTES))
+			.add(new ServiceProcessor().name("SvcProc Human Task").numExec(5).dist("DistService").timeUnit(TimeUnit.MINUTES))
+			.add(new ServiceProcessor().name("SvcProc User Task").numExec(10).dist("DistService").timeUnit(TimeUnit.MINUTES))
+			.add(new Distribution().name("DistArrival").distClass(ContDistExponential.class).distParams(3.0))
+			.add(new Distribution().name("DistService").distClass(ContDistUniform.class).distParams(3.0, 7.0))
+			.add(new Activity().name("1").svcProcessor("SvcProc Test"))
+			.add(new Activity().name("3").svcProcessor("SvcProc Human Task"))
+			.add(new Activity().name("4").svcProcessor("SvcProc User Task"))
+			.add(new TimerEvent().name("Catch").time(5).timeUnit(TimeUnit.MINUTES));
 		
 		model = new SimModel(conf);
 		
@@ -54,7 +54,7 @@ public class Simulation1 {
 		model.connectToExperiment(exp);
 		exp.setShowProgressBar(true);
 		
-		exp.stop(new TimeInstant(30, TimeUnit.DAYS));
+		exp.stop(new TimeInstant(1, TimeUnit.DAYS));
 		exp.start();
 		exp.report();
 		exp.finish();
