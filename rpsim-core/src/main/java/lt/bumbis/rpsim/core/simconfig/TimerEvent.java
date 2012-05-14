@@ -2,7 +2,7 @@ package lt.bumbis.rpsim.core.simconfig;
 
 import java.util.concurrent.TimeUnit;
 
-public class TimerEvent extends ConfigElement {
+public class TimerEvent extends ConfigElement<TimerEvent> {
 	
 	private long time;
 	private TimeUnit timeUnit;
@@ -23,24 +23,6 @@ public class TimerEvent extends ConfigElement {
 	//---------------------------------------------
 	// Configuration methods
 	//---------------------------------------------
-	@Override
-	public TimerEvent name(String name) {
-		setName(name);
-		return this;
-	}
-	
-	@Override
-	public TimerEvent showInReport(boolean showInReport) {
-		setShowInReport(showInReport);
-		return this;
-	}
-	
-	@Override
-	public TimerEvent showInTrace(boolean showInTrace) {
-		setShowInTrace(showInTrace);
-		return this;
-	}
-	
 	public TimerEvent time(long time) {
 		setTime(time);
 		return this;

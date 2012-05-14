@@ -2,7 +2,7 @@ package lt.bumbis.rpsim.core.simconfig;
 
 import java.util.concurrent.TimeUnit;
 
-public class ResourcePool extends ConfigElement {
+public class ResourcePool extends ConfigElement<ResourcePool> {
 	
 	private long resourceCount;
 	private double resourcePrice;
@@ -28,24 +28,6 @@ public class ResourcePool extends ConfigElement {
 	//---------------------------------------------
 	// Configuration methods
 	//---------------------------------------------
-	@Override
-	public ResourcePool name(String name) {
-		setName(name);
-		return this;
-	}
-
-	@Override
-	public ResourcePool showInReport(boolean showInReport) {
-		setShowInReport(showInReport);
-		return this;
-	}
-
-	@Override
-	public ResourcePool showInTrace(boolean showInTrace) {
-		setShowInTrace(showInTrace);
-		return null;
-	}
-	
 	public ResourcePool count(long resourceCount) {
 		setResourceCount(resourceCount);
 		return this;

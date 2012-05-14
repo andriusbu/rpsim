@@ -1,11 +1,11 @@
 package lt.bumbis.rpsim.core.simconfig;
 
-public abstract class ConfigElement {
+@SuppressWarnings("rawtypes")
+public abstract class ConfigElement<T extends ConfigElement> {
 	
 	private String name;
 	private boolean showInReport;
 	private boolean showInTrace;
-	
 	
 	//---------------------------------------------
 	// Constructors
@@ -24,11 +24,23 @@ public abstract class ConfigElement {
 	//---------------------------------------------
 	// Configuration methods
 	//---------------------------------------------
-	public abstract ConfigElement name(String name);
+	@SuppressWarnings("unchecked")
+	public T name(String name) {
+		this.name = name;
+		return ((T)this);
+	}
 	
-	public abstract ConfigElement showInReport(boolean showInReport);
+	@SuppressWarnings("unchecked")
+	public T showInReport(boolean showInReport) {
+		this.showInReport = showInReport;
+		return ((T)this);
+	}
 	
-	public abstract ConfigElement showInTrace(boolean showInTrace);
+	@SuppressWarnings("unchecked")
+	public T showInTrace(boolean showInTrace) {
+		this.showInTrace = showInTrace;
+		return ((T)this);
+	}
 	
 	//---------------------------------------------
 	// Getter and Setters

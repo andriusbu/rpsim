@@ -2,7 +2,7 @@ package lt.bumbis.rpsim.core.simconfig;
 
 import java.util.concurrent.TimeUnit;
 
-public class TokenGenerator extends ConfigElement {
+public class TokenGenerator extends ConfigElement<TokenGenerator> {
 		
 	private String processName;
     private String distName;
@@ -26,24 +26,6 @@ public class TokenGenerator extends ConfigElement {
 	//---------------------------------------------
 	// Configuration methods
 	//---------------------------------------------
-	@Override
-	public TokenGenerator name(String name) {
-		setName(name);
-		return this;
-	}
-	
-	@Override
-	public TokenGenerator showInReport(boolean showInReport) {
-		setShowInReport(showInReport);
-		return this;
-	}
-	
-	@Override
-	public TokenGenerator showInTrace(boolean showInTrace) {
-		setShowInTrace(showInTrace);
-		return this;
-	}
-	
 	public TokenGenerator process(String process) {
 		setProcessName(process);
 		return this;

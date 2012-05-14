@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
-public class SimConfig extends ConfigElement implements Serializable{
+public class SimConfig extends ConfigElement<SimConfig> implements Serializable{
 
 	/**
 	 * 
@@ -20,7 +20,7 @@ public class SimConfig extends ConfigElement implements Serializable{
 	private Map<String, ResourcePool> resPools = new HashMap<String, ResourcePool>();
 		 
 
-	@SuppressWarnings("serial")
+	@SuppressWarnings({ "serial", "rawtypes" })
 	private Map<Class<? extends ConfigElement>, HashMap<String, ? extends ConfigElement>> mapping = new HashMap<Class<? extends ConfigElement>, HashMap<String, ? extends ConfigElement>>() {
 		{
 			put(Distribution.class, (HashMap<String, Distribution>) dists);
@@ -47,26 +47,8 @@ public class SimConfig extends ConfigElement implements Serializable{
 	//---------------------------------------------
 	// Configuration methods
 	//---------------------------------------------
-	@Override
-	public SimConfig name(String name) {
-		setName(name);
-		return this;
-	}
-	
-	@Override
-	public SimConfig showInReport(boolean showInReport) {
-		setShowInReport(showInReport);
-		return this;
-	}
-	
-	@Override
-	public SimConfig showInTrace(boolean showInTrace) {
-		setShowInTrace(showInTrace);
-		return this;
-	}
-
 	@SuppressWarnings("unchecked")
-	public <T extends ConfigElement> SimConfig add(T element) {
+	public <T extends ConfigElement<T>> SimConfig add(T element) {
 		HashMap<String, T> col = (HashMap<String, T>) mapping.get(element
 				.getClass());
 		col.put(element.getName(), element);

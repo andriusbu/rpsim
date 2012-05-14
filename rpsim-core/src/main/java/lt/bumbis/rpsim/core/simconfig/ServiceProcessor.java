@@ -2,7 +2,7 @@ package lt.bumbis.rpsim.core.simconfig;
 
 import java.util.concurrent.TimeUnit;
 
-public class ServiceProcessor extends ConfigElement {
+public class ServiceProcessor extends ConfigElement<ServiceProcessor> {
 	
 	private int numExec;
 	private String distName;
@@ -29,24 +29,6 @@ public class ServiceProcessor extends ConfigElement {
 	//---------------------------------------------
 	// Configuration methods
 	//---------------------------------------------
-	@Override
-	public ServiceProcessor name(String name) {
-		setName(name);
-		return this;
-	}
-	
-	@Override
-	public ServiceProcessor showInReport(boolean showInReport) {
-		setShowInReport(showInReport);
-		return this;
-	}
-	
-	@Override
-	public ServiceProcessor showInTrace(boolean showInTrace) {
-		setShowInTrace(showInTrace);
-		return this;
-	}
-	
 	public ServiceProcessor numExec(int numExec) {
 		setNumExec(numExec);
 		return this;

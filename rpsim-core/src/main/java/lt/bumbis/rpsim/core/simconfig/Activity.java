@@ -1,6 +1,6 @@
 package lt.bumbis.rpsim.core.simconfig;
 
-public class Activity extends ConfigElement {
+public class Activity extends ConfigElement<Activity> {
 	
 	private String svcProcessor;
 		
@@ -18,25 +18,7 @@ public class Activity extends ConfigElement {
 	
 	//---------------------------------------------
 	// Configuration methods
-	//---------------------------------------------
-	@Override
-	public Activity name(String name) {
-		setName(name);
-		return this;
-	}
-
-	@Override
-	public Activity showInReport(boolean showInReport) {
-		setShowInReport(showInReport);
-		return this;
-	}
-
-	@Override
-	public Activity showInTrace(boolean showInTrace) {
-		setShowInTrace(showInTrace);
-		return this;
-	}
-	
+	//---------------------------------------------	
 	public Activity svcProcessor(String svcProcessor) {
 		setSvcProcessor(svcProcessor);
 		return this;

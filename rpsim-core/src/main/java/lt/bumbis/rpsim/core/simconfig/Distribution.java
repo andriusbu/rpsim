@@ -2,7 +2,7 @@ package lt.bumbis.rpsim.core.simconfig;
 
 import desmoj.core.dist.ContDist;
 
-public class Distribution extends ConfigElement {
+public class Distribution extends ConfigElement<Distribution> {
 	
 	private Class<? extends ContDist> distClass;
 	private Object[] distParams;
@@ -23,21 +23,6 @@ public class Distribution extends ConfigElement {
 	//---------------------------------------------
 	// Configuration methods
 	//---------------------------------------------
-	public Distribution name(String name) {
-		setName(name);
-		return this;
-	}
-	
-	public Distribution showInReport(boolean showInReport) {
-		setShowInReport(showInReport);
-		return this;
-	}
-	
-	public Distribution showInTrace(boolean showInTrace) {
-		setShowInTrace(showInTrace);
-		return this;
-	}
-	
 	public Distribution distClass(Class<? extends ContDist> distClass) {
 		setDistClass(distClass);
 		return this;
