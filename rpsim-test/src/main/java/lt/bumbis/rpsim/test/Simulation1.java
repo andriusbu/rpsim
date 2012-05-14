@@ -36,7 +36,7 @@ public class Simulation1 {
 			.add(new TokenGenerator().name("TG1").process("changeSet3_process1").dist("DistArrival").timeUnit(TimeUnit.MINUTES))
 			.add(new ServiceProcessor().name("SvcProc Test").numExec(3).dist("DistService").timeUnit(TimeUnit.MINUTES))
 			.add(new ServiceProcessor().name("SvcProc Human Task").numExec(5).dist("DistService").timeUnit(TimeUnit.MINUTES))
-			.add(new ServiceProcessor().name("SvcProc User Task").numExec(10).dist("DistService").timeUnit(TimeUnit.MINUTES))
+			.add(new ServiceProcessor().name("SvcProc User Task").numExec(5).dist("DistService").timeUnit(TimeUnit.MINUTES))
 			.add(new Distribution().name("DistArrival").distClass(ContDistExponential.class).distParams(3.0))
 			.add(new Distribution().name("DistService").distClass(ContDistUniform.class).distParams(3.0, 7.0))
 			.add(new Activity().name("1").svcProcessor("SvcProc Test"))
@@ -53,10 +53,11 @@ public class Simulation1 {
 		exp = new Experiment("Simulatio1 Experiment",true);
 		model.connectToExperiment(exp);
 		exp.setShowProgressBar(true);
-		
-		exp.stop(new TimeInstant(1, TimeUnit.DAYS));
+	
+		exp.stop(new TimeInstant(365, TimeUnit.DAYS));
 		exp.start();
 		exp.report();
+		System.out.println(exp.getReferenceUnit());
 		exp.finish();
 	}
 }
