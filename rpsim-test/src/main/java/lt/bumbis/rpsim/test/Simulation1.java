@@ -57,7 +57,6 @@ public class Simulation1 {
 		exp.stop(new TimeInstant(365, TimeUnit.DAYS));
 		exp.start();
 		exp.report();
-		System.out.println(exp.getReferenceUnit());
 		exp.finish();
 	}
 }
