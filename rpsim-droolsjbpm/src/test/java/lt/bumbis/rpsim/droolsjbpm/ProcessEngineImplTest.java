@@ -12,9 +12,9 @@ public class ProcessEngineImplTest extends JbpmJUnitTestCase {
 	public void testAddChangeSet() {
 		ProcessEngineImpl engine = new ProcessEngineImpl();
 		engine.addChangeSet(ResourceFactory.newClassPathResource("changeSet1.xml"));
-		assertEquals(1, engine.getKnowledgeBase().getProcesses().size());
+		assertEquals(1, engine.newKnowledgeBase().getProcesses().size());
 		engine.addChangeSet(ResourceFactory.newClassPathResource("changeSet2.xml"));
-		assertEquals(3, engine.getKnowledgeBase().getProcesses().size());
+		assertEquals(3, engine.newKnowledgeBase().getProcesses().size());
 	}
 	
 	@Test
