@@ -40,18 +40,6 @@ public class ProcessEngineImplTest extends JbpmJUnitTestCase {
 		assertProcessInstanceActive(processId, engine.getKnowledgeSession());
 	}
 	
-//	@Test
-//	public void testSetAdvanceTime() {
-//		ProcessEngineImpl engine = new ProcessEngineImpl();
-//		engine.addChangeSet(ResourceFactory.newClassPathResource("changeSet2.xml"));
-//		engine.startEngine();
-//		long processId = engine.startProcess("changeSet2_process1");
-//		assertProcessInstanceActive(processId, engine.getKnowledgeSession());
-//		engine.setAdvanceTime(2, TimeUnit.MILLISECONDS);
-//		engine.setAdvanceTime(3, TimeUnit.MILLISECONDS);
-//		assertProcessInstanceCompleted(processId, engine.getKnowledgeSession());	
-//	}
-	
 	@Test
 	public void testSyncTime1() {
 		ProcessEngineImpl engine = new ProcessEngineImpl();

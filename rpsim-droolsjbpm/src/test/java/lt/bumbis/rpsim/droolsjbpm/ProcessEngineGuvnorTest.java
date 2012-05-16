@@ -2,6 +2,8 @@ package lt.bumbis.rpsim.droolsjbpm;
 
 import static org.junit.Assert.*;
 
+import java.net.URL;
+
 import org.drools.runtime.conf.ClockTypeOption;
 import org.junit.Before;
 import org.junit.Test;
@@ -15,8 +17,10 @@ public class ProcessEngineGuvnorTest extends JbpmJUnitTestCase {
 	@Before
 	public void setUp() throws Exception {
 		engine = new ProcessEngineGuvnor();
-		engine.addModelURL("http://localhost:8080/drools-guvnor/org.drools.guvnor.Guvnor/package/lt.bumbis.rpsim/LATEST/MODEL");
-		engine.addPackageURL("http://localhost:8080/drools-guvnor/org.drools.guvnor.Guvnor/package/lt.bumbis.rpsim/LATEST");
+//		engine.addLoaderURLs(new URL("http://localhost:8080/drools-guvnor/org.drools.guvnor.Guvnor/package/lt.bumbis.rpsim/LATEST/MODEL"));
+//		engine.addLoaderURLs(new URL("http://localhost:8080/drools-guvnor/org.drools.guvnor.Guvnor/package/lt.bumbis.rpsim/LATEST"));
+		engine.addLoaderURLs(new URL("file://"));
+		engine.addPackage("lt.bumbis.rpsim.pkg");
 	}
 
 	@Test

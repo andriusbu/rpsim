@@ -20,7 +20,7 @@ import org.drools.io.ResourceFactory;
 
 public class ProcessEngineGuvnor extends ProcessEngine {
 	
-	private List<String> modelURLs;
+	private List<URL> loaderURLs;
 	private List<String> kpackageURLs;
 	
 	public ProcessEngineGuvnor() {
@@ -31,17 +31,17 @@ public class ProcessEngineGuvnor extends ProcessEngine {
 		super(simEngine);
 	}
 	
-	public void addModelURL(String url) {
-		modelURLs.add(url);
+	public void addLoaderURLs(URL url) {
+		this.loaderURLs.add(url);
 	}
 
-	public void addPackageURL(String url) {
+	public void addPackage(String url) {
 		kpackageURLs.add(url);
 	}
 	
 	@Override
 	protected void init() {
-		modelURLs = new ArrayList<String>();
+		loaderURLs = new ArrayList<URL>();
 		kpackageURLs = new ArrayList<String>();
 	}
 
@@ -49,17 +49,17 @@ public class ProcessEngineGuvnor extends ProcessEngine {
 	protected KnowledgeBase newKnowledgeBase() {
 		List<URL> urls; 
 		urls = new ArrayList<URL>();
-		for (Iterator<String> i = modelURLs.iterator(); i.hasNext(); ) {
-			URL url;
-			try {
-				url = new URL(i.next());
-				urls.add(url);
-			} catch (MalformedURLException e) {
-				//TODO implement exception handling
-			}
-		}
-		URL[] urlArray = new URL[urls.size()];
-		urls.toArray(urlArray);
+//		for (Iterator<String> i = modelURLs.iterator(); i.hasNext(); ) {
+//			URL url;
+//			try {
+//				url = new URL(i.next());
+//				urls.add(url);
+//			} catch (MalformedURLException e) {
+//				//TODO implement exception handling
+//			}
+//		}
+		URL[] urlArray = new URL[loaderURLs.size()];
+		loaderURLs.toArray(urlArray);
 		URLClassLoader customURLCLassLoader = new URLClassLoader(urlArray);
 		
 		KnowledgeBuilderConfiguration kbuilderConfig = KnowledgeBuilderFactory.newKnowledgeBuilderConfiguration(null, customURLCLassLoader);
@@ -67,8 +67,8 @@ public class ProcessEngineGuvnor extends ProcessEngine {
 		
 		urls.clear();
 		for (Iterator<String> i = kpackageURLs.iterator(); i.hasNext(); ) {
-			kbuilder.add(ResourceFactory.newUrlResource(i.next()), ResourceType.PKG);
-//			kbuilder.add(ResourceFactory.newClassPathResource(i.next(), customURLCLassLoader), ResourceType.PKG);
+//			kbuilder.add(ResourceFactory.newUrlResource(i.next()), ResourceType.PKG);
+			kbuilder.add(ResourceFactory.newClassPathResource(i.next(), customURLCLassLoader), ResourceType.PKG);
 		}
 		
 		KnowledgeBaseConfiguration kbaseConfig = KnowledgeBaseFactory.newKnowledgeBaseConfiguration(null, customURLCLassLoader);
