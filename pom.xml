@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>lt.bumbis</groupId>
   <artifactId>rpsim</artifactId>
-  <version>0.3-SNAPSHOT</version>
+  <version>0.4-SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>RPSIM Main</name>
   <description>Rules based process simulation tool build on Drools, jBPM and DESMO-J</description>
