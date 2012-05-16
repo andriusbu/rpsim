@@ -1,13 +1,11 @@
 package lt.bumbis.rpsim.droolsjbpm;
 
-import static org.junit.Assert.*;
-
 import java.net.URL;
 
 import org.drools.runtime.conf.ClockTypeOption;
+import org.jbpm.test.JbpmJUnitTestCase;
 import org.junit.Before;
 import org.junit.Test;
-import org.jbpm.test.JbpmJUnitTestCase;
 
 public class ProcessEngineGuvnorTest extends JbpmJUnitTestCase {
 
@@ -45,6 +43,5 @@ public class ProcessEngineGuvnorTest extends JbpmJUnitTestCase {
 			e.printStackTrace();
 		}
 		assertProcessInstanceActive(processId, engine.getKnowledgeSession());
-	}
-	
+	}	
 }

@@ -1,6 +1,5 @@
 package lt.bumbis.rpsim.droolsjbpm;
 
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.ArrayList;
@@ -49,15 +48,6 @@ public class ProcessEngineGuvnor extends ProcessEngine {
 	protected KnowledgeBase newKnowledgeBase() {
 		List<URL> urls; 
 		urls = new ArrayList<URL>();
-//		for (Iterator<String> i = modelURLs.iterator(); i.hasNext(); ) {
-//			URL url;
-//			try {
-//				url = new URL(i.next());
-//				urls.add(url);
-//			} catch (MalformedURLException e) {
-//				//TODO implement exception handling
-//			}
-//		}
 		URL[] urlArray = new URL[loaderURLs.size()];
 		loaderURLs.toArray(urlArray);
 		URLClassLoader customURLCLassLoader = new URLClassLoader(urlArray);
@@ -67,7 +57,6 @@ public class ProcessEngineGuvnor extends ProcessEngine {
 		
 		urls.clear();
 		for (Iterator<String> i = kpackageURLs.iterator(); i.hasNext(); ) {
-//			kbuilder.add(ResourceFactory.newUrlResource(i.next()), ResourceType.PKG);
 			kbuilder.add(ResourceFactory.newClassPathResource(i.next(), customURLCLassLoader), ResourceType.PKG);
 		}
 		

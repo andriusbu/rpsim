@@ -27,7 +27,7 @@ public abstract class ProcessEngine implements IProcessEngine {
     }
     
     public ProcessEngine(ISimEngine simEngine) {
-    	this.setSimEngine(simEngine);
+    	this.simEngine = simEngine;
     	init();
     }
     
