@@ -1,6 +1,8 @@
 package lt.bumbis.rpsim.droolsjbpm;
 
 import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.drools.runtime.conf.ClockTypeOption;
 import org.jbpm.test.JbpmJUnitTestCase;
@@ -33,7 +35,7 @@ public class ProcessEngineGuvnorTest extends JbpmJUnitTestCase {
 	}
 	
 	@Test
-	public void testStartProcess() {
+	public void testStartProcess1() {
 		engine.startEngine();
 		long processId = engine.startProcess(process1);
 		assertProcessInstanceActive(processId, engine.getKnowledgeSession());
@@ -43,5 +45,15 @@ public class ProcessEngineGuvnorTest extends JbpmJUnitTestCase {
 			e.printStackTrace();
 		}
 		assertProcessInstanceActive(processId, engine.getKnowledgeSession());
-	}	
+	}
+	
+	@Test
+	public void testStartProcess2() {
+		Map<String, Object> data = new HashMap<String, Object>();
+		data.put("Var1", "Value1");
+		engine.startEngine();
+		long processId = engine.startProcess(process1, data);
+		assertProcessInstanceActive(processId, engine.getKnowledgeSession());
+		assertProcessVarExists(engine.getKnowledgeSession().getProcessInstance(processId), "Var1");
+	}
 }

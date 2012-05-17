@@ -1,5 +1,6 @@
 package lt.bumbis.rpsim.droolsjbpm;
 
+import java.util.Map;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
@@ -61,6 +62,15 @@ public abstract class ProcessEngine implements IProcessEngine {
             return 0;
         } else {
         	return process.getId();
+    	}
+    }
+    
+    public long startProcess(String processName, Map<String, Object> data) {
+    	ProcessInstance process = ksession.startProcess(processName, data);
+    	if ( process == null ) {
+    		return 0;
+    	} else {
+    		return process.getId();
     	}
     }
     
