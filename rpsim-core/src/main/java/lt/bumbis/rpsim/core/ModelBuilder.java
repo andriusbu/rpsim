@@ -118,11 +118,17 @@ public final class ModelBuilder {
 	}
 	
 	private static void createTokenGenerator(SimModel model, TokenGenerator cfg) {
-		NewProcessToken tokenGen = new NewProcessToken(model, cfg.getName(),
-				cfg.isShowInReport());
+		NewProcessToken tokenGen = new NewProcessToken(model, cfg.getName(), cfg.isShowInReport());
 		tokenGen.setProcessName(cfg.getProcessName());
 		tokenGen.setDist(model.getDist(cfg.getDistName()));
 		tokenGen.setTimeUnit(cfg.getTimeUnit());
+		if ( cfg.getDataProvider() != null ) {
+			IDataProvider dataProvider = model.getDataProvider(cfg.getDataProvider());
+			if ( dataProvider == null ) {
+				throw new SimModelConfigurationException(cfg, "Data provider not found", null);
+			}
+			tokenGen.setDataProvider(dataProvider);
+		}
 		model.addTokenGenerator(cfg.getName(), tokenGen);
 	}
 	

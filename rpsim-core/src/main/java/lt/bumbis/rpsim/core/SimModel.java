@@ -172,4 +172,12 @@ public class SimModel extends Model implements ISimEngine {
 	public void addDataProvider(String name, IDataProvider provider) {
 		dataProviders.put(name, provider);
 	}
+	
+//	private static <T extends Object> T getModelElement(HashMap<String, T> map, String name) {
+//		if ( map.containsKey(name) ) {
+//			
+//		} else {
+//			return null;
+//		}
+//	}
 }

@@ -122,6 +122,26 @@ public class ModelBuilderTest {
 		assertEquals(2, model.getDataProviders().size());
 		assertEquals(TestDataProvider.class, model.getDataProvider("DataProvider1").getClass());
 	}
+	
+	@Test
+	public void testInit_TokenGenerator() {
+		SimConfig conf = new SimConfig("TestModel", false, false);
+		conf
+			.add(new DataProvider()
+				.name("DataProvider1").providerClass(TestDataProvider.class))
+			.add(new TokenGenerator()
+				.name("TG1").process("Process").dist("Dist1").timeUnit(TimeUnit.MINUTES)
+				.dataProvider("DataProvider1").showInReport(false).showInTrace(false))
+			.add(new Distribution()
+				.name("Dist1").distClass(ContDistNormal.class).distParams(3.0, 3.0)
+				.showInReport(false).showInTrace(false));
+		SimModel model = new SimModel(conf);
+		Experiment exp = new Experiment("TestExperiment",false);
+		exp.setShowProgressBar(false);
+		model.connectToExperiment(exp);
+		assertEquals(TestDataProvider.class, model.getDataProvider("DataProvider1").getClass());
+		assertEquals(ContDistNormal.class, model.getDist("Dist1").getClass());
+	}
 
 	@Test 
 	public void testDoInitialSchedules() {

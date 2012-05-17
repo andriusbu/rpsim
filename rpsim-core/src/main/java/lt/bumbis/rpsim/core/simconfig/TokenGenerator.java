@@ -7,6 +7,7 @@ public class TokenGenerator extends ConfigElement<TokenGenerator> {
 	private String processName;
     private String distName;
     private TimeUnit timeUnit;
+    private String dataProvider;
 
 	//---------------------------------------------
 	// Constructors
@@ -41,6 +42,11 @@ public class TokenGenerator extends ConfigElement<TokenGenerator> {
 		return this;
 	}
 	
+	public TokenGenerator dataProvider(String dataProvider) {
+		this.dataProvider = dataProvider;
+		return this;
+	}
+	
 	//---------------------------------------------
 	// Getter and Setters
 	//---------------------------------------------
@@ -66,5 +72,13 @@ public class TokenGenerator extends ConfigElement<TokenGenerator> {
 
 	public void setTimeUnit(TimeUnit timeUnit) {
 		this.timeUnit = timeUnit;
+	}
+
+	public String getDataProvider() {
+		return dataProvider;
+	}
+
+	public void setDataProvider(String dataProvider) {
+		this.dataProvider = dataProvider;
 	}
 }
