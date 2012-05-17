@@ -12,8 +12,6 @@ import lt.bumbis.rpsim.core.entities.SvcProcessor;
 import lt.bumbis.rpsim.core.entities.SvcReq;
 import lt.bumbis.rpsim.core.events.EventArrival;
 import lt.bumbis.rpsim.core.events.NewProcessToken;
-//import lt.bumbis.rpsim.core.events.ProcessArrival;
-//import lt.bumbis.rpsim.core.events.ProcessCompletion;
 import lt.bumbis.rpsim.core.events.ServiceRequestArrival;
 import lt.bumbis.rpsim.core.simconfig.SimConfig;
 import lt.bumbis.rpsim.core.simconfig.TimerEvent;
@@ -30,14 +28,13 @@ public class SimModel extends Model implements ISimEngine {
 	private Map<String, SvcProcessor> svcProcessors = new HashMap<String, SvcProcessor>();
 	private Map<String, SvcProcessor> activityMapping = new HashMap<String, SvcProcessor>();
 	private Map<String, ResPool> resPools = new HashMap<String, ResPool>();
+	private Map<String, IDataProvider> dataProviders = new HashMap<String, IDataProvider>();
 
 	private ProcessContainer processContainer;
 	private Map<Long, Process> activeProcesses = new HashMap<Long, Process>();
 
 	private IProcessEngine processEngine;
 	private SimClockObserver clockObserver;
-	
-//	private IDataProvider dataProvider;
 
 	public SimModel(SimConfig config) {
 		super(null, config.getName(), config.isShowInReport(), config.isShowInTrace());
@@ -162,5 +159,13 @@ public class SimModel extends Model implements ISimEngine {
 	}
 	public ResPool getResourcePool(String name) {
 		return resPools.get(name);
+	}
+	
+	public Map<String, IDataProvider> getDataProviders() {
+		return dataProviders;
+	}
+	
+	public IDataProvider getDataProvider(String name) {
+		return dataProviders.get(name);		
 	}
 }
