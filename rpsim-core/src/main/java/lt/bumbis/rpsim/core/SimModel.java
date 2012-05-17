@@ -168,4 +168,8 @@ public class SimModel extends Model implements ISimEngine {
 	public IDataProvider getDataProvider(String name) {
 		return dataProviders.get(name);		
 	}
+	
+	public void addDataProvider(String name, IDataProvider provider) {
+		dataProviders.put(name, provider);
+	}
 }

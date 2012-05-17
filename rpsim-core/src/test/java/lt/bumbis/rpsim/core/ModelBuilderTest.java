@@ -7,6 +7,7 @@ import java.util.concurrent.TimeUnit;
 import lt.bumbis.rpsim.core.entities.SvcProcessor;
 import lt.bumbis.rpsim.core.entities.SvcProcessorExec;
 import lt.bumbis.rpsim.core.simconfig.Activity;
+import lt.bumbis.rpsim.core.simconfig.DataProvider;
 import lt.bumbis.rpsim.core.simconfig.Distribution;
 import lt.bumbis.rpsim.core.simconfig.ResourcePool;
 import lt.bumbis.rpsim.core.simconfig.ServiceProcessor;
@@ -106,6 +107,20 @@ public class ModelBuilderTest {
 		model.connectToExperiment(exp);
 		assertEquals(3, model.getResourcePool("ResPool1").getResQueue().length());
 		assertEquals(2, model.getResourcePool("ResPool2").getResQueue().length());
+	}
+	
+	@Test
+	public void testInit_dataProvider() {
+		SimConfig conf = new SimConfig("TestModel", false, false);
+		conf
+			.add(new DataProvider().name("DataProvider1").providerClass(TestDataProvider.class))
+			.add(new DataProvider().name("DataProvider2").providerClass(TestDataProvider.class));
+		SimModel model = new SimModel(conf);
+		Experiment exp = new Experiment("TestExperiment",false);
+		exp.setShowProgressBar(false);
+		model.connectToExperiment(exp);
+		assertEquals(2, model.getDataProviders().size());
+		assertEquals(TestDataProvider.class, model.getDataProvider("DataProvider1").getClass());
 	}
 
 	@Test 

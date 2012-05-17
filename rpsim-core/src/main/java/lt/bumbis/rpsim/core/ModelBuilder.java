@@ -10,11 +10,13 @@ import lt.bumbis.rpsim.core.entities.SvcProcessorExec;
 import lt.bumbis.rpsim.core.entities.SvcReq;
 import lt.bumbis.rpsim.core.events.NewProcessToken;
 import lt.bumbis.rpsim.core.simconfig.Activity;
+import lt.bumbis.rpsim.core.simconfig.DataProvider;
 import lt.bumbis.rpsim.core.simconfig.Distribution;
 import lt.bumbis.rpsim.core.simconfig.ResourcePool;
 import lt.bumbis.rpsim.core.simconfig.ServiceProcessor;
 import lt.bumbis.rpsim.core.simconfig.SimConfig;
 import lt.bumbis.rpsim.core.simconfig.TokenGenerator;
+import lt.bumbis.rpsim.exceptions.SimModelConfigurationException;
 import desmoj.core.dist.ContDist;
 import desmoj.core.simulator.Model;
 import desmoj.core.simulator.Queue;
@@ -22,6 +24,8 @@ import desmoj.core.simulator.TimeSpan;
 
 public final class ModelBuilder {
 	
+	public static final String ERR_DATAPROVIDER = "DataProvider can not be instantiated";
+
 	private ModelBuilder() { }
 
 	public static void init(SimModel model) {
@@ -31,6 +35,9 @@ public final class ModelBuilder {
 		}
 		for (ResourcePool resPool: config.getResourcePools().values()){
 			createResPool(model, resPool);
+		}
+		for (DataProvider dataProvider : config.getDataProviders().values()) {
+			createDataProvider(model, dataProvider);
 		}
 		for (ServiceProcessor svcProc : config.getSvcProcs().values()) {
 			createSvcProcessor(model, svcProc);
@@ -136,5 +143,17 @@ public final class ModelBuilder {
 	private static void createResPool(SimModel model, ResourcePool cfg) {
 		ResPool resPool = new ResPool(model, cfg.getName(), cfg.getResourceCount(), cfg.isShowInReport(), cfg.isShowInTrace());
 		model.addResourcePool(cfg.getName(), resPool);
+	}
+	
+	private static void createDataProvider(SimModel model, DataProvider dataProvider) {
+		IDataProvider provider;
+		try {
+			provider = dataProvider.getProvider().newInstance();
+		} catch (InstantiationException e) {
+			throw new SimModelConfigurationException(dataProvider, ERR_DATAPROVIDER);
+		} catch (IllegalAccessException e) {
+			throw new SimModelConfigurationException(dataProvider, ERR_DATAPROVIDER);
+		}
+		model.addDataProvider(dataProvider.getName(), provider);
 	}
 }
