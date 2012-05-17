@@ -2,6 +2,7 @@ package lt.bumbis.rpsim.core.events;
 
 import java.util.concurrent.TimeUnit;
 
+import lt.bumbis.rpsim.core.IDataProvider;
 import lt.bumbis.rpsim.core.SimModel;
 
 import desmoj.core.dist.ContDist;
@@ -15,6 +16,7 @@ public class NewProcessToken extends ExternalEvent {
 	private String processName;
 	private ContDist dist;
 	private TimeUnit timeUnit;
+	private IDataProvider dataProvider;
 	
 	private SimModel model;
 	private Count tokenCount;
@@ -58,5 +60,13 @@ public class NewProcessToken extends ExternalEvent {
 
 	public Count getTokenCount() {
 		return tokenCount;
+	}
+
+	public IDataProvider getDataProvider() {
+		return dataProvider;
+	}
+
+	public void setDataProvider(IDataProvider dataProvider) {
+		this.dataProvider = dataProvider;
 	}
 }
