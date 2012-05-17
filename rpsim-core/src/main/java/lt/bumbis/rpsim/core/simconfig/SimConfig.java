@@ -18,7 +18,7 @@ public class SimConfig extends ConfigElement<SimConfig> implements Serializable{
 	private Map<String, Activity> activities = new HashMap<String, Activity>();
 	private Map<String, TimerEvent> timerEvents = new HashMap<String, TimerEvent>();
 	private Map<String, ResourcePool> resPools = new HashMap<String, ResourcePool>();
-		 
+	private Map<String, DataProvider> dataProviders = new HashMap<String, DataProvider>();		 
 
 	@SuppressWarnings({ "serial", "rawtypes" })
 	private Map<Class<? extends ConfigElement>, HashMap<String, ? extends ConfigElement>> mapping = new HashMap<Class<? extends ConfigElement>, HashMap<String, ? extends ConfigElement>>() {
@@ -29,6 +29,7 @@ public class SimConfig extends ConfigElement<SimConfig> implements Serializable{
 			put(Activity.class, (HashMap<String, Activity>) activities);
 			put(TimerEvent.class, (HashMap<String, TimerEvent>) timerEvents);
 			put(ResourcePool.class, (HashMap<String, ResourcePool>) resPools);
+			put(DataProvider.class, (HashMap<String, DataProvider>) dataProviders);
 		}
 	};
 	
@@ -101,5 +102,13 @@ public class SimConfig extends ConfigElement<SimConfig> implements Serializable{
 	
 	public ResourcePool getResourcePool(String name) {
 		return getResourcePools().get(name);
+	}
+	
+	public Map<String, DataProvider> getDataProviders() {
+		return dataProviders;
+	}
+	
+	public DataProvider getDataProvider(String name) {
+		return dataProviders.get(name);
 	}
 }

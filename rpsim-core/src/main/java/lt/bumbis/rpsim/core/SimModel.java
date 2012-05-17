@@ -36,6 +36,8 @@ public class SimModel extends Model implements ISimEngine {
 
 	private IProcessEngine processEngine;
 	private SimClockObserver clockObserver;
+	
+//	private IDataProvider dataProvider;
 
 	public SimModel(SimConfig config) {
 		super(null, config.getName(), config.isShowInReport(), config.isShowInTrace());

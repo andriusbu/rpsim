@@ -4,6 +4,8 @@ import static org.junit.Assert.*;
 
 import java.util.concurrent.TimeUnit;
 
+import lt.bumbis.rpsim.core.TestDataProvider;
+
 import org.junit.Test;
 
 public class SimConfigTest {
@@ -40,6 +42,17 @@ public class SimConfigTest {
 		
 		assertEquals(2, conf.getTimerEvents().size());
 		assertEquals(10, conf.getTimerEvent("Timer1").getTime());
+	}
+	
+	@Test
+	public void testDataProvider() {
+		SimConfig conf = new SimConfig("Test", false, false);
+		conf
+			.add(new DataProvider().name("Data Provider1").providerClass(TestDataProvider.class))
+			.add(new DataProvider().name("Data Provider2").providerClass(TestDataProvider.class));
+		
+		assertEquals(2, conf.getDataProviders().size());
+		assertEquals(TestDataProvider.class, conf.getDataProvider("Data Provider1").getProvider());
 	}
 
 }
