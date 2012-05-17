@@ -1,10 +1,12 @@
 package lt.bumbis.rpsim.core;
 
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 public class TestProcessEngine implements IProcessEngine {
 	
 	private int procStartCount = 0;
+	private int procWithDataStartCount = 0;
 	private String lastProcessName;
 	private long timeUpdateCount = 0;
 	private boolean engineStarted = false;
@@ -28,9 +30,18 @@ public class TestProcessEngine implements IProcessEngine {
 		}
 		return 0;
 	}
+	
+	public long startProcess(String processName, Map<String, Object> data) {
+		procWithDataStartCount++;
+		return startProcess(processName);
+	}
 
 	public int getProcStartCount() {
 		return procStartCount;
+	}
+	
+	public int getProcWithDataStartCount() {
+		return procWithDataStartCount;
 	}
 
 	public String getLastProcessName() {

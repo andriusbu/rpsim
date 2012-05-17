@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import java.util.concurrent.TimeUnit;
 
 import lt.bumbis.rpsim.core.SimModel;
+import lt.bumbis.rpsim.core.TestDataProvider;
 import lt.bumbis.rpsim.core.TestDist;
 import lt.bumbis.rpsim.core.TestProcessEngine;
 import lt.bumbis.rpsim.core.simconfig.Distribution;
@@ -17,7 +18,7 @@ import org.junit.Test;
 import desmoj.core.simulator.Experiment;
 import desmoj.core.simulator.TimeInstant;
 
-public class NewProcessEngineTest {
+public class NewProcessTokenTest {
 	
 	private SimConfig conf;
 	private Experiment exp;
@@ -44,6 +45,7 @@ public class NewProcessEngineTest {
 	public void testEventRoutine_Brahcn1() {
 		tokenGen.eventRoutine();
 		assertEquals(1, procEngine.getProcStartCount());
+		assertEquals(0, procEngine.getProcWithDataStartCount());
 		assertEquals("Process", procEngine.getLastProcessName());
 	}
 	
@@ -52,6 +54,7 @@ public class NewProcessEngineTest {
 		exp.stop(new TimeInstant(70, TimeUnit.MINUTES));
 		exp.start();
 		assertEquals(2, procEngine.getProcStartCount());
+		assertEquals(0, procEngine.getProcWithDataStartCount());
 		assertEquals("Process", procEngine.getLastProcessName());
 		exp.finish();
 	}
@@ -62,6 +65,17 @@ public class NewProcessEngineTest {
 		assertEquals(1, tokenGen.getTokenCount().getValue());
 		tokenGen.eventRoutine();
 		assertEquals(2, tokenGen.getTokenCount().getValue());
+	}
+	
+	@Test
+	public void testEventRoutine_Data() {
+		TestDataProvider dataProvider = new TestDataProvider();
+		tokenGen.setDataProvider(dataProvider);
+		tokenGen.eventRoutine();
+		assertEquals(1, procEngine.getProcStartCount());
+		assertEquals(1, procEngine.getProcWithDataStartCount());
+		assertEquals("Process", procEngine.getLastProcessName());
+		assertEquals(1, dataProvider.getDataCount());
 	}
 
 }

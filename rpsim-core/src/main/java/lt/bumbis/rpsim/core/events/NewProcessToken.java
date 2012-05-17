@@ -30,7 +30,11 @@ public class NewProcessToken extends ExternalEvent {
 	@Override
 	public void eventRoutine() {
 		tokenCount.update();
-		model.getProcessEngine().startProcess(processName);
+		if ( dataProvider == null ) {
+			model.getProcessEngine().startProcess(processName);
+		} else {
+			model.getProcessEngine().startProcess(processName, dataProvider.getData());
+		}
 		schedule(new TimeSpan(dist.sample(), timeUnit));
 	}
 	
