@@ -150,9 +150,9 @@ public final class ModelBuilder {
 		try {
 			provider = dataProvider.getProvider().newInstance();
 		} catch (InstantiationException e) {
-			throw new SimModelConfigurationException(dataProvider, ERR_DATAPROVIDER);
+			throw new SimModelConfigurationException(dataProvider, ERR_DATAPROVIDER, e);
 		} catch (IllegalAccessException e) {
-			throw new SimModelConfigurationException(dataProvider, ERR_DATAPROVIDER);
+			throw new SimModelConfigurationException(dataProvider, ERR_DATAPROVIDER, e);
 		}
 		model.addDataProvider(dataProvider.getName(), provider);
 	}

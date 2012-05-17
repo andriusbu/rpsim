@@ -6,11 +6,11 @@ public class SimModelConfigurationException extends RuntimeException {
 
 	private static final long serialVersionUID = -780079667695819588L;
 	
-	public SimModelConfigurationException(ConfigElement<?> configElement, String message) {
+	public SimModelConfigurationException(ConfigElement<?> configElement, String message, Throwable e) {
 		super(
 				configElement.getClass().getName()
 				+ ":" + configElement.getName()
-				+ ":" + message);
+				+ ":" + message, e);
 	}
 
 }
