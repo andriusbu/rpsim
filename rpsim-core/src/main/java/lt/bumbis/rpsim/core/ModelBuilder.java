@@ -160,6 +160,7 @@ public final class ModelBuilder {
 		} catch (IllegalAccessException e) {
 			throw new SimModelConfigurationException(dataProvider, ERR_DATAPROVIDER, e);
 		}
+		provider.init();
 		model.addDataProvider(dataProvider.getName(), provider);
 	}
 }

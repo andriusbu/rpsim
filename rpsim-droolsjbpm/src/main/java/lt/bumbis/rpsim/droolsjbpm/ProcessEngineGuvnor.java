@@ -20,7 +20,8 @@ import org.drools.io.ResourceFactory;
 public class ProcessEngineGuvnor extends ProcessEngine {
 	
 	private List<URL> loaderURLs;
-	private List<String> kpackageURLs;
+	private List<String> kpackageNames;
+	private List<URL> kpackageURLs;
 	
 	public ProcessEngineGuvnor() {
 		super();
@@ -35,13 +36,18 @@ public class ProcessEngineGuvnor extends ProcessEngine {
 	}
 
 	public void addPackage(String url) {
+		kpackageNames.add(url);
+	}
+	
+	public void addPackage(URL url) {
 		kpackageURLs.add(url);
 	}
 	
 	@Override
 	protected void init() {
 		loaderURLs = new ArrayList<URL>();
-		kpackageURLs = new ArrayList<String>();
+		kpackageNames = new ArrayList<String>();
+		kpackageURLs = new ArrayList<URL>();
 	}
 
 	@Override
@@ -55,9 +61,12 @@ public class ProcessEngineGuvnor extends ProcessEngine {
 		KnowledgeBuilderConfiguration kbuilderConfig = KnowledgeBuilderFactory.newKnowledgeBuilderConfiguration(null, customURLCLassLoader);
 		KnowledgeBuilder kbuilder = KnowledgeBuilderFactory.newKnowledgeBuilder(kbuilderConfig);
 		
-		urls.clear();
-		for (Iterator<String> i = kpackageURLs.iterator(); i.hasNext(); ) {
+		for (Iterator<String> i = kpackageNames.iterator(); i.hasNext(); ) {
 			kbuilder.add(ResourceFactory.newClassPathResource(i.next(), customURLCLassLoader), ResourceType.PKG);
+		}
+		
+		for (Iterator<URL> i = kpackageURLs.iterator(); i.hasNext(); ) {
+			kbuilder.add(ResourceFactory.newUrlResource(i.next()), ResourceType.PKG);
 		}
 		
 		KnowledgeBaseConfiguration kbaseConfig = KnowledgeBaseFactory.newKnowledgeBaseConfiguration(null, customURLCLassLoader);
