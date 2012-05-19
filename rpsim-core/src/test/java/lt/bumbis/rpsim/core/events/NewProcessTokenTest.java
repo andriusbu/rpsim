@@ -28,15 +28,20 @@ public class NewProcessTokenTest {
 
 	@Before
 	public void setUp() throws Exception {
-		conf = new SimConfig("TestModel", false, false);
-		conf
-			.add(new TokenGenerator("TG1", "Process", "Dist1", TimeUnit.MINUTES, false, false))
-			.add(new Distribution("Dist1", TestDist.class, new Object[] {}, false, false));
+		conf = new SimConfig() {
+			public void configure() {
+				name("TestModel").showInReport(false).showInTrace(false);
+				add(new TokenGenerator("TG1", "Process", "Dist1", TimeUnit.MINUTES, false, false));
+				add(new Distribution("Dist1", TestDist.class, new Object[] {}, false, false));				
+			}
+		};
+		conf.configure();
 		model = new SimModel(conf);
 		procEngine = new TestProcessEngine();
 		model.setProcessEngine(procEngine);
 		exp = new Experiment("TestExperiment",false);
 		exp.setShowProgressBar(false);
+		exp.setSilent(true);
 		model.connectToExperiment(exp);
 		tokenGen = model.getTokenGenerator("TG1");
 	}

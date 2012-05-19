@@ -17,7 +17,12 @@ public class ResPoolTest {
 
 	@Before
 	public void setUp() throws Exception {
-		config = new SimConfig("TestModel", false, false);
+		config = new SimConfig() {
+			public void configure() {
+				name("TestModel").showInReport(false).showInTrace(false);
+			}
+		};
+		config.configure();
 		model = new SimModel(config);
 		exp = new Experiment("TestExperiment",false);
 		exp.setShowProgressBar(false);

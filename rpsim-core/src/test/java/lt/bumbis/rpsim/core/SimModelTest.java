@@ -28,17 +28,22 @@ public class SimModelTest {
 	
 	@Before
 	public void setUp() throws Exception {
-		conf = new SimConfig("TestModel", false, false);
-		conf
-			.add(new ServiceProcessor("SvcProc1", 1, "Dist", TimeUnit.MINUTES, false, false))
-			.add(new Distribution("Dist", TestDist.class, new Object[] {}, false, false))
-			.add(new Activity("Activity1", "SvcProc1"))
-			.add(new TimerEvent("Event1", 10, TimeUnit.MINUTES, false, false));
+		conf = new SimConfig() {
+			public void configure() {
+				name("TestModel").showInReport(false).showInTrace(false)
+				.add(new ServiceProcessor("SvcProc1", 1, "Dist", TimeUnit.MINUTES, false, false))
+				.add(new Distribution("Dist", TestDist.class, new Object[] {}, false, false))
+				.add(new Activity("Activity1", "SvcProc1"))
+				.add(new TimerEvent("Event1", 10, TimeUnit.MINUTES, false, false));				
+			}
+		};
+		conf.configure();
 		model = new SimModel(conf);
 		procEngine = new TestProcessEngine(model, "Activity1");
 		model.setProcessEngine(procEngine);
 		exp = new Experiment("TestExperiment",false);
 		exp.setShowProgressBar(false);
+		exp.setSilent(true);
 		model.connectToExperiment(exp);
 		handler = new TestHandler();
 	}

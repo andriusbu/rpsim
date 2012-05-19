@@ -25,19 +25,24 @@ public class ProcessSimulationTest {
 
 	@Before
 	public void setUp() throws Exception {		
-		conf = new SimConfig("TestModel", false, false);
-		conf
-			.add(new TokenGenerator("TG1", "Process", "Dist1", TimeUnit.MINUTES, false, false))
-			.add(new ServiceProcessor("SvcProc1", 1, "Dist2", TimeUnit.MINUTES, false, false))
-			.add(new Distribution("Dist1", TestDist.class, new Object[] {5.0}, false, false))
-			.add(new Distribution("Dist2", TestDist.class, new Object[] {8.0}, false, false))
-			.add(new Activity("Activity1", "SvcProc1"));
+		conf = new SimConfig() {
+			public void configure() {
+				name("TestMode").showInReport(false).showInTrace(false)
+				.add(new TokenGenerator("TG1", "Process", "Dist1", TimeUnit.MINUTES, false, false))
+				.add(new ServiceProcessor("SvcProc1", 1, "Dist2", TimeUnit.MINUTES, false, false))
+				.add(new Distribution("Dist1", TestDist.class, new Object[] {5.0}, false, false))
+				.add(new Distribution("Dist2", TestDist.class, new Object[] {8.0}, false, false))
+				.add(new Activity("Activity1", "SvcProc1"));
+			}
+		};
+		conf.configure();
 		model = new SimModel(conf);
 		procEngine = new TestProcessEngine(model, "Activity1");
 		model.setProcessEngine(procEngine);
 		exp = new Experiment("TestExperiment",false);
 		model.connectToExperiment(exp);
 		exp.setShowProgressBar(false);
+		exp.setSilent(true);
 	}
 
 	@Test

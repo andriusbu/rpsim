@@ -25,13 +25,18 @@ public class SvcProcessorTest {
 
 	@Before
 	public void setUp() throws Exception {
-		conf = new SimConfig("TestModel", false, false);
-		conf
-			.add(new ServiceProcessor("SvcProc1", 1, "Dist", TimeUnit.MINUTES, false, false))
-			.add(new Distribution("Dist", TestDist.class, new Object[] {}, false, false));
+		conf = new SimConfig() {
+			public void configure() {
+				name("TestModel").showInReport(false).showInTrace(false)
+				.add(new ServiceProcessor("SvcProc1", 1, "Dist", TimeUnit.MINUTES, false, false))
+				.add(new Distribution("Dist", TestDist.class, new Object[] {}, false, false));
+			}
+		};
+		conf.configure();
 		model = new SimModel(conf);
 		exp = new Experiment("TestExperiment",false);
 		exp.setShowProgressBar(false);
+		exp.setSilent(true);
 		model.connectToExperiment(exp);
 	}
 

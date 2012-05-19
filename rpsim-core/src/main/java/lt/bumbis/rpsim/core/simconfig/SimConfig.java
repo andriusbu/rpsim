@@ -1,16 +1,10 @@
 package lt.bumbis.rpsim.core.simconfig;
 
-import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
-public class SimConfig extends ConfigElement<SimConfig> implements Serializable{
+public abstract class SimConfig extends ConfigElement<SimConfig> {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -7186985617657581544L;
-	
 	//Simulation Objects
 	private Map<String, Distribution> dists = new HashMap<String, Distribution>();
 	private Map<String, ServiceProcessor> svcProcs = new HashMap<String, ServiceProcessor>();
@@ -44,6 +38,8 @@ public class SimConfig extends ConfigElement<SimConfig> implements Serializable{
 	public SimConfig(String name, boolean showInReport, boolean showInTrace) {
 		super(name, showInReport, showInTrace);
 	}
+	
+	public abstract void configure();
 	
 	//---------------------------------------------
 	// Configuration methods

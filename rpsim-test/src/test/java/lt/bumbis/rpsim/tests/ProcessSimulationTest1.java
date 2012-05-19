@@ -32,17 +32,20 @@ public class ProcessSimulationTest1 {
 
 	@Test
 	public void test() {
-		conf = new SimConfig("TestModel", false, false);
-		conf
-			.add(new TokenGenerator("TG1", "changeSet3_process1", "DistArrival", TimeUnit.MINUTES, false, false))
-			.add(new ServiceProcessor("SvcProc1", 5, "DistService", TimeUnit.MINUTES, false, false))
-			.add(new Distribution("DistArrival", ContDistExponential.class, new Object[] {3.0}, false, false))
-			.add(new Distribution("DistService", ContDistUniform.class, new Object[] {3.0, 7.0}, false, false))
-			.add(new Activity("1", "SvcProc1"))
-			.add(new Activity("3", "SvcProc1"))
-			.add(new Activity("4", "SvcProc1"))
-			.add(new TimerEvent("Catch", 6, TimeUnit.MINUTES, false, false));
-		
+		conf = new SimConfig() {
+			public void configure() {
+				name("TestModel").showInReport(false).showInTrace(false)
+				.add(new TokenGenerator("TG1", "changeSet3_process1", "DistArrival", TimeUnit.MINUTES, false, false))
+				.add(new ServiceProcessor("SvcProc1", 5, "DistService", TimeUnit.MINUTES, false, false))
+				.add(new Distribution("DistArrival", ContDistExponential.class, new Object[] {3.0}, false, false))
+				.add(new Distribution("DistService", ContDistUniform.class, new Object[] {3.0, 7.0}, false, false))
+				.add(new Activity("1", "SvcProc1"))
+				.add(new Activity("3", "SvcProc1"))
+				.add(new Activity("4", "SvcProc1"))
+				.add(new TimerEvent("Catch", 6, TimeUnit.MINUTES, false, false));
+			}
+		};
+		conf.configure();
 		model = new SimModel(conf);
 		
 		ProcessEngineImpl procEngine = new ProcessEngineImpl(model);

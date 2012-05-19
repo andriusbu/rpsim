@@ -22,10 +22,16 @@ public class ProcessArrivalTest {
 
 	@Before
 	public void setUp() throws Exception {
-		conf = new SimConfig("TestModel", false, false);
+		conf = new SimConfig() {
+			public void configure() {
+				name("TestModel").showInReport(false).showInTrace(false);
+			}
+		};
+		conf.configure();
 		model = new SimModel(conf);
 		exp = new Experiment("TestExperiment",false);
 		exp.setShowProgressBar(false);
+		exp.setSilent(true);
 		model.connectToExperiment(exp);
 	}
 

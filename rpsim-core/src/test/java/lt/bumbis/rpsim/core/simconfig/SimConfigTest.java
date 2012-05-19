@@ -12,15 +12,19 @@ public class SimConfigTest {
 
 	@Test
 	public void testAddGet() {
-		SimConfig conf = new SimConfig("Test", false, false);
-		conf
-			.add(new Distribution("Dist1", null, null, false, false))
-			.add(new Distribution("Dist2", null, null, false, false))
-			.add(new TokenGenerator("TG1", null, null, null, false, false))
-			.add(new ServiceProcessor("SvcProc1", 1, null, null, false, false))
-			.add(new Activity("Activity1", "SvcProc1"))
-			.add(new Activity("Activity2", "SvcProc1"))
-			.add(new ResourcePool("ResPool1", 100, 10.0, TimeUnit.HOURS, false, false));
+		SimConfig conf = new SimConfig() {
+				public void configure() {
+					name("TestModel").showInReport(false).showInTrace(false)
+					.add(new Distribution("Dist1", null, null, false, false))
+					.add(new Distribution("Dist2", null, null, false, false))
+					.add(new TokenGenerator("TG1", null, null, null, false, false))
+					.add(new ServiceProcessor("SvcProc1", 1, null, null, false, false))
+					.add(new Activity("Activity1", "SvcProc1"))
+					.add(new Activity("Activity2", "SvcProc1"))
+					.add(new ResourcePool("ResPool1", 100, 10.0, TimeUnit.HOURS, false, false));
+				}
+			};
+		conf.configure();
 		assertEquals("Step1", 2, conf.getDists().size());
 		assertTrue("Step2", conf.getDists().containsKey("Dist2"));
 		assertEquals("Step3", 1, conf.getTokenGens().size());
@@ -35,24 +39,29 @@ public class SimConfigTest {
 	
 	@Test
 	public void testTimerEvent() {
-		SimConfig conf = new SimConfig("Test", false, false);
-		conf
-			.add(new TimerEvent("Timer1", 10, TimeUnit.MINUTES, false, false))
-			.add(new TimerEvent("Timer2", 1, TimeUnit.SECONDS, false, false));
-		
+		SimConfig conf = new SimConfig() {
+			public void configure() {
+				name("TestModel").showInReport(false).showInTrace(false);
+				add(new TimerEvent("Timer1", 10, TimeUnit.MINUTES, false, false));
+				add(new TimerEvent("Timer2", 1, TimeUnit.SECONDS, false, false));
+			}
+		};
+		conf.configure();		
 		assertEquals(2, conf.getTimerEvents().size());
 		assertEquals(10, conf.getTimerEvent("Timer1").getTime());
 	}
 	
 	@Test
 	public void testDataProvider() {
-		SimConfig conf = new SimConfig("Test", false, false);
-		conf
-			.add(new DataProvider().name("Data Provider1").providerClass(TestDataProvider.class))
-			.add(new DataProvider().name("Data Provider2").providerClass(TestDataProvider.class));
-		
+		SimConfig conf = new SimConfig() {
+			public void configure() {
+				name("TestModel").showInReport(false).showInTrace(false);
+				add(new DataProvider().name("Data Provider1").providerClass(TestDataProvider.class));
+				add(new DataProvider().name("Data Provider2").providerClass(TestDataProvider.class));
+			}
+		};
+		conf.configure();
 		assertEquals(2, conf.getDataProviders().size());
 		assertEquals(TestDataProvider.class, conf.getDataProvider("Data Provider1").getProvider());
 	}
-
 }

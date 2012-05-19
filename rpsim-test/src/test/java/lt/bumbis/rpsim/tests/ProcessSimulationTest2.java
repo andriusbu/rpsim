@@ -36,14 +36,17 @@ public class ProcessSimulationTest2 {
 
 	@Test
 	public void test() throws MalformedURLException {
-		conf = new SimConfig("TestModel", false, false);
-		conf
-			.add(new TokenGenerator("TG1", process1, "DistArrival", TimeUnit.MINUTES, false, false).dataProvider("DataProvider"))
-			.add(new ServiceProcessor("SvcProc1", 5, "DistService", TimeUnit.MINUTES, false, false))
-			.add(new Distribution("DistArrival", ContDistExponential.class, new Object[] {3.0}, false, false))
-			.add(new Distribution("DistService", ContDistUniform.class, new Object[] {3.0, 7.0}, false, false))
-			.add(new DataProvider().name("DataProvider").providerClass(TestDataProvider.class));
-		
+		conf = new SimConfig() {
+			public void configure() {
+				name("TestModel").showInReport(false).showInTrace(false)
+				.add(new TokenGenerator("TG1", process1, "DistArrival", TimeUnit.MINUTES, false, false).dataProvider("DataProvider"))
+				.add(new ServiceProcessor("SvcProc1", 5, "DistService", TimeUnit.MINUTES, false, false))
+				.add(new Distribution("DistArrival", ContDistExponential.class, new Object[] {3.0}, false, false))
+				.add(new Distribution("DistService", ContDistUniform.class, new Object[] {3.0, 7.0}, false, false))
+				.add(new DataProvider().name("DataProvider").providerClass(TestDataProvider.class));
+			}
+		};
+		conf.configure();		
 		model = new SimModel(conf);
 		
 		procEngine = new ProcessEngineGuvnor();

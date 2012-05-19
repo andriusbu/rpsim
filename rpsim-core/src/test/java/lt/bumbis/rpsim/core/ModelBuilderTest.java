@@ -28,22 +28,26 @@ public class ModelBuilderTest {
 
 	@Before
 	public void setUp() throws Exception {
-		conf = new SimConfig("TestModel", false, false);
-		conf
-			.add(new Activity().name("Activity1").svcProcessor("SvcProc1"))
-			.add(new Activity().name("Activity2").svcProcessor("SvcProc1"))
-			.add(new TokenGenerator()
-				.name("TG1").process("Process").dist("Dist1").timeUnit(TimeUnit.MINUTES)
-				.showInReport(false).showInTrace(false))
-			.add(new ServiceProcessor()
-				.name("SvcProc1").numExec(3).dist("Dist2")
-				.timeUnit(TimeUnit.MINUTES).showInReport(false).showInTrace(false))
-			.add(new Distribution()
-				.name("Dist1").distClass(ContDistNormal.class).distParams(3.0, 3.0)
-				.showInReport(false).showInTrace(false))
-			.add(new Distribution()
-				.name("Dist2").distClass(TestDist.class).distParams(3)
-				.showInReport(false).showInTrace(false));
+		conf = new SimConfig() {
+			public void configure() {
+				name("TestModel").showInReport(false).showInTrace(false);
+				add(new Activity().name("Activity1").svcProcessor("SvcProc1"));
+				add(new Activity().name("Activity2").svcProcessor("SvcProc1"));
+				add(new TokenGenerator()
+					.name("TG1").process("Process").dist("Dist1").timeUnit(TimeUnit.MINUTES)
+					.showInReport(false).showInTrace(false));
+				add(new ServiceProcessor()
+					.name("SvcProc1").numExec(3).dist("Dist2")
+					.timeUnit(TimeUnit.MINUTES).showInReport(false).showInTrace(false));
+				add(new Distribution()
+					.name("Dist1").distClass(ContDistNormal.class).distParams(3.0, 3.0)
+					.showInReport(false).showInTrace(false));
+				add(new Distribution()
+					.name("Dist2").distClass(TestDist.class).distParams(3)
+					.showInReport(false).showInTrace(false));
+			}
+		};
+		conf.configure();
 		model = new SimModel(conf);
 		exp = new Experiment("TestExperiment",false);
 		exp.setShowProgressBar(false);
@@ -98,9 +102,14 @@ public class ModelBuilderTest {
 	
 	@Test
 	public void testInit_resourcePool() {
-		conf = new SimConfig("TestModel", false, false);
-		conf.add(new ResourcePool("ResPool1", 3, 2.0, TimeUnit.HOURS, false, false))
-			.add(new ResourcePool("ResPool2", 2, 1.0, TimeUnit.HOURS, false, false));
+		conf = new SimConfig() {
+			public void configure() {
+				name("TestModel").showInReport(false).showInTrace(false);
+				add(new ResourcePool("ResPool1", 3, 2.0, TimeUnit.HOURS, false, false));
+				add(new ResourcePool("ResPool2", 2, 1.0, TimeUnit.HOURS, false, false));
+			}
+		};
+		conf.configure();
 		model = new SimModel(conf);
 		exp = new Experiment("TestExperiment",false);
 		exp.setShowProgressBar(false);
@@ -111,10 +120,14 @@ public class ModelBuilderTest {
 	
 	@Test
 	public void testInit_dataProvider() {
-		SimConfig conf = new SimConfig("TestModel", false, false);
-		conf
-			.add(new DataProvider().name("DataProvider1").providerClass(TestDataProvider.class))
-			.add(new DataProvider().name("DataProvider2").providerClass(TestDataProvider.class));
+		SimConfig conf = new SimConfig() {
+			public void configure() {
+				name("TestModel").showInReport(false).showInTrace(false);
+				add(new DataProvider().name("DataProvider1").providerClass(TestDataProvider.class));
+				add(new DataProvider().name("DataProvider2").providerClass(TestDataProvider.class));				
+			}
+		};
+		conf.configure();
 		SimModel model = new SimModel(conf);
 		Experiment exp = new Experiment("TestExperiment",false);
 		exp.setShowProgressBar(false);
@@ -125,16 +138,14 @@ public class ModelBuilderTest {
 	
 	@Test
 	public void testInit_TokenGenerator() {
-		SimConfig conf = new SimConfig("TestModel", false, false);
-		conf
-			.add(new DataProvider()
-				.name("DataProvider1").providerClass(TestDataProvider.class))
-			.add(new TokenGenerator()
-				.name("TG1").process("Process").dist("Dist1").timeUnit(TimeUnit.MINUTES)
-				.dataProvider("DataProvider1").showInReport(false).showInTrace(false))
-			.add(new Distribution()
-				.name("Dist1").distClass(ContDistNormal.class).distParams(3.0, 3.0)
-				.showInReport(false).showInTrace(false));
+		SimConfig conf = new SimConfig() {
+			public void configure() {
+				add(new DataProvider().name("DataProvider1").providerClass(TestDataProvider.class));
+				add(new TokenGenerator().name("TG1").process("Process").dist("Dist1").timeUnit(TimeUnit.MINUTES).dataProvider("DataProvider1").showInReport(false).showInTrace(false));
+				add(new Distribution().name("Dist1").distClass(ContDistNormal.class).distParams(3.0, 3.0).showInReport(false).showInTrace(false));	
+			}
+		};
+		conf.configure();
 		SimModel model = new SimModel(conf);
 		Experiment exp = new Experiment("TestExperiment",false);
 		exp.setShowProgressBar(false);
