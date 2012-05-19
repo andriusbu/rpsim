@@ -52,8 +52,6 @@ public class ProcessEngineGuvnor extends ProcessEngine {
 
 	@Override
 	protected KnowledgeBase newKnowledgeBase() {
-		List<URL> urls; 
-		urls = new ArrayList<URL>();
 		URL[] urlArray = new URL[loaderURLs.size()];
 		loaderURLs.toArray(urlArray);
 		URLClassLoader customURLCLassLoader = new URLClassLoader(urlArray);

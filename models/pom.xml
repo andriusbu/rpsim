@@ -6,6 +6,7 @@
   <packaging>pom</packaging>
   <modules>
   	<module>sim1</module>
+  	<module>sim2</module>
   </modules>
   
   <dependencies>
