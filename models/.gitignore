@@ -1,0 +1,10 @@
+# Ignore maven target folder
+*/target
+
+# Ignore eclipse files
+.classpath
+.project
+.settings
+
+# Ignore DesmoJ output files
+*.html
