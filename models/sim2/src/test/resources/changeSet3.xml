@@ -4,5 +4,6 @@
              xs:schemaLocation='http://drools.org/drools-5.0/change-set http://anonsvn.jboss.org/repos/labs/labs/jbossrules/trunk/drools-api/src/main/resources/change-set-1.0.0.xsd' >
   <add>
        <resource source='classpath:changeSet3_process1.bpmn' type="BPMN2" />
+       <resource source='classpath:changeSet3_process2.bpmn' type="BPMN2" />
    </add>
  </change-set>

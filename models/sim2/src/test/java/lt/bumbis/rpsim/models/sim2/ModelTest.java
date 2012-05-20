@@ -1,10 +1,11 @@
-package lt.bumbis.rpsim.models;
+package lt.bumbis.rpsim.models.sim2;
 
 import java.util.concurrent.TimeUnit;
 
 import lt.bumbis.rpsim.core.SimModel;
 import lt.bumbis.rpsim.core.simconfig.SimConfig;
 import lt.bumbis.rpsim.droolsjbpm.ProcessEngineImpl;
+import lt.bumbis.rpsim.models.sim2.Configuration;
 
 import org.drools.io.ResourceFactory;
 import org.junit.Test;
@@ -12,11 +13,11 @@ import org.junit.Test;
 import desmoj.core.simulator.Experiment;
 import desmoj.core.simulator.TimeInstant;
 
-public class Sim2Test {
+public class ModelTest {
 
 	@Test
 	public void test() {
-		SimConfig conf = new Sim2();
+		SimConfig conf = new Configuration();
 		conf.configure();
 		SimModel model = new SimModel(conf);
 		
@@ -24,7 +25,7 @@ public class Sim2Test {
 		procEngine.addChangeSet(ResourceFactory.newClassPathResource("changeSet3.xml"));
 		model.setProcessEngine(procEngine);
 		
-		Experiment exp = new Experiment("Simulatio1 Experiment",true);
+		Experiment exp = new Experiment("Simulation Experiment",true);
 		model.connectToExperiment(exp);
 		exp.setShowProgressBar(true);
 	

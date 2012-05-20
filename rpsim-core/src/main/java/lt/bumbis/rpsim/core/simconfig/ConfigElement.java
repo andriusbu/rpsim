@@ -30,12 +30,22 @@ public abstract class ConfigElement<T extends ConfigElement> {
 		return ((T)this);
 	}
 	
+	/**
+	 * Defines should this element be shown in report
+	 * @param showInReport - default TRUE
+	 * @return
+	 */
 	@SuppressWarnings("unchecked")
 	public T showInReport(boolean showInReport) {
 		this.showInReport = showInReport;
 		return ((T)this);
 	}
 	
+	/**
+	 * Defines should this element be shown in trace
+	 * @param showInTrace - default TRUE
+	 * @return
+	 */
 	@SuppressWarnings("unchecked")
 	public T showInTrace(boolean showInTrace) {
 		this.showInTrace = showInTrace;
