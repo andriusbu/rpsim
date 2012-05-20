@@ -1,4 +1,4 @@
-package lt.bumbis.rpsim.models;
+package lt.bumbis.rpsim.models.sim2;
 
 import java.util.concurrent.TimeUnit;
 
@@ -13,7 +13,7 @@ import org.junit.Test;
 import desmoj.core.simulator.Experiment;
 import desmoj.core.simulator.TimeInstant;
 
-public class Sim1Test {
+public class ModelTest {
 
 	@Test
 	public void test() {
