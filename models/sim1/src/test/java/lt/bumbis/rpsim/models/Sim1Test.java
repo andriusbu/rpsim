@@ -5,6 +5,7 @@ import java.util.concurrent.TimeUnit;
 import lt.bumbis.rpsim.core.SimModel;
 import lt.bumbis.rpsim.core.simconfig.SimConfig;
 import lt.bumbis.rpsim.droolsjbpm.ProcessEngineImpl;
+import lt.bumbis.rpsim.models.sim1.Configuration;
 
 import org.drools.io.ResourceFactory;
 import org.junit.Test;
@@ -16,7 +17,7 @@ public class Sim1Test {
 
 	@Test
 	public void test() {
-		SimConfig conf = new Sim1();
+		SimConfig conf = new Configuration();
 		conf.configure();
 		SimModel model = new SimModel(conf);
 		

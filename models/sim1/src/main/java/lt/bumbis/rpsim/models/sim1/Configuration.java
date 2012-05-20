@@ -1,4 +1,4 @@
-package lt.bumbis.rpsim.models;
+package lt.bumbis.rpsim.models.sim1;
 
 import java.util.concurrent.TimeUnit;
 
@@ -11,7 +11,7 @@ import lt.bumbis.rpsim.core.simconfig.SimConfig;
 import lt.bumbis.rpsim.core.simconfig.TimerEvent;
 import lt.bumbis.rpsim.core.simconfig.TokenGenerator;
 
-public class Sim1 extends SimConfig {
+public class Configuration extends SimConfig {
 
 	@Override
 	public void configure() {
