@@ -8,6 +8,12 @@
   	<module>sim1</module>
   	<module>sim2</module>
   </modules>
+
+  	<properties>
+		<rpsimVersion>0.5-SNAPSHOT</rpsimVersion>
+		<jUnitVersion>4.10</jUnitVersion>
+  	</properties>
+
   
   <dependencies>
 		<dependency>
@@ -20,11 +26,5 @@
 			<artifactId>rpsim-droolsjbpm</artifactId>
 			<version>${rpsimVersion}</version>
 		</dependency>
-	</dependencies>
-  
-  	<properties>
-		<rpsimVersion>0.5-SNAPSHOT</rpsimVersion>
-		<jUnitVersion>4.10</jUnitVersion>
-  	</properties>
-  
+	</dependencies>  
 </project>

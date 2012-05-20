@@ -13,7 +13,7 @@ import org.junit.Test;
 import desmoj.core.simulator.Experiment;
 import desmoj.core.simulator.TimeInstant;
 
-public class ModelTest {
+public class ModelTest1 {
 
 	@Test
 	public void test() {
