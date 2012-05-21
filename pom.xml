@@ -25,7 +25,7 @@
   
   
   	<properties>
-		<DroolsVersion>5.3.1.Final</DroolsVersion>
+		<DroolsVersion>5.3.0.Final</DroolsVersion>
 		<jBPMVersion>5.2.0.Final</jBPMVersion>
 		<slf4jVersion>1.6.4</slf4jVersion>
 		<jUnitVersion>4.10</jUnitVersion>
