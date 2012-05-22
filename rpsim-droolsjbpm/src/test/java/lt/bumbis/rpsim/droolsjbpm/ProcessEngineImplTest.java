@@ -1,6 +1,11 @@
 package lt.bumbis.rpsim.droolsjbpm;
 
+import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
+
+import org.drools.builder.KnowledgeBuilder;
+import org.drools.builder.KnowledgeBuilderFactory;
+import org.drools.builder.ResourceType;
 import org.drools.io.ResourceFactory;
 import org.drools.runtime.conf.ClockTypeOption;
 import org.jbpm.test.JbpmJUnitTestCase;
@@ -74,6 +79,28 @@ public class ProcessEngineImplTest extends JbpmJUnitTestCase {
 		assertEquals(1, simEngine.getNewProcessArrivalCounter());
 		assertEquals(1, simEngine.getNewProcessCompleteionCounter());
 		assertEquals(1, simEngine.getNewServiceRequestCounter());
+	}
+	
+	@Test
+	public void testEnableRules() {
+		TestSimEngine simEngine = new TestSimEngine(true);
+		ProcessEngineImpl procEngine = new ProcessEngineImpl(simEngine);
+		procEngine.setEnableRules(true);
+		procEngine.addChangeSet(ResourceFactory.newClassPathResource("changeSet4.xml"));
+		procEngine.startEngine();
+		HashMap<String, Object> data = new HashMap<String, Object>();
+		data.put("test", new TestModelA("a", 1) );
+		long processId = procEngine.startProcess("changeSet4_process1", data);
+	}
+	
+	@Test
+	public void test() {
+		KnowledgeBuilder kbuilder = KnowledgeBuilderFactory.newKnowledgeBuilder();
+		kbuilder.add(ResourceFactory.newClassPathResource("changeSet4_rules.drl"), ResourceType.DRL);
+		if( kbuilder.hasErrors() ) {
+		    System.out.println( kbuilder.getErrors() );
+		}
+		assertTrue("Rules has errors", ! kbuilder.hasErrors());
 	}
 	
 	

@@ -11,11 +11,15 @@ import org.drools.runtime.StatefulKnowledgeSession;
 import org.drools.runtime.conf.ClockTypeOption;
 import org.drools.runtime.process.ProcessInstance;
 import org.drools.time.impl.PseudoClockScheduler;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import lt.bumbis.rpsim.core.IProcessEngine;
 import lt.bumbis.rpsim.core.ISimEngine;
 
 public abstract class ProcessEngine implements IProcessEngine {
+	
+	final static Logger logger = LoggerFactory.getLogger(ProcessEngine.class);
 	
 	private ISimEngine simEngine;
     private StatefulKnowledgeSession ksession;
@@ -50,14 +54,21 @@ public abstract class ProcessEngine implements IProcessEngine {
         ksession = kbase.newStatefulKnowledgeSession(conf, null);
         clock = ksession.getSessionClock();
         if (getSimEngine() != null) {
-        	ProcessEventListener eventListener = new EventListener(getSimEngine());
+        	ProcessEventListener eventListener;
+        	if (isEnableRules() ) {
+        		logger.debug("Rules enabled > User EventListenerRules");
+        		eventListener = new EventListenerRules(getSimEngine(), ksession);
+        	} else {
+        		logger.debug("Rules disabled > User EventListenerDefault");
+        		eventListener = new EventListenerDefault(getSimEngine());
+        	}
         	ksession.addEventListener(eventListener);
         }
         CustomWorkItemHandler handler =  new CustomWorkItemHandler(getSimEngine());
         ksession.getWorkItemManager().registerWorkItemHandler("", handler);
-        if (isEnableRules()) {
+//        if (isEnableRules()) {
 //        	enableRules();
-        }
+//        }
         return this;
     }
     
@@ -81,12 +92,7 @@ public abstract class ProcessEngine implements IProcessEngine {
     
     public long startProcess(String processName, Map<String, Object> data) {
     	ProcessInstance process = ksession.startProcess(processName, data);
-    	ksession.insert(process);
-    	
-		for (Object obj: data.values()) {
-			ksession.insert(obj);
-		}   	
-    	
+   		
     	if ( process == null ) {
     		return 0;
     	} else {

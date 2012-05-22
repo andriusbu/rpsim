@@ -1,0 +1,20 @@
+package lt.bumbis.rpsim.droolsjbpm
+
+import org.drools.runtime.process.WorkflowProcessInstance
+
+rule "Test rule1"
+	ruleflow-group "main"
+    when
+        $processInstance: WorkflowProcessInstance()
+    then
+        System.out.println("Rule1");
+end
+
+
+rule "Test rule2"
+	ruleflow-group 'main'
+	when
+		eval ( 1==1 )
+	then
+		System.out.println("Rule2");
+end
