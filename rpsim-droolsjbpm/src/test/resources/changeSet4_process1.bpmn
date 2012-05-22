@@ -21,14 +21,10 @@
     <endEvent id="_3" name="End" >
         <terminateEventDefinition/>
     </endEvent>
-    <scriptTask id="_4" name="Script" scriptFormat="http://www.java.com/java" >
-      <script>System.out.println("test");</script>
-    </scriptTask>
 
     <!-- connections -->
-    <sequenceFlow id="_4-_2" sourceRef="_4" targetRef="_2" />
+    <sequenceFlow id="_1-_2" sourceRef="_1" targetRef="_2" />
     <sequenceFlow id="_2-_3" sourceRef="_2" targetRef="_3" />
-    <sequenceFlow id="_1-_4" sourceRef="_1" targetRef="_4" />
 
   </process>
 
@@ -43,20 +39,13 @@
       <bpmndi:BPMNShape bpmnElement="_3" >
         <dc:Bounds x="463" y="190" width="48" height="48" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape bpmnElement="_4" >
-        <dc:Bounds x="346" y="305" width="80" height="48" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge bpmnElement="_4-_2" >
-        <di:waypoint x="386" y="329" />
+      <bpmndi:BPMNEdge bpmnElement="_1-_2" >
+        <di:waypoint x="169" y="212" />
         <di:waypoint x="314" y="213" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge bpmnElement="_2-_3" >
         <di:waypoint x="314" y="213" />
         <di:waypoint x="487" y="214" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge bpmnElement="_1-_4" >
-        <di:waypoint x="169" y="212" />
-        <di:waypoint x="386" y="329" />
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>

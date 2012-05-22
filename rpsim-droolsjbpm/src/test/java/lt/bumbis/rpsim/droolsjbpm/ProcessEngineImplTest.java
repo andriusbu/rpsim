@@ -1,6 +1,8 @@
 package lt.bumbis.rpsim.droolsjbpm;
 
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.concurrent.TimeUnit;
 
 import org.drools.builder.KnowledgeBuilder;
@@ -8,6 +10,9 @@ import org.drools.builder.KnowledgeBuilderFactory;
 import org.drools.builder.ResourceType;
 import org.drools.io.ResourceFactory;
 import org.drools.runtime.conf.ClockTypeOption;
+import org.drools.runtime.process.WorkflowProcessInstance;
+import org.drools.runtime.rule.FactHandle;
+import org.jbpm.ruleflow.instance.RuleFlowProcessInstance;
 import org.jbpm.test.JbpmJUnitTestCase;
 import org.junit.Test;
 
@@ -82,7 +87,7 @@ public class ProcessEngineImplTest extends JbpmJUnitTestCase {
 	}
 	
 	@Test
-	public void testEnableRules() {
+	public void testRulesEnablement() {
 		TestSimEngine simEngine = new TestSimEngine(true);
 		ProcessEngineImpl procEngine = new ProcessEngineImpl(simEngine);
 		procEngine.setEnableRules(true);
@@ -90,7 +95,17 @@ public class ProcessEngineImplTest extends JbpmJUnitTestCase {
 		procEngine.startEngine();
 		HashMap<String, Object> data = new HashMap<String, Object>();
 		data.put("test", new TestModelA("a", 1) );
-		long processId = procEngine.startProcess("changeSet4_process1", data);
+		procEngine.startProcess("changeSet4_process1", data);
+		Collection<FactHandle> factHandles = procEngine.getKnowledgeSession().getFactHandles();
+		assertEquals(2, factHandles.size());
+		for (Iterator<FactHandle> i = factHandles.iterator(); i.hasNext();	) {
+			FactHandle factHandle = i.next(); 
+			if ( factHandle.getClass().equals(String.class)) {
+				assertEquals("Test", procEngine.getKnowledgeSession().getObject(factHandle));
+			} else if ( factHandle.getClass().equals(RuleFlowProcessInstance.class)) {
+				assertEquals(RuleFlowProcessInstance.class, procEngine.getKnowledgeSession().getObject(factHandle).getClass());
+			}
+		}
 	}
 	
 	@Test
