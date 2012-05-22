@@ -21,6 +21,8 @@ public abstract class ProcessEngine implements IProcessEngine {
     private StatefulKnowledgeSession ksession;
     private PseudoClockScheduler clock;
     private KnowledgeBase kbase;
+    
+    private boolean enableRules = false;
 
 
     public ProcessEngine() {
@@ -53,10 +55,22 @@ public abstract class ProcessEngine implements IProcessEngine {
         }
         CustomWorkItemHandler handler =  new CustomWorkItemHandler(getSimEngine());
         ksession.getWorkItemManager().registerWorkItemHandler("", handler);
+        if (isEnableRules()) {
+//        	enableRules();
+        }
         return this;
     }
     
-    public long startProcess(final String processName) {
+//    private void enableRules() {
+//        new Thread(new Runnable() {
+//			public void run() {
+//				ksession.fireUntilHalt();
+//			}
+//        	
+//        }).start();
+//	}
+
+	public long startProcess(final String processName) {
         ProcessInstance process = ksession.startProcess(processName);
         if (process == null) {
             return 0;
@@ -67,6 +81,12 @@ public abstract class ProcessEngine implements IProcessEngine {
     
     public long startProcess(String processName, Map<String, Object> data) {
     	ProcessInstance process = ksession.startProcess(processName, data);
+    	ksession.insert(process);
+    	
+		for (Object obj: data.values()) {
+			ksession.insert(obj);
+		}   	
+    	
     	if ( process == null ) {
     		return 0;
     	} else {
@@ -98,5 +118,13 @@ public abstract class ProcessEngine implements IProcessEngine {
 
 	public void setSimEngine(ISimEngine simEngine) {
 		this.simEngine = simEngine;
+	}
+
+	public boolean isEnableRules() {
+		return enableRules;
+	}
+
+	public void setEnableRules(boolean enableRules) {
+		this.enableRules = enableRules;
 	}
 }

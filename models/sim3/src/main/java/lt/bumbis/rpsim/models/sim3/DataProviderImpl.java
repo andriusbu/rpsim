@@ -6,6 +6,8 @@ import java.util.Map;
 import lt.bumbis.rpsim.core.IDataProvider;
 
 public class DataProviderImpl implements IDataProvider {
+	
+	private int n = 0;
 
 	public void init() {		
 	}
@@ -22,10 +24,10 @@ public class DataProviderImpl implements IDataProvider {
 	}
 	
 	private long getRandomNum(long from, long to) {
-		return 1;
+		return n++;
 	}
 	
 	private int getRandomAge() {
-		return 16;
+		return 32;
 	}
 }

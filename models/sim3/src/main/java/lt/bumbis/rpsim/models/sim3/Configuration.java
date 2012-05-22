@@ -13,7 +13,7 @@ public class Configuration extends SimConfig {
 	@Override
 	public void configure() {
 		name("Simulation1 Model");
-		add(new TokenGenerator().name("TG1").process("lt.bumbis.rpsim.models.sim3.process1").dist("DistArrival").timeUnit(TimeUnit.MINUTES).dataProvider("DataProvider"));
+		add(new TokenGenerator().name("TG1").process("testProcess").dist("DistArrival").timeUnit(TimeUnit.MINUTES).dataProvider("DataProvider"));
 		add(new DataProvider().name("DataProvider").providerClass(DataProviderImpl.class));
 		add(new Distribution().name("DistArrival").distClass(ContDistExponential.class).distParams(3.0));
 	}
