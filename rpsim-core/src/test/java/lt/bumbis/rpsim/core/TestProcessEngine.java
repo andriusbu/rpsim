@@ -68,4 +68,9 @@ public class TestProcessEngine implements IProcessEngine {
 	public boolean isEngineStarted() {
 		return engineStarted;
 	}
+
+	public void stopEngine() {
+		this.engineStarted = false;
+		
+	}
 }

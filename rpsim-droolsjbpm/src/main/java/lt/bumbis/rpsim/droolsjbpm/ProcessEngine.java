@@ -7,6 +7,8 @@ import java.util.concurrent.TimeUnit;
 import org.drools.KnowledgeBase;
 import org.drools.SessionConfiguration;
 import org.drools.event.process.ProcessEventListener;
+import org.drools.logger.KnowledgeRuntimeLogger;
+import org.drools.logger.KnowledgeRuntimeLoggerFactory;
 import org.drools.runtime.StatefulKnowledgeSession;
 import org.drools.runtime.conf.ClockTypeOption;
 import org.drools.runtime.process.ProcessInstance;
@@ -27,7 +29,9 @@ public abstract class ProcessEngine implements IProcessEngine {
     private KnowledgeBase kbase;
     
     private boolean enableRules = false;
-
+    private String logPath = "log/log.log";
+    private boolean enableLog = false;
+    private KnowledgeRuntimeLogger klogger;
 
     public ProcessEngine() {
     	init();
@@ -64,22 +68,19 @@ public abstract class ProcessEngine implements IProcessEngine {
         	}
         	ksession.addEventListener(eventListener);
         }
+        
+        if ( enableLog ) {
+        	klogger = KnowledgeRuntimeLoggerFactory.newFileLogger(ksession, "log/helloworld");
+        }
         CustomWorkItemHandler handler =  new CustomWorkItemHandler(getSimEngine());
         ksession.getWorkItemManager().registerWorkItemHandler("", handler);
-//        if (isEnableRules()) {
-//        	enableRules();
-//        }
         return this;
     }
     
-//    private void enableRules() {
-//        new Thread(new Runnable() {
-//			public void run() {
-//				ksession.fireUntilHalt();
-//			}
-//        	
-//        }).start();
-//	}
+    public void stopEngine() {
+    	klogger.close();
+    }
+    
 
 	public long startProcess(final String processName) {
         ProcessInstance process = ksession.startProcess(processName);
@@ -132,5 +133,14 @@ public abstract class ProcessEngine implements IProcessEngine {
 
 	public void setEnableRules(boolean enableRules) {
 		this.enableRules = enableRules;
+	}
+	
+	public void enableLog() {
+		this.enableLog = true;
+	}
+	
+	public void enableLog(String path) {
+		enableLog();
+		this.logPath = path;
 	}
 }
