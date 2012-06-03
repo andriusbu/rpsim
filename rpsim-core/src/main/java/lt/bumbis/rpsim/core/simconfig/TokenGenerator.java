@@ -8,6 +8,7 @@ public class TokenGenerator extends ConfigElement<TokenGenerator> {
     private String distName;
     private TimeUnit timeUnit;
     private String dataProvider;
+    private boolean useContextData = false;
 
 	//---------------------------------------------
 	// Constructors
@@ -47,6 +48,11 @@ public class TokenGenerator extends ConfigElement<TokenGenerator> {
 		return this;
 	}
 	
+	public TokenGenerator useContextData(boolean value) {
+		this.useContextData = value;
+		return this;
+	}
+	
 	//---------------------------------------------
 	// Getter and Setters
 	//---------------------------------------------
@@ -80,5 +86,13 @@ public class TokenGenerator extends ConfigElement<TokenGenerator> {
 
 	public void setDataProvider(String dataProvider) {
 		this.dataProvider = dataProvider;
+	}
+
+	public boolean isUseContextData() {
+		return useContextData;
+	}
+
+	public void setUseContextData(boolean useContextData) {
+		this.useContextData = useContextData;
 	}
 }

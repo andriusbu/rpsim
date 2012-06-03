@@ -78,4 +78,12 @@ public class NewProcessToken extends ExternalEvent {
 	public void setDataProvider(IDataProvider dataProvider) {
 		this.dataProvider = dataProvider;
 	}
+
+	public boolean isUseContextData() {
+		return useContextData;
+	}
+
+	public void setUseContextData(boolean useContextData) {
+		this.useContextData = useContextData;
+	}
 }

@@ -122,6 +122,7 @@ public final class ModelBuilder {
 		tokenGen.setProcessName(cfg.getProcessName());
 		tokenGen.setDist(model.getDist(cfg.getDistName()));
 		tokenGen.setTimeUnit(cfg.getTimeUnit());
+		tokenGen.setUseContextData(cfg.isUseContextData());
 		if ( cfg.getDataProvider() != null ) {
 			IDataProvider dataProvider = model.getDataProvider(cfg.getDataProvider());
 			if ( dataProvider == null ) {
