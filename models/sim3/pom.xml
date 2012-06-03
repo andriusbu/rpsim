@@ -11,6 +11,12 @@
 	</parent>
 
 	<dependencies>
+	 <dependency>
+		   <groupId>com.thoughtworks.xstream</groupId>
+		   <artifactId>xstream</artifactId>
+		   <version>${xstreamVersion}</version>
+	  </dependency>
+
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>

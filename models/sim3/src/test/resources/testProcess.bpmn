@@ -1,41 +1,128 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<bpmn2:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:drools="http://www.jboss.org/drools" id="Definitions_1">
-  <bpmn2:collaboration id="Collaboration_1">
-    <bpmn2:participant id="Participant_1" name="Internal" processRef="testProcess"/>
-  </bpmn2:collaboration>
-  <bpmn2:process id="testProcess" name="Test Process">
-    <bpmn2:startEvent id="StartEvent_1" name="Start">
-      <bpmn2:outgoing>SequenceFlow_6</bpmn2:outgoing>
-    </bpmn2:startEvent>
-    <bpmn2:businessRuleTask id="BusinessRuleTask_1" drools:ruleFlowGroup="main" name="Business Rule Task" implementation="java">
-      <bpmn2:incoming>SequenceFlow_6</bpmn2:incoming>
-      <bpmn2:outgoing>SequenceFlow_4</bpmn2:outgoing>
-    </bpmn2:businessRuleTask>
-    <bpmn2:endEvent id="EndEvent_1" name="End">
-      <bpmn2:incoming>SequenceFlow_4</bpmn2:incoming>
-    </bpmn2:endEvent>
-    <bpmn2:sequenceFlow id="SequenceFlow_4" name="" sourceRef="BusinessRuleTask_1" targetRef="EndEvent_1"/>
-    <bpmn2:sequenceFlow id="SequenceFlow_6" name="" sourceRef="StartEvent_1" targetRef="BusinessRuleTask_1"/>
-  </bpmn2:process>
-  <bpmndi:BPMNDiagram id="_70Q3UaNyEeGMJ6dT6LVrEQ">
-    <bpmndi:BPMNPlane id="_70Q3UqNyEeGMJ6dT6LVrEQ" bpmnElement="testProcess">
-      <bpmndi:BPMNShape id="BPMNShape_StartEvent_1" bpmnElement="StartEvent_1">
-        <dc:Bounds height="51.0" width="36.0" x="150.0" y="170.0"/>
+<?xml version="1.0" encoding="UTF-8"?> 
+<definitions id="Definition"
+             targetNamespace=""
+             typeLanguage="http://www.java.com/javaTypes"
+             expressionLanguage="http://www.mvel.org/2.0"
+             xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd"
+             xmlns:g="http://www.jboss.org/drools/flow/gpd"
+             xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI"
+             xmlns:dc="http://www.omg.org/spec/DD/20100524/DC"
+             xmlns:di="http://www.omg.org/spec/DD/20100524/DI"
+             xmlns:tns="http://www.jboss.org/drools">
+
+  <process processType="Private" isExecutable="true" id="testProcess" name="Test Process" >
+
+    <!-- nodes -->
+    <startEvent id="StartEvent_1" name="Start" />
+    <businessRuleTask id="BusinessRuleTask_1" name="Business Rule Task" g:ruleFlowGroup="main" >
+    </businessRuleTask>
+    <endEvent id="EndEvent_1" name="End" />
+    <exclusiveGateway id="_4" name="Gateway" gatewayDirection="Diverging" />
+    <userTask id="_5" name="Task #1" >
+      <ioSpecification>
+        <dataInput id="_5_TaskNameInput" name="TaskName" />
+        <inputSet>
+          <dataInputRefs>_5_TaskNameInput</dataInputRefs>
+        </inputSet>
+        <outputSet>
+        </outputSet>
+      </ioSpecification>
+      <dataInputAssociation>
+        <targetRef>_5_TaskNameInput</targetRef>
+        <assignment>
+          <from xsi:type="tFormalExpression">Task1</from>
+          <to xsi:type="tFormalExpression">_5_TaskNameInput</to>
+        </assignment>
+      </dataInputAssociation>
+    </userTask>
+    <userTask id="_6" name="Task #2" >
+      <ioSpecification>
+        <dataInput id="_6_TaskNameInput" name="TaskName" />
+        <inputSet>
+          <dataInputRefs>_6_TaskNameInput</dataInputRefs>
+        </inputSet>
+        <outputSet>
+        </outputSet>
+      </ioSpecification>
+      <dataInputAssociation>
+        <targetRef>_6_TaskNameInput</targetRef>
+        <assignment>
+          <from xsi:type="tFormalExpression">Task2</from>
+          <to xsi:type="tFormalExpression">_6_TaskNameInput</to>
+        </assignment>
+      </dataInputAssociation>
+    </userTask>
+    <exclusiveGateway id="_7" name="Gateway" gatewayDirection="Converging" />
+
+    <!-- connections -->
+    <sequenceFlow id="StartEvent_1-BusinessRuleTask_1" sourceRef="StartEvent_1" targetRef="BusinessRuleTask_1" />
+    <sequenceFlow id="_7-EndEvent_1" sourceRef="_7" targetRef="EndEvent_1" />
+    <sequenceFlow id="BusinessRuleTask_1-_4" sourceRef="BusinessRuleTask_1" targetRef="_4" />
+    <sequenceFlow id="_4-_5" sourceRef="_4" targetRef="_5" name="&gt;18" tns:priority="1" >
+      <conditionExpression xsi:type="tFormalExpression" language="http://www.jboss.org/drools/rule" >eval( true )</conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="_4-_6" sourceRef="_4" targetRef="_6" name="Default" tns:priority="100" >
+      <conditionExpression xsi:type="tFormalExpression" language="http://www.jboss.org/drools/rule" >eval(true)</conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="_5-_7" sourceRef="_5" targetRef="_7" />
+    <sequenceFlow id="_6-_7" sourceRef="_6" targetRef="_7" />
+
+  </process>
+
+  <bpmndi:BPMNDiagram>
+    <bpmndi:BPMNPlane bpmnElement="testProcess" >
+      <bpmndi:BPMNShape bpmnElement="StartEvent_1" >
+        <dc:Bounds x="12" y="158" width="48" height="48" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="BPMNShape_BusinessRuleTask_1" bpmnElement="BusinessRuleTask_1">
-        <dc:Bounds height="50.0" width="160.0" x="250.0" y="163.0"/>
+      <bpmndi:BPMNShape bpmnElement="BusinessRuleTask_1" >
+        <dc:Bounds x="106" y="159" width="160" height="50" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="BPMNShape_EndEvent_1" bpmnElement="EndEvent_1">
-        <dc:Bounds height="51.0" width="36.0" x="470.0" y="180.0"/>
+      <bpmndi:BPMNShape bpmnElement="EndEvent_1" >
+        <dc:Bounds x="674" y="170" width="48" height="48" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_2" bpmnElement="SequenceFlow_4" sourceElement="BPMNShape_BusinessRuleTask_1" targetElement="BPMNShape_EndEvent_1">
-        <di:waypoint xsi:type="dc:Point" x="410.0" y="188.0"/>
-        <di:waypoint xsi:type="dc:Point" x="470.0" y="198.0"/>
+      <bpmndi:BPMNShape bpmnElement="_4" >
+        <dc:Bounds x="313" y="160" width="48" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_5" >
+        <dc:Bounds x="406" y="62" width="100" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_6" >
+        <dc:Bounds x="408" y="245" width="100" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_7" >
+        <dc:Bounds x="564" y="167" width="48" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="StartEvent_1-BusinessRuleTask_1" >
+        <di:waypoint x="36" y="182" />
+        <di:waypoint x="186" y="184" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_4" bpmnElement="SequenceFlow_6" sourceElement="BPMNShape_StartEvent_1" targetElement="BPMNShape_BusinessRuleTask_1">
-        <di:waypoint xsi:type="dc:Point" x="186.0" y="188.0"/>
-        <di:waypoint xsi:type="dc:Point" x="250.0" y="188.0"/>
+      <bpmndi:BPMNEdge bpmnElement="_7-EndEvent_1" >
+        <di:waypoint x="588" y="191" />
+        <di:waypoint x="698" y="194" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="BusinessRuleTask_1-_4" >
+        <di:waypoint x="186" y="184" />
+        <di:waypoint x="337" y="184" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_4-_5" >
+        <di:waypoint x="337" y="184" />
+        <di:waypoint x="456" y="86" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_4-_6" >
+        <di:waypoint x="337" y="184" />
+        <di:waypoint x="458" y="269" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_5-_7" >
+        <di:waypoint x="456" y="86" />
+        <di:waypoint x="588" y="191" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_6-_7" >
+        <di:waypoint x="458" y="269" />
+        <di:waypoint x="588" y="191" />
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
-</bpmn2:definitions>
+
+</definitions>
