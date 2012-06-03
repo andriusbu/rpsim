@@ -7,6 +7,7 @@ public class TestProcessEngine implements IProcessEngine {
 	
 	private int procStartCount = 0;
 	private int procWithDataStartCount = 0;
+	private int procWithContextDataStartCount = 0;
 	private String lastProcessName;
 	private long timeUpdateCount = 0;
 	private boolean engineStarted = false;
@@ -35,6 +36,12 @@ public class TestProcessEngine implements IProcessEngine {
 		procWithDataStartCount++;
 		return startProcess(processName);
 	}
+	
+	public long startProcess(String processName,
+			Map<String, Object> processData, Map<String, Object> contextData) {
+		procWithContextDataStartCount++;
+		return startProcess(processName);
+	}
 
 	public int getProcStartCount() {
 		return procStartCount;
@@ -56,6 +63,10 @@ public class TestProcessEngine implements IProcessEngine {
 		return timeUpdateCount;
 	}
 	
+	public int getProcWithContextDataStartCount() {
+		return procWithContextDataStartCount;
+	}
+	
 	public void syncTime(long time, TimeUnit timeUnit) {
 		timeUpdateCount++;		
 	}
@@ -72,5 +83,9 @@ public class TestProcessEngine implements IProcessEngine {
 	public void stopEngine() {
 		this.engineStarted = false;
 		
+	}
+
+	public void addContextData(Object obj) {
+		// TODO Auto-generated method stub	
 	}
 }
