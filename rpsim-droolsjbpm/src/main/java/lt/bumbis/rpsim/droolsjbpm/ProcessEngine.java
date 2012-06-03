@@ -18,6 +18,7 @@ import org.slf4j.LoggerFactory;
 
 import lt.bumbis.rpsim.core.IProcessEngine;
 import lt.bumbis.rpsim.core.ISimEngine;
+import lt.bumbis.rpsim.core.simconfig.Distribution;
 
 public abstract class ProcessEngine implements IProcessEngine {
 	
@@ -99,6 +100,17 @@ public abstract class ProcessEngine implements IProcessEngine {
     	} else {
     		return process.getId();
     	}
+    }
+    
+    public long startProcess(String processName, Map<String, Object> processData, Map<String, Object> contextData) {
+    	for (Object obj: contextData.values()) {
+			addContextData(obj);
+		}
+    	return startProcess(processName, processData);
+    }
+    
+    public void addContextData(Object obj) {
+    	ksession.insert(obj);
     }
     
 	public void syncTime(long time, TimeUnit timeUnit) {
