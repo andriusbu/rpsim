@@ -22,32 +22,23 @@ public class SimulationConfiguration extends SimConfig {
 				.dist("DistArrival").timeUnit(TimeUnit.MINUTES)
 				.dataProvider("DP").useContextData(true));
 		// Distributions
-		add(new Distribution().name("DistArrival")
-				.distClass(ContDistExponential.class).distParams(30.0));
-		add(new Distribution().name("DistAuto")
-				.distClass(ContDistUniform.class).distParams(5.0, 2.0));
-		add(new Distribution().name("DistHT").distClass(ContDistUniform.class)
-				.distParams(3.0, 7.0));
-		add(new Distribution().name("DistHT1").distClass(ContDistUniform.class)
-				.distParams(15.0, 5.0));
+		add(new Distribution().name("DistArrival").distClass(ContDistExponential.class).distParams(20.0));
+		add(new Distribution().name("DistAuto").distClass(ContDistUniform.class).distParams(5.0, 2.0));
+		add(new Distribution().name("DistHT").distClass(ContDistUniform.class).distParams(10.0, 7.0));
+		add(new Distribution().name("DistHT1").distClass(ContDistUniform.class).distParams(15.0, 5.0));
+		
 		// Data providers
 		add(new DataProvider().name("DP").providerClass(DataProviderImpl.class));
+		
 		// Service processors
-		add(new ServiceProcessor().name("Auto-Process").dist("DistAuto")
-				.numExec(100).timeUnit(TimeUnit.SECONDS));
-		add(new ServiceProcessor().name("Review").dist("DistHT").numExec(2)
-				.timeUnit(TimeUnit.MINUTES));
-		add(new ServiceProcessor().name("Finalize").dist("DistHT").numExec(1)
-				.timeUnit(TimeUnit.MINUTES));
-		add(new ServiceProcessor().name("Investigate&Approve").dist("DistHT")
-				.numExec(1).timeUnit(TimeUnit.MINUTES));
-		add(new ServiceProcessor().name("Finalize").dist("DistHT1").numExec(1)
-				.timeUnit(TimeUnit.MINUTES));
+		add(new ServiceProcessor().name("Auto-Process").dist("DistAuto").numExec(100).timeUnit(TimeUnit.SECONDS));
+		add(new ServiceProcessor().name("Review").dist("DistHT").numExec(2).timeUnit(TimeUnit.MINUTES));
+		add(new ServiceProcessor().name("Investigate&Approve").dist("DistHT").numExec(1).timeUnit(TimeUnit.MINUTES));
+		add(new ServiceProcessor().name("Finalize").dist("DistHT1").numExec(1).timeUnit(TimeUnit.MINUTES));
 		// Activity mapping
 		add(new Activity().name("Review").svcProcessor("Review"));
 		add(new Activity().name("Auto-Process").svcProcessor("Auto-Process"));
-		add(new Activity().name("Investigate").svcProcessor(
-				"Investigate&Approve"));
+		add(new Activity().name("Investigate").svcProcessor("Investigate&Approve"));
 		add(new Activity().name("Approve").svcProcessor("Investigate&Approve"));
 		add(new Activity().name("Finalize").svcProcessor("Finalize"));
 	}

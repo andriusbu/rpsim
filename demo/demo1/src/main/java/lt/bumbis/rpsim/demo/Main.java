@@ -26,11 +26,11 @@ public class Main {
 		procEngine.setEnableRules(true);
 		model.setProcessEngine(procEngine);
 		
-		Experiment exp = new Experiment(Main.SIM_NAME,true);
+		Experiment exp = new Experiment(Main.SIM_NAME,true);		
 		model.connectToExperiment(exp);
 		exp.setShowProgressBar(true);
 	
-		exp.stop(new TimeInstant(2, TimeUnit.HOURS));
+		exp.stop(new TimeInstant(365*2, TimeUnit.DAYS));
 		exp.start();
 		exp.report();
 		exp.finish();

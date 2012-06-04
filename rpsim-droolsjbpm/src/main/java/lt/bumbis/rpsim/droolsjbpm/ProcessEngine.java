@@ -39,16 +39,14 @@ public abstract class ProcessEngine implements IProcessEngine {
     private boolean enableLog = false;
     private KnowledgeRuntimeLogger klogger;
     
-    private Map<ProcessInstance, List<FactHandle>> contextDataHandles;
+    private Map<ProcessInstance, List<FactHandle>> contextDataHandles = new HashMap<ProcessInstance, List<FactHandle>>();
 
     public ProcessEngine() {
-    	contextDataHandles = new HashMap<ProcessInstance, List<FactHandle>>();
     	init();
     }
     
     public ProcessEngine(ISimEngine simEngine) {
     	this.simEngine = simEngine;
-    	contextDataHandles = new HashMap<ProcessInstance, List<FactHandle>>();
     	init();
     }
     
