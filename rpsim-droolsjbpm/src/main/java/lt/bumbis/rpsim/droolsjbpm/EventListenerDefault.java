@@ -1,24 +1,18 @@
 package lt.bumbis.rpsim.droolsjbpm;
 
-import java.util.HashMap;
-
 import lt.bumbis.rpsim.core.ISimEngine;
 
 import org.drools.event.process.ProcessCompletedEvent;
 import org.drools.event.process.ProcessNodeLeftEvent;
 import org.drools.event.process.ProcessNodeTriggeredEvent;
 import org.drools.event.process.ProcessStartedEvent;
-import org.drools.runtime.StatefulKnowledgeSession;
-import org.drools.runtime.process.WorkflowProcessInstance;
-import org.drools.runtime.rule.FactHandle;
 import org.jbpm.workflow.instance.node.TimerNodeInstance;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class EventListenerDefault extends EventListener {
 
-	final static Logger logger = LoggerFactory
-			.getLogger(EventListenerDefault.class);
+	private final static Logger LOG = LoggerFactory.getLogger(EventListenerDefault.class);
 
 	private ISimEngine simEngine;
 
@@ -28,7 +22,7 @@ public class EventListenerDefault extends EventListener {
 	
 	@Override
 	public void afterNodeTriggered(ProcessNodeTriggeredEvent event) {
-		logger.debug("AfterNodeTriggeredEvent - Node class/name:"
+		LOG.debug("AfterNodeTriggeredEvent - Node class/name:"
 				+ event.getNodeInstance().getClass() + "/"
 				+ event.getNodeInstance().getNodeName() + "/"
 				+ event.getNodeInstance().getId());
@@ -46,7 +40,7 @@ public class EventListenerDefault extends EventListener {
 
 	@Override
 	public void beforeNodeTriggered(ProcessNodeTriggeredEvent event) {
-		logger.debug("BeforeNodeTriggeredEvent - Node class/name:"
+		LOG.debug("BeforeNodeTriggeredEvent - Node class/name:"
 				+ event.getNodeInstance().getClass() + "/"
 				+ event.getNodeInstance().getNodeName() + "/"
 				+ event.getNodeInstance().getId());
@@ -56,7 +50,7 @@ public class EventListenerDefault extends EventListener {
 	}
 
 	public void beforeProcessStarted(ProcessStartedEvent event) {
-		logger.debug("BeforeProcessStartedEvent - ProcessId:"
+		LOG.debug("BeforeProcessStartedEvent - ProcessId:"
 				+ event.getProcessInstance().getProcessId());
 		simEngine.newProcessArrival(event.getProcessInstance().getProcessId(),
 				event.getProcessInstance().getId());
@@ -64,7 +58,7 @@ public class EventListenerDefault extends EventListener {
 	
 	@Override
 	public void beforeNodeLeft(ProcessNodeLeftEvent event) {
-		logger.debug("BeforeNodeLeftEvent" + event.getNodeInstance().getClass() + "/"
+		LOG.debug("BeforeNodeLeftEvent" + event.getNodeInstance().getClass() + "/"
 				+ event.getNodeInstance().getNodeName()+ "/"
 				+ event.getNodeInstance().getId());
 	}

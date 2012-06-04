@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.drools.event.process.ProcessCompletedEvent;
-import org.drools.event.process.ProcessNodeLeftEvent;
 import org.drools.event.process.ProcessNodeTriggeredEvent;
 import org.drools.event.process.ProcessStartedEvent;
 import org.drools.runtime.StatefulKnowledgeSession;
@@ -19,7 +18,7 @@ import lt.bumbis.rpsim.core.ISimEngine;
 
 public class EventListenerRules extends EventListenerDefault {
 	
-	final static Logger logger = LoggerFactory
+	final static Logger LOG = LoggerFactory
 			.getLogger(EventListenerRules.class);
 
 	private StatefulKnowledgeSession ksession;
@@ -61,7 +60,7 @@ public class EventListenerRules extends EventListenerDefault {
 	public void afterNodeTriggered(ProcessNodeTriggeredEvent event) {
 		super.afterNodeTriggered(event);
 		if ( event.getNodeInstance().getClass().equals(RuleSetNodeInstance.class) ) {
-			logger.debug("Firing rule activity rules");
+			LOG.debug("Firing rule activity rules");
 			ksession.fireAllRules();
 		} else
 		if ( event.getNodeInstance().getClass().equals(DynamicNodeInstance.class) ) {

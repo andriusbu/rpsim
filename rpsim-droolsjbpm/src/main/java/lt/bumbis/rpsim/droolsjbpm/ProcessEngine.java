@@ -23,11 +23,11 @@ import org.slf4j.LoggerFactory;
 
 import lt.bumbis.rpsim.core.IProcessEngine;
 import lt.bumbis.rpsim.core.ISimEngine;
-import lt.bumbis.rpsim.core.simconfig.Distribution;
 
 public abstract class ProcessEngine implements IProcessEngine {
 	
-	final static Logger logger = LoggerFactory.getLogger(ProcessEngine.class);
+	private final static Logger LOG = LoggerFactory.getLogger(ProcessEngine.class);
+	private final static String DEFAUL_KLOG_PATH = "log/log.log";
 	
 	private ISimEngine simEngine;
     private StatefulKnowledgeSession ksession;
@@ -35,7 +35,7 @@ public abstract class ProcessEngine implements IProcessEngine {
     private KnowledgeBase kbase;
     
     private boolean enableRules = false;
-    private String logPath = "log/log.log";
+    private String logPath = DEFAUL_KLOG_PATH;
     private boolean enableLog = false;
     private KnowledgeRuntimeLogger klogger;
     
@@ -68,17 +68,17 @@ public abstract class ProcessEngine implements IProcessEngine {
         if (getSimEngine() != null) {
         	ProcessEventListener eventListener;
         	if (isEnableRules() ) {
-        		logger.debug("Rules enabled > User EventListenerRules");
+        		LOG.debug("Rules enabled > User EventListenerRules");
         		eventListener = new EventListenerRules(getSimEngine(), this, ksession);
         	} else {
-        		logger.debug("Rules disabled > User EventListenerDefault");
+        		LOG.debug("Rules disabled > User EventListenerDefault");
         		eventListener = new EventListenerDefault(getSimEngine());
         	}
         	ksession.addEventListener(eventListener);
         }
         
         if ( enableLog ) {
-        	klogger = KnowledgeRuntimeLoggerFactory.newFileLogger(ksession, "log/helloworld");
+        	klogger = KnowledgeRuntimeLoggerFactory.newFileLogger(ksession, this.logPath);
         }
         CustomWorkItemHandler handler =  new CustomWorkItemHandler(getSimEngine());
         ksession.getWorkItemManager().registerWorkItemHandler("", handler);

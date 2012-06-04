@@ -10,7 +10,6 @@ import org.drools.builder.KnowledgeBuilderFactory;
 import org.drools.builder.ResourceType;
 import org.drools.io.ResourceFactory;
 import org.drools.runtime.conf.ClockTypeOption;
-import org.drools.runtime.process.WorkflowProcessInstance;
 import org.drools.runtime.rule.FactHandle;
 import org.jbpm.ruleflow.instance.RuleFlowProcessInstance;
 import org.jbpm.test.JbpmJUnitTestCase;
