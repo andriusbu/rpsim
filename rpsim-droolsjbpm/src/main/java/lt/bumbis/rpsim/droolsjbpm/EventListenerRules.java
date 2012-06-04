@@ -24,12 +24,20 @@ public class EventListenerRules extends EventListenerDefault {
 
 	private StatefulKnowledgeSession ksession;
 	private Map<WorkflowProcessInstance, FactHandle> handles;
+	private ProcessEngine procEngine;
 
 	public EventListenerRules(ISimEngine simEngine,
 			StatefulKnowledgeSession ksession) {
 		super(simEngine);
 		this.ksession = ksession;
 		handles = new HashMap<WorkflowProcessInstance, FactHandle>();
+	}
+	
+	public EventListenerRules(ISimEngine simEngine, ProcessEngine procEngine, StatefulKnowledgeSession ksession) {
+		super(simEngine);
+		this.ksession = ksession;
+		handles = new HashMap<WorkflowProcessInstance, FactHandle>();
+		this.procEngine = procEngine;
 	}
 
 	@Override

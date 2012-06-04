@@ -32,6 +32,7 @@ public class EventListenerDefault extends EventListener {
 	public void afterProcessCompleted(ProcessCompletedEvent event) {
 		simEngine.newProcessCompletion(event.getProcessInstance()
 				.getProcessId(), event.getProcessInstance().getId());
+		
 	}
 
 	@Override

@@ -1,9 +1,14 @@
 package lt.bumbis.rpsim.droolsjbpm;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
+import org.drools.runtime.rule.FactHandle;
 import org.drools.KnowledgeBase;
 import org.drools.SessionConfiguration;
 import org.drools.event.process.ProcessEventListener;
@@ -33,8 +38,11 @@ public abstract class ProcessEngine implements IProcessEngine {
     private String logPath = "log/log.log";
     private boolean enableLog = false;
     private KnowledgeRuntimeLogger klogger;
+    
+    private Map<ProcessInstance, List<FactHandle>> contextDataHandles;
 
     public ProcessEngine() {
+    	contextDataHandles = new HashMap<ProcessInstance, List<FactHandle>>();
     	init();
     }
     
@@ -62,7 +70,7 @@ public abstract class ProcessEngine implements IProcessEngine {
         	ProcessEventListener eventListener;
         	if (isEnableRules() ) {
         		logger.debug("Rules enabled > User EventListenerRules");
-        		eventListener = new EventListenerRules(getSimEngine(), ksession);
+        		eventListener = new EventListenerRules(getSimEngine(), this, ksession);
         	} else {
         		logger.debug("Rules disabled > User EventListenerDefault");
         		eventListener = new EventListenerDefault(getSimEngine());
@@ -94,7 +102,6 @@ public abstract class ProcessEngine implements IProcessEngine {
     
     public long startProcess(String processName, Map<String, Object> data) {
     	ProcessInstance process = ksession.startProcess(processName, data);
-   		
     	if ( process == null ) {
     		return 0;
     	} else {
@@ -103,10 +110,25 @@ public abstract class ProcessEngine implements IProcessEngine {
     }
     
     public long startProcess(String processName, Map<String, Object> processData, Map<String, Object> contextData) {
+    	ProcessInstance process = ksession.startProcess(processName, processData);
+    	List<FactHandle> handleList = new ArrayList<FactHandle>();
     	for (Object obj: contextData.values()) {
-			addContextData(obj);
+			handleList.add(ksession.insert(obj));
 		}
-    	return startProcess(processName, processData);
+    	contextDataHandles.put(process, handleList);
+    	if ( process == null ) {
+    		return 0;
+    	} else {
+    		return process.getId();
+    	}
+    }
+    
+    public void stopProcess(ProcessInstance process) {
+    	List<FactHandle> handleList = contextDataHandles.get(process);
+    	for ( Iterator<FactHandle> i = handleList.iterator(); i.hasNext() ;) {
+    		ksession.retract(i.next());
+    	}
+    	contextDataHandles.remove(process);
     }
     
     public void addContextData(Object obj) {
