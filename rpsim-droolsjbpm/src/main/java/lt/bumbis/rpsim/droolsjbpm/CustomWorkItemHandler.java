@@ -9,26 +9,35 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class CustomWorkItemHandler implements WorkItemHandler {
-	
-	final static Logger logger = LoggerFactory.getLogger(CustomWorkItemHandler.class);
-	
+
+	final static Logger logger = LoggerFactory
+			.getLogger(CustomWorkItemHandler.class);
+
 	private ISimEngine simEngine;
-	
+
 	public CustomWorkItemHandler(ISimEngine simEngine) {
 		this.simEngine = simEngine;
 	}
 
 	public void abortWorkItem(WorkItem arg0, WorkItemManager arg1) {
-		
+
 	}
-	
-	protected void executeWorkItem(WorkItem workItem, String nodeId, WorkItemManager workItemManager) {
-		simEngine.newServiceRequest(nodeId, new ServiceRequestHandler(workItem, workItemManager));
+
+	protected void executeWorkItem(WorkItem workItem, String nodeId,
+			WorkItemManager workItemManager) {
+		logger.debug("Executing work item: " + workItem.getId() + "/"
+				+ workItem.getName() + "/" + workItem.getParameter("TaskName"));
+		simEngine.newServiceRequest(nodeId, new ServiceRequestHandler(workItem,
+				workItemManager));
 	}
-	
+
 	public void executeWorkItem(WorkItem workItem, WorkItemManager workItemManager) {
-		logger.debug("Executin work item", workItem.getName());
-		executeWorkItem(workItem, workItem.getName(), workItemManager);		
+		logger.debug("Executing work item", workItem.getName());
+		if ( workItem.getName().equals("Human Task") ) {
+			executeWorkItem(workItem, (String) workItem.getParameter("TaskName"), workItemManager);
+		} else {
+			executeWorkItem(workItem, ((CustomWorkItemManager)workItemManager).getLastNode().toString(), workItemManager  );
+		}
 	}
 
 }

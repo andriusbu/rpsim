@@ -61,5 +61,9 @@ public class CustomWorkItemManager extends DefaultWorkItemManager {
 	   public void setLastNode(long id) {
 		   this.lastNode = id;
 	   }
+	   
+	   public Long getLastNode() {
+		   return this.lastNode;
+	   }
 	
 }
