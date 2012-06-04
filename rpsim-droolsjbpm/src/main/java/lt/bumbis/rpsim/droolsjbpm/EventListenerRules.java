@@ -1,5 +1,6 @@
 package lt.bumbis.rpsim.droolsjbpm;
 
+import org.drools.event.process.ProcessNodeLeftEvent;
 import org.drools.event.process.ProcessNodeTriggeredEvent;
 import org.drools.event.process.ProcessStartedEvent;
 import org.drools.runtime.StatefulKnowledgeSession;
@@ -33,9 +34,14 @@ public class EventListenerRules extends EventListenerDefault {
 	@Override
 	public void afterNodeTriggered(ProcessNodeTriggeredEvent event) {
 		super.afterNodeTriggered(event);
-		if ( event.getNodeInstance().getClass().equals(RuleSetNodeInstance.class) || 
-				event.getNodeInstance().getClass().equals(DynamicNodeInstance.class) ) {
+		if ( event.getNodeInstance().getClass().equals(RuleSetNodeInstance.class) ) {
 			ksession.fireAllRules();
+		} else
+		if ( event.getNodeInstance().getClass().equals(DynamicNodeInstance.class) ) {
+			ksession.insert((DynamicNodeInstance)event.getNodeInstance());
+			ksession.fireAllRules();
+//			ksession.signalEvent("Review", null, event.getProcessInstance().getId());
+//			((DynamicNodeInstance)event.getNodeInstance()).getP
 		}
 	}
 }

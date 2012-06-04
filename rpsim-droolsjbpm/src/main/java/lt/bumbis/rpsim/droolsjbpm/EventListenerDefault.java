@@ -3,6 +3,7 @@ package lt.bumbis.rpsim.droolsjbpm;
 import lt.bumbis.rpsim.core.ISimEngine;
 
 import org.drools.event.process.ProcessCompletedEvent;
+import org.drools.event.process.ProcessNodeLeftEvent;
 import org.drools.event.process.ProcessNodeTriggeredEvent;
 import org.drools.event.process.ProcessStartedEvent;
 import org.jbpm.workflow.instance.node.TimerNodeInstance;
@@ -37,7 +38,8 @@ public class EventListenerDefault extends EventListener {
 	public void beforeNodeTriggered(ProcessNodeTriggeredEvent event) {
 		logger.debug("BeforeNodeTriggeredEvent - Node class/name:"
 				+ event.getNodeInstance().getClass() + "/"
-				+ event.getNodeInstance().getNodeName());
+				+ event.getNodeInstance().getNodeName() + "/"
+				+ event.getNodeInstance().getId());
 		CustomWorkItemManager workItemManager = (CustomWorkItemManager) event
 				.getKnowledgeRuntime().getWorkItemManager();
 		workItemManager.setLastNode(event.getNodeInstance().getId());
@@ -48,5 +50,12 @@ public class EventListenerDefault extends EventListener {
 				+ event.getProcessInstance().getProcessId());
 		simEngine.newProcessArrival(event.getProcessInstance().getProcessId(),
 				event.getProcessInstance().getId());
+	}
+	
+	@Override
+	public void beforeNodeLeft(ProcessNodeLeftEvent event) {
+		logger.debug("BeforeNodeLeftEvent" + event.getNodeInstance().getClass() + "/"
+				+ event.getNodeInstance().getNodeName()+ "/"
+				+ event.getNodeInstance().getId());
 	}
 }
