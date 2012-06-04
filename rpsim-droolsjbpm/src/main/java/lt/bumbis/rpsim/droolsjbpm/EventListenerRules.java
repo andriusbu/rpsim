@@ -52,8 +52,9 @@ public class EventListenerRules extends EventListenerDefault {
 			ksession.fireAllRules();
 		} else
 		if ( event.getNodeInstance().getClass().equals(DynamicNodeInstance.class) ) {
-			ksession.insert((DynamicNodeInstance)event.getNodeInstance());
+			FactHandle handle = ksession.insert((DynamicNodeInstance)event.getNodeInstance());
 			ksession.fireAllRules();
+			ksession.retract(handle);
 //			ksession.signalEvent("Review", null, event.getProcessInstance().getId());
 //			((DynamicNodeInstance)event.getNodeInstance()).getP
 		}
