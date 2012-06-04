@@ -1,11 +1,16 @@
 package lt.bumbis.rpsim.droolsjbpm;
 
+import java.util.HashMap;
+
 import lt.bumbis.rpsim.core.ISimEngine;
 
 import org.drools.event.process.ProcessCompletedEvent;
 import org.drools.event.process.ProcessNodeLeftEvent;
 import org.drools.event.process.ProcessNodeTriggeredEvent;
 import org.drools.event.process.ProcessStartedEvent;
+import org.drools.runtime.StatefulKnowledgeSession;
+import org.drools.runtime.process.WorkflowProcessInstance;
+import org.drools.runtime.rule.FactHandle;
 import org.jbpm.workflow.instance.node.TimerNodeInstance;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,9 +25,13 @@ public class EventListenerDefault extends EventListener {
 	public EventListenerDefault(ISimEngine simEngine) {
 		this.simEngine = simEngine;
 	}
-
+	
 	@Override
 	public void afterNodeTriggered(ProcessNodeTriggeredEvent event) {
+		logger.debug("AfterNodeTriggeredEvent - Node class/name:"
+				+ event.getNodeInstance().getClass() + "/"
+				+ event.getNodeInstance().getNodeName() + "/"
+				+ event.getNodeInstance().getId());
 		if (event.getNodeInstance().getClass().equals(TimerNodeInstance.class)) {
 			simEngine.newEvent(event.getNodeInstance().getNodeName());
 		}

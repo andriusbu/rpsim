@@ -31,6 +31,7 @@ public class EventListenerRules extends EventListenerDefault {
 		super(simEngine);
 		this.ksession = ksession;
 		handles = new HashMap<WorkflowProcessInstance, FactHandle>();
+		this.procEngine = null;
 	}
 	
 	public EventListenerRules(ISimEngine simEngine, ProcessEngine procEngine, StatefulKnowledgeSession ksession) {
@@ -51,6 +52,9 @@ public class EventListenerRules extends EventListenerDefault {
 	public void afterProcessCompleted(ProcessCompletedEvent event) {
 		super.afterProcessCompleted(event);
 		ksession.retract(handles.get((WorkflowProcessInstance) event.getProcessInstance()));
+		if ( procEngine != null ) {
+			procEngine.stopProcess(event.getProcessInstance());
+		}
 	}
 
 	@Override
@@ -60,11 +64,9 @@ public class EventListenerRules extends EventListenerDefault {
 			ksession.fireAllRules();
 		} else
 		if ( event.getNodeInstance().getClass().equals(DynamicNodeInstance.class) ) {
-			FactHandle handle = ksession.insert((DynamicNodeInstance)event.getNodeInstance());
+			ksession.insert((DynamicNodeInstance)event.getNodeInstance());
 			ksession.fireAllRules();
-			ksession.retract(handle);
-//			ksession.signalEvent("Review", null, event.getProcessInstance().getId());
-//			((DynamicNodeInstance)event.getNodeInstance()).getP
+//			ksession.retract(handle);
 		}
 	}
 

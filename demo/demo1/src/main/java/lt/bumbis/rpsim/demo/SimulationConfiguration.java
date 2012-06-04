@@ -23,13 +23,13 @@ public class SimulationConfiguration extends SimConfig {
 				.dataProvider("DP").useContextData(true));
 		// Distributions
 		add(new Distribution().name("DistArrival")
-				.distClass(ContDistExponential.class).distParams(15.0));
+				.distClass(ContDistExponential.class).distParams(30.0));
 		add(new Distribution().name("DistAuto")
 				.distClass(ContDistUniform.class).distParams(5.0, 2.0));
 		add(new Distribution().name("DistHT").distClass(ContDistUniform.class)
 				.distParams(3.0, 7.0));
 		add(new Distribution().name("DistHT1").distClass(ContDistUniform.class)
-				.distParams(15.0, 20.0));
+				.distParams(15.0, 5.0));
 		// Data providers
 		add(new DataProvider().name("DP").providerClass(DataProviderImpl.class));
 		// Service processors

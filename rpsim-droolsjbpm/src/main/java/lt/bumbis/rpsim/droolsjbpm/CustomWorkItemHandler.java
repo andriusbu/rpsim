@@ -32,7 +32,6 @@ public class CustomWorkItemHandler implements WorkItemHandler {
 	}
 
 	public void executeWorkItem(WorkItem workItem, WorkItemManager workItemManager) {
-		logger.debug("Executing work item", workItem.getName());
 		if ( workItem.getName().equals("Human Task") ) {
 			executeWorkItem(workItem, (String) workItem.getParameter("TaskName"), workItemManager);
 		} else {

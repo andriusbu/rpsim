@@ -32,3 +32,10 @@ rule "Automaticaly process small requests"
     then
         kcontext.getKnowledgeRuntime().signalEvent("Auto-Process", null, p.getId());
 end
+
+rule "test"
+	when
+		n: DynamicNodeInstance()
+	then
+		System.out.println("test");
+end

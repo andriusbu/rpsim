@@ -48,6 +48,7 @@ public abstract class ProcessEngine implements IProcessEngine {
     
     public ProcessEngine(ISimEngine simEngine) {
     	this.simEngine = simEngine;
+    	contextDataHandles = new HashMap<ProcessInstance, List<FactHandle>>();
     	init();
     }
     
@@ -124,11 +125,13 @@ public abstract class ProcessEngine implements IProcessEngine {
     }
     
     public void stopProcess(ProcessInstance process) {
-    	List<FactHandle> handleList = contextDataHandles.get(process);
-    	for ( Iterator<FactHandle> i = handleList.iterator(); i.hasNext() ;) {
-    		ksession.retract(i.next());
+    	if ( contextDataHandles.containsKey(process) ) {
+	    		List<FactHandle> handleList = contextDataHandles.get(process);
+		    	for ( Iterator<FactHandle> i = handleList.iterator(); i.hasNext() ;) {
+		    		ksession.retract(i.next());
+		    	}
+		    	contextDataHandles.remove(process);
     	}
-    	contextDataHandles.remove(process);
     }
     
     public void addContextData(Object obj) {
