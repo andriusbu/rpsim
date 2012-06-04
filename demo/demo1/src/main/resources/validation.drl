@@ -1,5 +1,7 @@
 package lt.bumbis.rpsim.demo
 
+import org.drools.runtime.process.WorkflowProcessInstance
+
 rule "Unknown Customer" ruleflow-group "Validation"
     when
         r: Request()
@@ -11,7 +13,7 @@ end
 rule "Underage Customer" ruleflow-group "Validation"
     when
         r: Request()
-        Person(id == r.personId, age < 18)
+        Person(id == r.personId, age < 100)
     then
-        r.setInvalid("Underage customer");
+        r.setInvalid("Underage customer");        
 end

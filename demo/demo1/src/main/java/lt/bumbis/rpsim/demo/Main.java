@@ -30,7 +30,7 @@ public class Main {
 		model.connectToExperiment(exp);
 		exp.setShowProgressBar(true);
 	
-		exp.stop(new TimeInstant(365*2, TimeUnit.DAYS));
+		exp.stop(new TimeInstant(365, TimeUnit.DAYS));
 		exp.start();
 		exp.report();
 		exp.finish();

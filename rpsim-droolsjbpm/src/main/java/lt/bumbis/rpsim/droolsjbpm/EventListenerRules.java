@@ -61,6 +61,7 @@ public class EventListenerRules extends EventListenerDefault {
 	public void afterNodeTriggered(ProcessNodeTriggeredEvent event) {
 		super.afterNodeTriggered(event);
 		if ( event.getNodeInstance().getClass().equals(RuleSetNodeInstance.class) ) {
+			logger.debug("Firing rule activity rules");
 			ksession.fireAllRules();
 		} else
 		if ( event.getNodeInstance().getClass().equals(DynamicNodeInstance.class) ) {

@@ -35,8 +35,12 @@ public class DataProviderImpl implements IDataProvider {
 		Request request = new Request(id + "");
 		request.setPersonId("Person_" + id);
 		request.setAmount(getRandomNum(100.0, 2000.0));
+		
+		Person person = new Person("Person_" + id, "Person_" + id + "_name");
+		person.setAge((int)getRandomNum(15.0, 65.0));
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("request", request);
+		params.put("person", person);
 		return params;
 	}
 	
