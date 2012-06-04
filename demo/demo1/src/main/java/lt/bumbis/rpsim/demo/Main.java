@@ -30,7 +30,7 @@ public class Main {
 		model.connectToExperiment(exp);
 		exp.setShowProgressBar(true);
 	
-		exp.stop(new TimeInstant(2, TimeUnit.DAYS));
+		exp.stop(new TimeInstant(60, TimeUnit.DAYS));
 		exp.start();
 		exp.report();
 		exp.finish();

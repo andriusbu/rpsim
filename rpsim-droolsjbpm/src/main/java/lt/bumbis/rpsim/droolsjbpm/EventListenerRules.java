@@ -1,10 +1,15 @@
 package lt.bumbis.rpsim.droolsjbpm;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import org.drools.event.process.ProcessCompletedEvent;
 import org.drools.event.process.ProcessNodeLeftEvent;
 import org.drools.event.process.ProcessNodeTriggeredEvent;
 import org.drools.event.process.ProcessStartedEvent;
 import org.drools.runtime.StatefulKnowledgeSession;
 import org.drools.runtime.process.WorkflowProcessInstance;
+import org.drools.runtime.rule.FactHandle;
 import org.jbpm.workflow.instance.node.DynamicNodeInstance;
 import org.jbpm.workflow.instance.node.RuleSetNodeInstance;
 import org.slf4j.Logger;
@@ -18,17 +23,26 @@ public class EventListenerRules extends EventListenerDefault {
 			.getLogger(EventListenerRules.class);
 
 	private StatefulKnowledgeSession ksession;
+	private Map<WorkflowProcessInstance, FactHandle> handles;
 
 	public EventListenerRules(ISimEngine simEngine,
 			StatefulKnowledgeSession ksession) {
 		super(simEngine);
 		this.ksession = ksession;
+		handles = new HashMap<WorkflowProcessInstance, FactHandle>();
 	}
 
 	@Override
 	public void beforeProcessStarted(ProcessStartedEvent event) {
 		super.beforeProcessStarted(event);
-		ksession.insert((WorkflowProcessInstance) event.getProcessInstance());
+		FactHandle handle = ksession.insert((WorkflowProcessInstance) event.getProcessInstance());
+		handles.put((WorkflowProcessInstance) event.getProcessInstance(), handle);
+	}
+	
+	@Override
+	public void afterProcessCompleted(ProcessCompletedEvent event) {
+		super.afterProcessCompleted(event);
+		ksession.retract(handles.get((WorkflowProcessInstance) event.getProcessInstance()));
 	}
 
 	@Override
@@ -44,4 +58,5 @@ public class EventListenerRules extends EventListenerDefault {
 //			((DynamicNodeInstance)event.getNodeInstance()).getP
 		}
 	}
+
 }

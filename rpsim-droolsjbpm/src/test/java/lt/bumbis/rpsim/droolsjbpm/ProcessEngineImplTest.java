@@ -97,7 +97,7 @@ public class ProcessEngineImplTest extends JbpmJUnitTestCase {
 		data.put("test", new TestModelA("a", 1) );
 		procEngine.startProcess("changeSet4_process1", data);
 		Collection<FactHandle> factHandles = procEngine.getKnowledgeSession().getFactHandles();
-		assertEquals(2, factHandles.size());
+		assertEquals(1, factHandles.size());
 		for (Iterator<FactHandle> i = factHandles.iterator(); i.hasNext();	) {
 			FactHandle factHandle = i.next(); 
 			if ( factHandle.getClass().equals(String.class)) {
