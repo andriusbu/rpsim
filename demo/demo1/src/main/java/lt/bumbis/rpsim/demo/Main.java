@@ -23,13 +23,14 @@ public class Main {
 		
 		ProcessEngineImpl procEngine = new ProcessEngineImpl(model);
 		procEngine.addChangeSet(ResourceFactory.newClassPathResource(Main.CHANGE_SET));
+		procEngine.setEnableRules(true);
 		model.setProcessEngine(procEngine);
 		
 		Experiment exp = new Experiment(Main.SIM_NAME,true);
 		model.connectToExperiment(exp);
 		exp.setShowProgressBar(true);
 	
-		exp.stop(new TimeInstant(30, TimeUnit.DAYS));
+		exp.stop(new TimeInstant(2, TimeUnit.DAYS));
 		exp.start();
 		exp.report();
 		exp.finish();

@@ -1,0 +1,8 @@
+# Ignore maven target folder
+*/target
+*.html
+
+# Ignore eclipse files
+.classpath
+.project
+.settings

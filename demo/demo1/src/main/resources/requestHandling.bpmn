@@ -18,21 +18,6 @@
     <startEvent id="_1" name="StartProcess" />
     <businessRuleTask id="_2" name="Validate" g:ruleFlowGroup="Validation" >
     </businessRuleTask>
-    <intermediateCatchEvent id="_4" name="Failure" >
-      <signalEventDefinition signalRef="Failure"/>
-    </intermediateCatchEvent>
-    <task id="_5" name="Emai2" tns:taskName="Email" >
-      <ioSpecification>
-        <inputSet>
-        </inputSet>
-        <outputSet>
-        </outputSet>
-      </ioSpecification>
-    </task>
-    <endEvent id="_6" name="End" />
-    <scriptTask id="_7" name="Log" >
-      <script></script>
-    </scriptTask>
     <endEvent id="_8" name="End" >
         <terminateEventDefinition/>
     </endEvent>
@@ -67,14 +52,14 @@
       <ioSpecification>
         <dataInput id="_14-1_CommentInput" name="Comment" />
         <dataInput id="_14-1_SkippableInput" name="Skippable" />
-        <dataInput id="_14-1_TaskNameInput" name="TaskName" />
         <dataInput id="_14-1_ContentInput" name="Content" />
+        <dataInput id="_14-1_TaskNameInput" name="TaskName" />
         <dataInput id="_14-1_PriorityInput" name="Priority" />
         <inputSet>
           <dataInputRefs>_14-1_CommentInput</dataInputRefs>
           <dataInputRefs>_14-1_SkippableInput</dataInputRefs>
-          <dataInputRefs>_14-1_TaskNameInput</dataInputRefs>
           <dataInputRefs>_14-1_ContentInput</dataInputRefs>
+          <dataInputRefs>_14-1_TaskNameInput</dataInputRefs>
           <dataInputRefs>_14-1_PriorityInput</dataInputRefs>
         </inputSet>
         <outputSet>
@@ -95,17 +80,17 @@
         </assignment>
       </dataInputAssociation>
       <dataInputAssociation>
-        <targetRef>_14-1_TaskNameInput</targetRef>
-        <assignment>
-          <from xsi:type="tFormalExpression">Review</from>
-          <to xsi:type="tFormalExpression">_14-1_TaskNameInput</to>
-        </assignment>
-      </dataInputAssociation>
-      <dataInputAssociation>
         <targetRef>_14-1_ContentInput</targetRef>
         <assignment>
           <from xsi:type="tFormalExpression"></from>
           <to xsi:type="tFormalExpression">_14-1_ContentInput</to>
+        </assignment>
+      </dataInputAssociation>
+      <dataInputAssociation>
+        <targetRef>_14-1_TaskNameInput</targetRef>
+        <assignment>
+          <from xsi:type="tFormalExpression">Review</from>
+          <to xsi:type="tFormalExpression">_14-1_TaskNameInput</to>
         </assignment>
       </dataInputAssociation>
       <dataInputAssociation>
@@ -125,14 +110,14 @@
       <ioSpecification>
         <dataInput id="_14-2_CommentInput" name="Comment" />
         <dataInput id="_14-2_SkippableInput" name="Skippable" />
-        <dataInput id="_14-2_TaskNameInput" name="TaskName" />
         <dataInput id="_14-2_ContentInput" name="Content" />
+        <dataInput id="_14-2_TaskNameInput" name="TaskName" />
         <dataInput id="_14-2_PriorityInput" name="Priority" />
         <inputSet>
           <dataInputRefs>_14-2_CommentInput</dataInputRefs>
           <dataInputRefs>_14-2_SkippableInput</dataInputRefs>
-          <dataInputRefs>_14-2_TaskNameInput</dataInputRefs>
           <dataInputRefs>_14-2_ContentInput</dataInputRefs>
+          <dataInputRefs>_14-2_TaskNameInput</dataInputRefs>
           <dataInputRefs>_14-2_PriorityInput</dataInputRefs>
         </inputSet>
         <outputSet>
@@ -153,17 +138,17 @@
         </assignment>
       </dataInputAssociation>
       <dataInputAssociation>
-        <targetRef>_14-2_TaskNameInput</targetRef>
-        <assignment>
-          <from xsi:type="tFormalExpression">Investigate</from>
-          <to xsi:type="tFormalExpression">_14-2_TaskNameInput</to>
-        </assignment>
-      </dataInputAssociation>
-      <dataInputAssociation>
         <targetRef>_14-2_ContentInput</targetRef>
         <assignment>
           <from xsi:type="tFormalExpression"></from>
           <to xsi:type="tFormalExpression">_14-2_ContentInput</to>
+        </assignment>
+      </dataInputAssociation>
+      <dataInputAssociation>
+        <targetRef>_14-2_TaskNameInput</targetRef>
+        <assignment>
+          <from xsi:type="tFormalExpression">Investigate</from>
+          <to xsi:type="tFormalExpression">_14-2_TaskNameInput</to>
         </assignment>
       </dataInputAssociation>
       <dataInputAssociation>
@@ -183,14 +168,14 @@
       <ioSpecification>
         <dataInput id="_14-4_CommentInput" name="Comment" />
         <dataInput id="_14-4_SkippableInput" name="Skippable" />
-        <dataInput id="_14-4_ContentInput" name="Content" />
         <dataInput id="_14-4_TaskNameInput" name="TaskName" />
+        <dataInput id="_14-4_ContentInput" name="Content" />
         <dataInput id="_14-4_PriorityInput" name="Priority" />
         <inputSet>
           <dataInputRefs>_14-4_CommentInput</dataInputRefs>
           <dataInputRefs>_14-4_SkippableInput</dataInputRefs>
-          <dataInputRefs>_14-4_ContentInput</dataInputRefs>
           <dataInputRefs>_14-4_TaskNameInput</dataInputRefs>
+          <dataInputRefs>_14-4_ContentInput</dataInputRefs>
           <dataInputRefs>_14-4_PriorityInput</dataInputRefs>
         </inputSet>
         <outputSet>
@@ -211,17 +196,17 @@
         </assignment>
       </dataInputAssociation>
       <dataInputAssociation>
-        <targetRef>_14-4_ContentInput</targetRef>
-        <assignment>
-          <from xsi:type="tFormalExpression"></from>
-          <to xsi:type="tFormalExpression">_14-4_ContentInput</to>
-        </assignment>
-      </dataInputAssociation>
-      <dataInputAssociation>
         <targetRef>_14-4_TaskNameInput</targetRef>
         <assignment>
           <from xsi:type="tFormalExpression">Approve</from>
           <to xsi:type="tFormalExpression">_14-4_TaskNameInput</to>
+        </assignment>
+      </dataInputAssociation>
+      <dataInputAssociation>
+        <targetRef>_14-4_ContentInput</targetRef>
+        <assignment>
+          <from xsi:type="tFormalExpression"></from>
+          <to xsi:type="tFormalExpression">_14-4_ContentInput</to>
         </assignment>
       </dataInputAssociation>
       <dataInputAssociation>
@@ -237,20 +222,49 @@
         </resourceAssignmentExpression>
       </potentialOwner>
     </userTask>
-    <scriptTask id="_14-5" name="Auto-Process" >
-      <script></script>
-    </scriptTask>
+    <userTask id="_14-5" name="Auto-Process" >
+      <ioSpecification>
+        <dataInput id="_14-5_TaskNameInput" name="TaskName" />
+        <inputSet>
+          <dataInputRefs>_14-5_TaskNameInput</dataInputRefs>
+        </inputSet>
+        <outputSet>
+        </outputSet>
+      </ioSpecification>
+      <dataInputAssociation>
+        <targetRef>_14-5_TaskNameInput</targetRef>
+        <assignment>
+          <from xsi:type="tFormalExpression">Auto-Process</from>
+          <to xsi:type="tFormalExpression">_14-5_TaskNameInput</to>
+        </assignment>
+      </dataInputAssociation>
+    </userTask>
     <!-- connections -->
     <sequenceFlow id="_14-2-_14-4" sourceRef="_14-2" targetRef="_14-4" />
+    <completionCondition xsi:type="tFormalExpression">getActivityInstanceAttribute("numberOfActiveInstances") == 0</completionCondition>
     </adHocSubProcess>
     <endEvent id="_15" name="End" />
+    <userTask id="_16" name="Finalize" >
+      <ioSpecification>
+        <dataInput id="_16_TaskNameInput" name="TaskName" />
+        <inputSet>
+          <dataInputRefs>_16_TaskNameInput</dataInputRefs>
+        </inputSet>
+        <outputSet>
+        </outputSet>
+      </ioSpecification>
+      <dataInputAssociation>
+        <targetRef>_16_TaskNameInput</targetRef>
+        <assignment>
+          <from xsi:type="tFormalExpression">Finalize</from>
+          <to xsi:type="tFormalExpression">_16_TaskNameInput</to>
+        </assignment>
+      </dataInputAssociation>
+    </userTask>
 
     <!-- connections -->
     <sequenceFlow id="_1-_2" sourceRef="_1" targetRef="_2" />
-    <sequenceFlow id="_4-_5" sourceRef="_4" targetRef="_5" />
-    <sequenceFlow id="_5-_6" sourceRef="_5" targetRef="_6" />
-    <sequenceFlow id="_14-_7" sourceRef="_14" targetRef="_7" />
-    <sequenceFlow id="_7-_8" sourceRef="_7" targetRef="_8" />
+    <sequenceFlow id="_16-_8" sourceRef="_16" targetRef="_8" />
     <sequenceFlow id="_2-_9" sourceRef="_2" targetRef="_9" />
     <sequenceFlow id="_9-_10" sourceRef="_9" targetRef="_10" name="invalid" tns:priority="1" >
       <conditionExpression xsi:type="tFormalExpression" language="http://www.jboss.org/drools/rule" >eval(false)</conditionExpression>
@@ -261,6 +275,7 @@
       <conditionExpression xsi:type="tFormalExpression" language="http://www.jboss.org/drools/rule" >eval(true)</conditionExpression>
     </sequenceFlow>
     <sequenceFlow id="_13-_15" sourceRef="_13" targetRef="_15" />
+    <sequenceFlow id="_14-_16" sourceRef="_14" targetRef="_16" />
 
   </process>
 
@@ -272,20 +287,8 @@
       <bpmndi:BPMNShape bpmnElement="_2" >
         <dc:Bounds x="98" y="127" width="80" height="48" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape bpmnElement="_4" >
-        <dc:Bounds x="56" y="447" width="48" height="48" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape bpmnElement="_5" >
-        <dc:Bounds x="127" y="447" width="100" height="48" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape bpmnElement="_6" >
-        <dc:Bounds x="259" y="447" width="48" height="48" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape bpmnElement="_7" >
-        <dc:Bounds x="644" y="126" width="80" height="48" />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape bpmnElement="_8" >
-        <dc:Bounds x="747" y="125" width="48" height="48" />
+        <dc:Bounds x="778" y="122" width="48" height="48" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape bpmnElement="_9" >
         <dc:Bounds x="204" y="126" width="48" height="48" />
@@ -315,10 +318,13 @@
         <dc:Bounds x="496" y="195" width="100" height="48" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape bpmnElement="_14-5" >
-        <dc:Bounds x="354" y="130" width="131" height="48" />
+        <dc:Bounds x="353" y="132" width="100" height="48" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape bpmnElement="_15" >
         <dc:Bounds x="510" y="402" width="48" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_16" >
+        <dc:Bounds x="646" y="125" width="100" height="48" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge bpmnElement="_14-2-_14-4" >
         <di:waypoint x="86" y="193" />
@@ -328,21 +334,9 @@
         <di:waypoint x="52" y="152" />
         <di:waypoint x="138" y="151" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge bpmnElement="_4-_5" >
-        <di:waypoint x="80" y="471" />
-        <di:waypoint x="177" y="471" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge bpmnElement="_5-_6" >
-        <di:waypoint x="177" y="471" />
-        <di:waypoint x="283" y="471" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge bpmnElement="_14-_7" >
-        <di:waypoint x="474" y="151" />
-        <di:waypoint x="684" y="150" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge bpmnElement="_7-_8" >
-        <di:waypoint x="684" y="150" />
-        <di:waypoint x="771" y="149" />
+      <bpmndi:BPMNEdge bpmnElement="_16-_8" >
+        <di:waypoint x="696" y="149" />
+        <di:waypoint x="802" y="146" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge bpmnElement="_2-_9" >
         <di:waypoint x="138" y="151" />
@@ -367,6 +361,10 @@
       <bpmndi:BPMNEdge bpmnElement="_13-_15" >
         <di:waypoint x="535" y="352" />
         <di:waypoint x="534" y="426" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_14-_16" >
+        <di:waypoint x="474" y="151" />
+        <di:waypoint x="696" y="149" />
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>

@@ -1,13 +1,34 @@
 package lt.bumbis.rpsim.demo
 
 import org.drools.runtime.process.WorkflowProcessInstance
+import org.jbpm.workflow.instance.node.DynamicNodeInstance
 
-rule "Automatically review large requests"
+rule "Review average requests"
     when
-        r: Request( amount > 500 )
+        r: Request( amount > 500, amount < 1500 )
         p: WorkflowProcessInstance()
+        n: DynamicNodeInstance( processInstance == p)
         String( this == r.id ) from p.getVariable("request")
     then
-        System.out.println("Automatically triggering the review process due to large amount");
         kcontext.getKnowledgeRuntime().signalEvent("Review", null, p.getId());
+end
+
+rule "Investigate large requests"
+    when
+        r: Request( amount >= 1500 )
+        p: WorkflowProcessInstance()
+        n: DynamicNodeInstance( processInstance == p)
+        String( this == r.id ) from p.getVariable("request")
+    then
+        kcontext.getKnowledgeRuntime().signalEvent("Investigate", null, p.getId());
+end
+
+rule "Automaticaly process small requests"
+    when
+        r: Request( amount < 500 )
+        p: WorkflowProcessInstance()
+        n: DynamicNodeInstance( processInstance == p)
+        String( this == r.id ) from p.getVariable("request")
+    then
+        kcontext.getKnowledgeRuntime().signalEvent("Auto-Process", null, p.getId());
 end
