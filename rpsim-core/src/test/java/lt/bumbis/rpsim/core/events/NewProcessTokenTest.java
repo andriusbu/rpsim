@@ -80,7 +80,9 @@ public class NewProcessTokenTest {
 		assertEquals(1, procEngine.getProcStartCount());
 		assertEquals(1, procEngine.getProcWithDataStartCount());
 		assertEquals("Process", procEngine.getLastProcessName());
-		assertEquals(1, dataProvider.getDataCount());
+		assertEquals(1, dataProvider.getPrepareDataCount());
+		assertEquals(1, dataProvider.getGetProcessDataCount());
+		assertEquals(0, dataProvider.getGetContextDataCount());
 	}
 
 }

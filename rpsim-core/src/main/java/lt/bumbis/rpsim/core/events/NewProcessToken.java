@@ -1,6 +1,5 @@
 package lt.bumbis.rpsim.core.events;
 
-import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import lt.bumbis.rpsim.core.IDataProvider;
@@ -34,11 +33,13 @@ public class NewProcessToken extends ExternalEvent {
 		tokenCount.update();
 		if ( dataProvider == null ) {
 			model.getProcessEngine().startProcess(processName);
-		} else if (useContextData) {
-			Map<String, Object> data = dataProvider.getData();
-			model.getProcessEngine().startProcess(processName, data, data);
 		} else {
-			model.getProcessEngine().startProcess(processName, dataProvider.getData());
+			dataProvider.prpareData();
+			if (useContextData) {
+				model.getProcessEngine().startProcess(processName, dataProvider.getProcessData(), dataProvider.getContextData());
+			} else {
+				model.getProcessEngine().startProcess(processName, dataProvider.getProcessData());
+			}
 		}
 		schedule(new TimeSpan(dist.sample(), timeUnit));
 	}

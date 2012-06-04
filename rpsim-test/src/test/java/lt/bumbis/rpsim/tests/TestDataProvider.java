@@ -73,4 +73,19 @@ public class TestDataProvider implements IDataProvider {
 		return data;
 	}
 
+	public void prpareData() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public Map<String, Object> getProcessData() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Map<String, Object> getContextData() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

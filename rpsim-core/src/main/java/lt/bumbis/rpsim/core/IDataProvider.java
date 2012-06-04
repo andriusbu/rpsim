@@ -5,6 +5,8 @@ import java.util.Map;
 public interface IDataProvider {
 
 	void init();
-	Map<String, Object> getData();
+	void prpareData();
+	Map<String, Object> getProcessData();
+	Map<String, Object> getContextData();
 	
 }
