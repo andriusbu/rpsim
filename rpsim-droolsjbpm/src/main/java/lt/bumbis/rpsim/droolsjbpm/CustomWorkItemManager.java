@@ -32,8 +32,8 @@ public class CustomWorkItemManager extends DefaultWorkItemManager {
 		((WorkItemImpl) workItem).setId(workItemCounter.incrementAndGet());
 	    internalAddWorkItem(workItem);
 	    if (handler != null) {
-//	            handler.executeWorkItem(workItem, this);
-	    		handler.executeWorkItem(workItem, lastNode.toString(), this);
+	            handler.executeWorkItem(workItem, this);
+//	    		handler.executeWorkItem(workItem, lastNode.toString(), this);
 	        } else {
 	        	throw new WorkItemHandlerNotFoundException( "Could not find work item handler for ", workItem.getName());
 	        }
