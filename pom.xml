@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>lt.bumbis</groupId>
 	<artifactId>rpsim</artifactId>
-	<version>0.5-SNAPSHOT</version>
+	<version>0.6-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<name>RPSIM Main</name>
 	<description>Rules based process simulation tool build on Drools, jBPM and DESMO-J</description>
@@ -12,6 +12,7 @@
 		<module>rpsim-reports</module>
 		<module>rpsim-droolsjbpm</module>
 		<module>rpsim-test</module>
+		<module>rpsim-demo</module>
 	</modules>
 
 	<dependencies>
@@ -46,6 +47,7 @@
 		<desmojVersion>2.3.3</desmojVersion>
 		<javadesignerVersion>2.0.13</javadesignerVersion>
 		<JasperReportsVersion>3.5.3</JasperReportsVersion>
+		<xstreamVersion>1.3.1</xstreamVersion>
 	</properties>
 
 </project>

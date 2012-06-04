@@ -1,0 +1,37 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>demo1</artifactId>
+	<name>RPSIM Demo : Demo1</name>
+
+	<parent>
+		<groupId>lt.bumbis</groupId>
+		<artifactId>rpsim-demo</artifactId>
+		<version>0.6-SNAPSHOT</version>
+		<relativePath>..</relativePath>
+	</parent>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>exec-maven-plugin</artifactId>
+				<version>1.2.1</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>java</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<mainClass>lt.bumbis.rpsim.demo.Main</mainClass>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+
+
+
+</project>
