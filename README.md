@@ -4,7 +4,7 @@
 
 *RPSIM* rule based process simulation project is built on discrete event simulator DESMO-J and integrated business logic engine DROOLS/JBPM. All dependencies except DESMO-J are available in central MAVEN repository and are downloaded automatically. However DESMO-J library should be manually downloaded and installed into local MAVEN repository.
 
-Only DESMO-J core library is required to run *RPSIM*. This library can be downloaded from DESMO-J [http://desmoj.sourceforge.net/download.html download page]. Library can be installed to local MAVEN repository by executing command below.
+Only DESMO-J core library is required to run *RPSIM*. This library can be downloaded from DESMO-J [download page](http://desmoj.sourceforge.net/download.html). Library can be installed to local MAVEN repository by executing command below.
 
     mvn install:install-file \
 	    -Dfile=<path-to-file> \
