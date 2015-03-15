@@ -1,4 +1,4 @@
-# Build and run demo simulation
+# rpsim - rules based process simulation
 
 ## Dependencies
 
@@ -28,7 +28,7 @@ To build *RPSIM* library and install it to local MAVEN repository run command be
 
     mvn install
 
-# Run demo simulation
+## Run demo simulation
 
 *RPSIM* project contains demo simulation. It can be found in rpsim-demo/demo1 subproject. To run simulation the following maven command should be executed from the subproject folder.
 
